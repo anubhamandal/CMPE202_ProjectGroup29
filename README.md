@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/veereshkamble/CMPE202_ProjectGroup29.png?label=ready&title=Ready)](https://waffle.io/veereshkamble/CMPE202_ProjectGroup29)
 # CMPE202_ProjectGroup29 Random Coders
 This repository is for the team project for CMPE202 under Prof. Paul Nguyen.  
 
