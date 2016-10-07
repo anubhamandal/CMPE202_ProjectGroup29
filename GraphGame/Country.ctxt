@@ -1,0 +1,18 @@
+#BlueJ class context
+comment0.target=Country
+comment0.text=\n\ Write\ a\ description\ of\ class\ Country\ here.\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
+comment1.params=
+comment1.target=void\ act()
+comment1.text=\n\ Act\ -\ do\ whatever\ the\ Country\ wants\ to\ do.\ This\ method\ is\ called\ whenever\n\ the\ 'Act'\ or\ 'Run'\ button\ gets\ pressed\ in\ the\ environment.\n
+comment2.params=
+comment2.target=Country()
+comment3.params=x\ y\ w\ h
+comment3.target=Country(int,\ int,\ int,\ int)
+comment4.params=color
+comment4.target=void\ updateColor(java.awt.Color)
+comment5.params=
+comment5.target=void\ updateImage()
+comment5.text=\n\ Update\ the\ image\ on\ screen\ to\ show\ the\ current\ value.\n
+comment6.params=image
+comment6.target=void\ drawInImage(greenfoot.GreenfootImage)
+numComments=7
