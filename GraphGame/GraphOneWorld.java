@@ -23,9 +23,21 @@ public class GraphOneWorld extends World
     }
     
     private void prepare() {
-        Country country1 = new Country(0, 100, 600, 200);
-        Country country2 = new Country(0, 300, 600, 200);
-        addObject( country1, 300, 100);
-        addObject( country2, 300, 300);
+        //Country country1 = new Country(0, 100, 600, 200);
+        //Country country2 = new Country(0, 300, 600, 200);
+        //Country country3 = new Country(0, 100, 600, 200);
+        //Country country4 = new Country(0, 300, 600, 200);
+        TriangleCountry country1 = new TriangleCountry(0, 0, 600, 200);
+        TriangleCountry country2 = new TriangleCountry(0, 0, 600, 200);
+        TriangleCountry country3 = new TriangleCountry(0, 0, 400, 300);
+        TriangleCountry country4 = new TriangleCountry(0, 0, 400, 300);
+        addObject( country1, 300, 99);
+        country1.setRotation(180);
+        addObject( country2, 301, 300);
+        addObject(country3, 149, 200);
+        country3.setRotation(90);
+        addObject(country4, 452, 200);
+        country4.setRotation(270);
+        
     }
 }

@@ -17,6 +17,12 @@ public class Country extends Actor
     int xPos = 0;
     int yPos = 0;
     private int clickCount;
+    boolean isClicked = isClickInRange();
+    boolean addedToWorld = false;
+    
+    public void addedToWorld(World world) {
+        this.addedToWorld = true;
+    }
     
     /**
      * Act - do whatever the Country wants to do. This method is called whenever
@@ -25,6 +31,10 @@ public class Country extends Actor
     public void act() 
     {
         if (Greenfoot.mouseClicked(this)){
+            if (! isClickInRange()) {
+            // Forward click to any intersecting objects
+            
+            }
             this.clickCount += 1;
             this.clickCount %= 3;
 
@@ -42,6 +52,13 @@ public class Country extends Actor
             updateImage();
         }
     }    
+    
+    boolean isClickInRange() {
+        if (! this.addedToWorld) return false;
+        MouseInfo mi = Greenfoot.getMouseInfo();
+        if (Greenfoot.getMouseInfo() == null) return false;
+        return true;
+    }
     
     public Country() {
         updateImage();

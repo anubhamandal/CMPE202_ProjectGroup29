@@ -1,0 +1,12 @@
+#BlueJ class context
+comment0.target=TriangleCountry
+comment0.text=\n\ Write\ a\ description\ of\ class\ TriangleCountry\ here.\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
+comment1.params=x\ y\ width\ height
+comment1.target=TriangleCountry(int,\ int,\ int,\ int)
+comment1.text=\n\ Triangle\ will\ always\ be\ drawn\ facing\ up.\ \ rotateDeg\ is\ measured\ in\ degee\ rotation\ \n\ around\ the\ center\ clockwise.\n
+comment2.params=
+comment2.target=boolean\ isClickInRange()
+comment2.text=\n\ Check\ if\ mouse\ click\ coincides\ with\ image.\n\ Since\ this\ is\ a\ triangle,\ we\ will\ split\ into\ 2\ triangles,\ based\ on\ x\ position\n
+comment3.params=image
+comment3.target=void\ drawInImage(greenfoot.GreenfootImage)
+numComments=4

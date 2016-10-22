@@ -1,6 +1,7 @@
 #Greenfoot properties
-#Fri Oct 07 14:45:54 PDT 2016
+#Fri Oct 21 21:41:44 PDT 2016
 readme.name=@README
+class.TriangleCountry.superclass=Country
 class.GraphOneWorld.superclass=greenfoot.World
 target2.name=Country
 dependency1.from=GraphOneWorld
@@ -8,8 +9,9 @@ target2.showInterface=false
 class.Country.superclass=greenfoot.Actor
 target1.type=ClassTarget
 target2.y=10
-target2.x=200
 package.numTargets=2
+target2.x=200
+class.TriangleCountry.image=Country.png
 target1.height=50
 editor.swing.0.y=267
 editor.swing.0.x=1047
@@ -21,7 +23,7 @@ dependency1.to=Country
 editor.fx.0.height=700
 target1.showInterface=false
 target1.name=GraphOneWorld
-editor.swing.0.width=701
+editor.swing.0.width=700
 editor.fx.0.width=700
 target2.typeParameters=
 readme.y=10
@@ -33,7 +35,7 @@ mainWindow.y=113
 target1.width=120
 mainWindow.height=600
 mainWindow.x=228
-editor.fx.0.y=23
+editor.fx.0.y=0
 editor.fx.0.x=0
 readme.width=47
 target2.type=ClassTarget
