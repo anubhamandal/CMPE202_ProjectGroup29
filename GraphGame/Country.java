@@ -1,5 +1,7 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.awt.Color;
+import java.util.List;
+import java.util.ListIterator;
 
 /**
  * Write a description of class Country here.
@@ -19,11 +21,11 @@ public class Country extends Actor
     private int clickCount;
     boolean isClicked = isClickInRange();
     boolean addedToWorld = false;
-    
+
     public void addedToWorld(World world) {
         this.addedToWorld = true;
     }
-    
+
     /**
      * Act - do whatever the Country wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
@@ -31,39 +33,64 @@ public class Country extends Actor
     public void act() 
     {
         if (Greenfoot.mouseClicked(this)){
-            if (! isClickInRange()) {
-            // Forward click to any intersecting objects
-            
-            }
-            this.clickCount += 1;
-            this.clickCount %= 3;
 
-            switch(clickCount){
-                case 0:
-                    fillColor = Color.GRAY;
-                    break;
-                case 1:
-                    fillColor = Color.RED;
-                    break;
-                case 2:
-                    fillColor = Color.BLUE;
-                    break;
+            if (! isClickInRange()) {
+                // Forward click to any intersecting objects
+                List<Country> countries = this.getIntersectingObjects(Country.class);
+                ListIterator<Country> li = countries.listIterator();
+                while (li.hasNext()){
+                    Country c = li.next();
+                    c.mouseClicked();
+                }
+            } else {
+                mouseClicked();
             }
-            updateImage();
         }
     }    
-    
+
+    void mouseClicked() {
+
+        if (! isClickInRange()){
+            return;
+        }
+        
+        this.clickCount += 1;
+        this.clickCount %= 3;
+
+        switch(clickCount){
+            case 0:
+            fillColor = Color.GRAY;
+            break;
+            case 1:
+            fillColor = Color.RED;
+            break;
+            case 2:
+            fillColor = Color.BLUE;
+            break;
+        }
+        updateImage();
+    }
+
     boolean isClickInRange() {
         if (! this.addedToWorld) return false;
         MouseInfo mi = Greenfoot.getMouseInfo();
         if (Greenfoot.getMouseInfo() == null) return false;
-        return true;
+        int selfx = getX();
+        int selfy = getY();
+        int clickx = mi.getX();
+        int clicky = mi.getY();
+
+        int x = clickx - selfx;
+        int y = clicky - selfy;
+        int rot = getRotation();
+        System.out.printf("rot %d, x %d, y %d\n", rot, Math.abs(x), Math.abs(y));
+        return Math.abs(x) < width/2.0 && Math.abs(y) < height/2.0;
     }
-    
+
     public Country() {
         updateImage();
     }
-    
+
     public Country(int x, int y, int w, int h) {
         xPos = x;
         yPos = y;
@@ -71,13 +98,13 @@ public class Country extends Actor
         height = h;
         updateImage();
     }
-    
+
     void updateColor(Color color){
         fillColor = color;
         updateImage();
     }
-    
-        /**
+
+    /**
      * Update the image on screen to show the current value.
      */
     void updateImage()
@@ -86,7 +113,7 @@ public class Country extends Actor
         drawInImage(image);
         setImage(image);
     }
-    
+
     void drawInImage(GreenfootImage image) {
         image.setColor(lineColor);
         image.drawRect(0, 0, width-1, height-1);

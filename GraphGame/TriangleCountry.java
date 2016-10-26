@@ -21,7 +21,7 @@ public class TriangleCountry extends Country
         //this.rotateDeg = rotateDeg;
         updateImage();
     }
-    
+
     /**
      * Check if mouse click coincides with image.
      * Since this is a triangle, we will split into 2 triangles, based on x position
@@ -31,25 +31,63 @@ public class TriangleCountry extends Country
         MouseInfo mi = Greenfoot.getMouseInfo();
         if (Greenfoot.getMouseInfo() == null) return false;
 
-        int mouseX = mi.getX(); 
-        int mouseY = mi.getY(); 
-        int triX = this.getX(); 
-        int triY = this.getY(); 
-        int halfW = this.width/2;
-        int halfH = this.height/2;
-
-        System.out.printf("%d, %d, %d, %d\n", mouseX, mouseY, triX, triY);
+        // Check if click in box
+        if (! super.isClickInRange()) return false;
         
-        //Break into left and right half
-        if (mouseX < triX) {
-            // Left half
-            return mouseY > (height/width*(triX-halfW));
-        } else {
-            return mouseY < (-height/width*(triX-halfW)+(triY+height));
+        //Normalize x,y
+        int selfx = getX();
+        int selfy = getY();
+        int clickx = mi.getX();
+        int clicky = mi.getY();
+
+        int x = clickx - selfx;
+        int y = clicky - selfy;
+        double halfHeight = height * 0.5;
+        double halfWidth = width * 0.5;
+        double slope = 1.0 * height / width;
+
+        // Get rotation
+        int rot = getRotation();
+
+        System.out.printf("%d, %d, %d, %d\n", clickx, clicky, selfx, selfy);
+        // Break into half triangle regions
+        switch (rot) {
+            case 0:{
+                if (x < 0){
+                    return y < slope * x + halfHeight;
+                }else {
+                    return y < -slope * x + halfHeight;
+                }
+            }
+
+            case 90: {
+                if (y > 0) {
+                    return y < -slope * x + halfHeight/2;
+                } else {
+                    return y > slope * x - halfHeight/2;
+                }
+            }
+
+            case 180:{
+                if (x < 0) {
+                    return y > -slope * x - halfHeight;
+                } else {
+                    return y > slope * x - halfHeight;
+                }
+            }
+
+            case 270:{
+                if (y > 0) {
+                    return y < slope * x + halfHeight/2;
+                } else {
+                    return y > -slope * x - halfHeight/2;
+                }
+            }
+
         }
+        return true;
 
     }
-    
     void drawInImage(GreenfootImage image) {
         int halfWidth = this.width / 2;
         int halfHeight = this.height / 2;
