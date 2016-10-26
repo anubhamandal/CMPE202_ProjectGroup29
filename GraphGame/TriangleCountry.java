@@ -41,10 +41,10 @@ public class TriangleCountry extends Country
         int clicky = mi.getY();
 
         int x = clickx - selfx;
-        int y = clicky - selfy;
+        int y = (clicky - selfy) * -1; // Y-axis is inverted in graph
         double halfHeight = height * 0.5;
         double halfWidth = width * 0.5;
-        double slope = 1.0 * height / width;
+        double slope = 1.0 * height / halfWidth;
 
         // Get rotation
         int rot = getRotation();
@@ -61,10 +61,11 @@ public class TriangleCountry extends Country
             }
 
             case 90: {
-                if (y > 0) {
-                    return y < -slope * x + halfHeight/2;
+                slope = 1.0/slope; // invert slope, width/height b/c of rotation
+                if (y > 0) { //top
+                    return y < -slope * x + halfWidth/2;
                 } else {
-                    return y > slope * x - halfHeight/2;
+                    return y > slope * x - halfWidth/2;
                 }
             }
 
@@ -77,10 +78,11 @@ public class TriangleCountry extends Country
             }
 
             case 270:{
-                if (y > 0) {
-                    return y < slope * x + halfHeight/2;
+                slope = 1.0/slope; // invert slope, height/width b/c of rotation
+                if (y > 0) { // top
+                    return y < slope * x + halfWidth/2;
                 } else {
-                    return y > -slope * x - halfHeight/2;
+                    return y > -slope * x - halfWidth/2;
                 }
             }
 
