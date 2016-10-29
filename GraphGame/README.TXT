@@ -1,12 +1,17 @@
-------------------------------------------------------------------------
-This is the project README file. Here, you should describe your project.
-Tell the reader (someone who does not know anything about this project)
-all he/she needs to know. The comments should usually include at least:
-------------------------------------------------------------------------
 
-PROJECT TITLE:
-PURPOSE OF PROJECT:
-VERSION or DATE:
-HOW TO START THIS PROJECT:
-AUTHORS:
-USER INSTRUCTIONS:
+# Graph Coloring Game
+# PURPOSE OF PROJECT  
+This is a collection of single player graphs to be stitched together to be multiplayer in the near future
+
+# VERSION 1.0
+
+# HOW TO START THIS PROJECT:
+GraphOneWorld is a subclass of world.  
+Country is a base class for a country type.  It is rectangular.
+TriangleCountry is a subclass of country.  It has more complicated logic on drawing triangles and differentiating between overlapping countries.
+
+# AUTHORS
+CMPE202 Random Coders
+
+# USER INSTRUCTIONS:
+Run in Greenfoot.
