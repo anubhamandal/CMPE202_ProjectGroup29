@@ -15,3 +15,11 @@ CMPE202 Random Coders
 
 # USER INSTRUCTIONS:
 Run in Greenfoot.
+There is a label in top which shows whether the graph is valid or not.
+Click on the different triangles.  All triangles are gray to start with.
+One click turns triangle red.  2 clicks will turn it blue.
+The third click will return it back to gray.
+
+# TODO
+Have a color picker bar.
+Be able to choose between different graphs. (Menu?)
