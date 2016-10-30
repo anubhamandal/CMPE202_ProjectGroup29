@@ -10,8 +10,8 @@ public class TriangleCountry extends Country
 {
     //int rotateDeg;
     /**
-     * Triangle will always be drawn facing up.  rotateDeg is measured in degee rotation 
-     * around the center clockwise.
+     * Triangle will always be drawn with flat part on bottom and one point facing up. 
+     * rotateDeg is measured in degrees rotation around the center clockwise.
      */
     public TriangleCountry(int x, int y, int width, int height) {
         this.xPos = x;

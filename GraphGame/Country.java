@@ -69,6 +69,8 @@ public class Country extends Actor
             break;
         }
         updateImage();
+        GraphOneWorld world = (GraphOneWorld)getWorld();
+        world.checkValid();
     }
 
     boolean isClickInRange() {
@@ -87,6 +89,29 @@ public class Country extends Actor
         return Math.abs(x) < width/2.0 && Math.abs(y) < height/2.0;
     }
 
+    /**
+     * A function to check the validity of country color.  
+     * true if adjacent colors do not match this country color
+     * false if adjacent countries have color that match this country color
+     * Ignores GRAY, which is uninitialized color
+     */
+    public boolean checkColor(){
+        // If uninitialized, quick exit
+        if (this.fillColor == Color.GRAY) {
+            return true;
+        }
+        
+        List<Country> countries = getIntersectingObjects(Country.class);
+        ListIterator<Country> it = countries.listIterator();
+        while (it.hasNext()){
+            Country c = it.next();
+            if (c.fillColor == this.fillColor){
+                return false;
+            }
+        }
+        return true;
+    }
+    
     public Country() {
         updateImage();
     }
