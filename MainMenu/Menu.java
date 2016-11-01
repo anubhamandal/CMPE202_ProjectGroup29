@@ -5,15 +5,19 @@ public class Menu extends World
 {
     boolean Down1; // tracks the down state of the '1' key (Graph1)
     boolean Down2; // tracks the down state of the '2' key (Graph2)
-  
+        
     public Menu()
     {
         super(800, 500, 1);
-        // paint background of this world with color green
-        GreenfootImage background = getBackground();
-        background.setColor(Color.red);
-        background.fill();
+        GreenfootImage background = new GreenfootImage("Background.jpg");
+        setBackground(background);
+        //     setBackground(new GreenfootImage("Background.jpg"));
+        /*GreenfootImage*/ background = getBackground();
+       // background.setColor(Color.yellow);
+        //background.fill();
         GreenfootImage text;
+        text = new GreenfootImage("Welcome to the Graph Coloring Game!", 40, Color.black, new Color(0, 0, 0, 0));
+        background.drawImage(text, 400-text.getWidth()/2, 50);
         text = new GreenfootImage("Graph Selection Menu", 32, Color.black, new Color(0, 0, 0, 0));
         background.drawImage(text, 400-text.getWidth()/2, 200);
         text = new GreenfootImage("Use '1' key to go to Graph1", 32, Color.black, new Color(0, 0, 0, 0));
