@@ -1,4 +1,4 @@
-.class
+*.class
 GraphGame/*.class
 *.ctxt
-
+.DS_Store
