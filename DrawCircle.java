@@ -13,6 +13,7 @@ public class DrawCircle extends Actor
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     GreenfootImage image = new GreenfootImage(110,100);
+    int n=0;
     public DrawCircle()
     {
         image.drawOval(0,0,109,99);
@@ -22,13 +23,32 @@ public class DrawCircle extends Actor
     public void act()
     {
 
-        if(Greenfoot.mouseClicked(image))
+        
+        if(Greenfoot.mouseClicked(this))
         {
-            image.setColor(java.awt.Color.RED);
-            image.drawOval(10,10,109,99);
+            
+                      if(n == 1){
             image.fillOval(0,0,109,99);
             setImage(image);
+            }
+        
         }
-    }
+        
+        }
+        
+    
+    public void fillColor(String color)
+    {
+        n=1;
+        if(color=="RED")
+        image.setColor(java.awt.Color.RED);
+        else if(color=="BLUE")
+        image.setColor(java.awt.Color.BLUE);
+        else if(color=="YELLOW")
+        image.setColor(java.awt.Color.YELLOW);
+        else if(color=="GREEN")
+        image.setColor(java.awt.Color.GREEN);
+    
 
+}
 }

@@ -12,12 +12,30 @@ public class RedColor extends Actor
      * Act - do whatever the RedColor wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
+    DrawCircle dc;
+    DrawOval dov;
+    DrawRectangle dr;
+    GreenfootImage image = new GreenfootImage(110,100);
+    public RedColor(DrawCircle dc,DrawRectangle dr,DrawOval dov)
+    {
+        this.dc = dc;
+        this.dov=dov;
+        this.dr=dr;
+        image.drawRect(0,0,50,50);
+        image.setColor(java.awt.Color.RED);
+        image.fillRect(0,0,50,50);
+        setImage(image);
+    }
+
     public void act() 
     {
-         GreenfootImage image1 = new GreenfootImage(110,100);
-      image1.drawRect(0,0,50,50);
-      image1.setColor(java.awt.Color.RED);
-      image1.fillRect(0,0,50,50);
-      setImage(image1);
+        if(Greenfoot.mouseClicked(this))
+        {
+            dc.fillColor("RED");
+            dr.fillColor("RED");
+            dov.fillColor("RED");
+
+        } 
+
     }    
 }
