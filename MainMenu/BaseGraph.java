@@ -4,8 +4,8 @@ import java.awt.Color;
 /**
  * Write a description of class BaseGraph here.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author jonguan
+ * @version 11-4-16
  */
 public class BaseGraph extends World
 {

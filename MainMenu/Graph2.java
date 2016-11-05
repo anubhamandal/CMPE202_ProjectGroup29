@@ -10,8 +10,8 @@ import java.awt.event.*;
 /**
  * Write a description of class MyWorld here.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author jonguan 
+ * @version 11-4-16
  */
 public class Graph2 extends BaseGraph
 {
