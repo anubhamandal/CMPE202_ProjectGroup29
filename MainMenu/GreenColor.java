@@ -22,6 +22,7 @@ public class GreenColor extends ColorPicker
 
         super(width, height);
         fillColor = Color.GREEN;
+        updateImage();
     }
 
     public GreenColor(DrawCircle dc,DrawRectangle dr,DrawOval dov)
@@ -36,15 +37,4 @@ public class GreenColor extends ColorPicker
         setImage(image);
     }
 
-    public void act() 
-    {
-        // Add your action code here.
-        if(Greenfoot.mouseClicked(this))
-        {
-            dc.fillColor("GREEN");
-            dr.fillColor("GREEN");
-            dov.fillColor("GREEN");
-
-        }
-    }    
 }

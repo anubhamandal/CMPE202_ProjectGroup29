@@ -22,6 +22,7 @@ public class BlueColor extends ColorPicker
 
         super(width, height);
         fillColor = Color.BLUE;
+        updateImage();
     }
 
     public BlueColor(DrawCircle dc,DrawRectangle dr,DrawOval dov)
@@ -37,15 +38,4 @@ public class BlueColor extends ColorPicker
 
     }
 
-    public void act() 
-    {
-        if(Greenfoot.mouseClicked(this))
-        {
-            dc.fillColor("BLUE");
-            dr.fillColor("BLUE");
-            dov.fillColor("BLUE");
-
-        }
-
-    }    
 }

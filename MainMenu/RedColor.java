@@ -19,11 +19,10 @@ public class RedColor extends ColorPicker
     GreenfootImage image = new GreenfootImage(110,100);
 
     public RedColor(int width, int height) {
-
         super(width, height);
         fillColor = Color.RED;
+        updateImage();
     }
-
     public RedColor(DrawCircle dc,DrawRectangle dr,DrawOval dov)
     {
         super(110,100);
@@ -36,15 +35,4 @@ public class RedColor extends ColorPicker
         setImage(image);
     }
 
-    public void act() 
-    {
-        if(Greenfoot.mouseClicked(this))
-        {
-            dc.fillColor("RED");
-            dr.fillColor("RED");
-            dov.fillColor("RED");
-
-        } 
-
-    }    
 }

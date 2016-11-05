@@ -10,7 +10,7 @@ public class Menu extends World
         
     public Menu()
     {
-        super(800, 500, 1);
+        super(800, 500, 1);        
         GreenfootImage background = new GreenfootImage("Background.jpg");
         setBackground(background);
         //     setBackground(new GreenfootImage("Background.jpg"));
@@ -26,6 +26,15 @@ public class Menu extends World
         background.drawImage(text, 400-text.getWidth()/2, 300);
         text = new GreenfootImage("Use '2' key to go to Graph2", 32, Color.black, new Color(0, 0, 0, 0));
         background.drawImage(text, 400-text.getWidth()/2, 340);
+        
+          // temporary
+        
+          Greenfoot.setWorld(new Graph2());
+            Down2 = true;
+            
+            
+            return;
+            
     }
     
     public void act()

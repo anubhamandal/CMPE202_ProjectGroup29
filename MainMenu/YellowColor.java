@@ -22,6 +22,7 @@ public class YellowColor extends ColorPicker
 
         super(width, height);
         fillColor = Color.YELLOW;
+        updateImage();
     }
 
     public YellowColor(DrawCircle dc,DrawRectangle dr,DrawOval dov)
@@ -37,16 +38,4 @@ public class YellowColor extends ColorPicker
 
     }
 
-    public void act() 
-    {
-        // Add your action code here.
-        if(Greenfoot.mouseClicked(this))
-        {
-            dc.fillColor("YELLOW");
-            dr.fillColor("YELLOW");
-            dov.fillColor("YELLOW");
-
-        }
-
-    }    
 }

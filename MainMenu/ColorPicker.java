@@ -10,7 +10,7 @@ import java.awt.Color;
 public class ColorPicker extends Actor
 {
     int width, height = 0;
-    Color lineColor = Color.GRAY;
+    Color lineColor = Color.WHITE;
     Color fillColor = Color.GRAY;
 
     /**
@@ -24,8 +24,8 @@ public class ColorPicker extends Actor
             this.lineColor = Color.BLACK;
 
             // Tell BaseGraph that this color selected
-            BaseGraph world = (BaseGraph)getWorld();
-            world.selectedColor = "RED";
+            Graph2 world = (Graph2)getWorld();
+            world.setSelectedColor(fillColor);
 
             // Update outline to show selected
             updateImage();
@@ -51,8 +51,8 @@ public class ColorPicker extends Actor
 
     void drawInImage(GreenfootImage image) {
         image.setColor(lineColor);
-        image.drawRect(0, 0, width-1, height-1);
+        image.drawRect(0, 0, width, height);
         image.setColor(fillColor);
-        image.fillRect(1, 1, width-2, height-2);
+        image.fillRect(0, 0, width, height);
     }
 }
