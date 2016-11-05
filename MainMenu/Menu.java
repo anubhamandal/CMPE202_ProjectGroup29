@@ -26,14 +26,6 @@ public class Menu extends World
         background.drawImage(text, 400-text.getWidth()/2, 300);
         text = new GreenfootImage("Use '2' key to go to Graph2", 32, Color.black, new Color(0, 0, 0, 0));
         background.drawImage(text, 400-text.getWidth()/2, 340);
-        
-          // temporary
-        
-          Greenfoot.setWorld(new Graph2());
-            Down2 = true;
-            
-            
-            return;
             
     }
     
