@@ -12,7 +12,7 @@ public class Menu extends World
         
     public Menu()
     {
-        super(800, 500, 1);
+        super(800, 500, 1);        
         GreenfootImage background = new GreenfootImage("Background.jpg");
         setBackground(background);
         background = getBackground();
