@@ -82,6 +82,18 @@ public class Graph2 extends BaseGraph
         }            
 
     }
+    
+    /**
+     * Update Color picker to denote selected color
+     * Puts a check in selected picker; clears the other
+     */
+    public void updatePicker() {
+        for (int i = 0; i < numColors; i++){
+            ColorPicker cp = colors[i];
+            cp.updateImage();
+        } 
+    }
+    
     public void increaseColors() {
         if (numColors >= 4){
             return;

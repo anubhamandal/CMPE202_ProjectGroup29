@@ -21,17 +21,24 @@ public class ColorPicker extends Actor
     {
         if(Greenfoot.mouseClicked(this)){
             //Change line color to black
-            this.lineColor = Color.BLACK;
+            this.lineColor = Color.black;
 
             // Tell BaseGraph that this color selected
             Graph2 world = (Graph2)getWorld();
             world.setSelectedColor(fillColor);
 
             // Update outline to show selected
-            updateImage();
+            world.updatePicker();
+            //updateImage();
         }
     }   
 
+    public boolean isSelected(){
+        BaseGraph world = (BaseGraph)getWorld();
+        if (world == null) return false;
+        return fillColor == world.selectedColor;
+    }
+    
     public ColorPicker(int width, int height){
         this.width = width;
         this.height = height;
@@ -54,5 +61,9 @@ public class ColorPicker extends Actor
         image.drawRect(0, 0, width, height);
         image.setColor(fillColor);
         image.fillRect(0, 0, width, height);
+        if (isSelected()){
+            image.setColor(lineColor);
+            image.drawLine(0, 0, width, height);
+        }
     }
 }
