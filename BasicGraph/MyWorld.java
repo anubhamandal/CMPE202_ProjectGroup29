@@ -72,6 +72,12 @@ public class MyWorld extends World
         addObject(new GraphEdge("M", "N", 2, 415, -10), 799,338);
         addObject(new GraphEdge("M", "O", 2, 160, 10), 862,465);
         addObject(new GraphEdge("N", "O", 2, 230, -20), 811,239);
+         // add color pallet 
+         
+         addObject(new RedColor(), 51,65);
+         addObject(new BlueColor(), 104,65);
+         addObject(new GreenColor(), 159,65);
+         addObject(new OrangeColor(), 219,65);
          
         }
 }
