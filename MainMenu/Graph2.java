@@ -10,7 +10,7 @@ import java.util.ListIterator;
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Graph2 extends World
+public class Graph2 extends BaseGraph
 {
     int height = 400;
     int width = 600;

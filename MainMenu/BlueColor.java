@@ -1,4 +1,5 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import java.awt.Color;
 
 /**
  * Write a description of class BlueColor here.
@@ -6,7 +7,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class BlueColor extends Actor
+public class BlueColor extends ColorPicker
 {
     /**
      * Act - do whatever the BlueColor wants to do. This method is called whenever
@@ -16,8 +17,16 @@ public class BlueColor extends Actor
     DrawOval dov;
     DrawRectangle dr;
     GreenfootImage image = new GreenfootImage(110,100);
+
+    public BlueColor(int width, int height) {
+
+        super(width, height);
+        fillColor = Color.BLUE;
+    }
+
     public BlueColor(DrawCircle dc,DrawRectangle dr,DrawOval dov)
     {
+        super(110,100);
         this.dc = dc;
         this.dov=dov;
         this.dr=dr;

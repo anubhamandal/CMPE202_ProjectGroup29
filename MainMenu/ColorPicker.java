@@ -12,20 +12,30 @@ public class ColorPicker extends Actor
     int width, height = 0;
     Color lineColor = Color.GRAY;
     Color fillColor = Color.GRAY;
-    
+
     /**
      * Act - do whatever the ColorPicker wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public void act() 
     {
-        // Add your action code here.
+        if(Greenfoot.mouseClicked(this)){
+            //Change line color to black
+            this.lineColor = Color.BLACK;
+
+            // Tell BaseGraph that this color selected
+            BaseGraph world = (BaseGraph)getWorld();
+            world.selectedColor = "RED";
+
+            // Update outline to show selected
+            updateImage();
+        }
     }   
 
     public ColorPicker(int width, int height){
         this.width = width;
         this.height = height;
-        
+
         updateImage();
     }
 

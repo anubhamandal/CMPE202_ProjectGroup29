@@ -10,7 +10,7 @@ import java.util.*;
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Graph1 extends World
+public class Graph1 extends BaseGraph
 {
     public Graph1()
     {    
