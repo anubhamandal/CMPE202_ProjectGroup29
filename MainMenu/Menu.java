@@ -9,7 +9,7 @@ public class Menu extends World
     boolean Key2; // tracks the down state of the '2' key (Graph2) //Jon
     boolean Key3; // tracks the down state of the '3' key (Graph3) //Anubha
     boolean Key4; // tracks the down state of the '4' key (Graph4) //Shilpa
-        
+    boolean Key5;  
     public Menu()
     {
         super(800, 500, 1);        
@@ -24,10 +24,12 @@ public class Menu extends World
         text = new GreenfootImage("Use '1' key to go to Graph1", 32, Color.black, new Color(0, 0, 0, 0));
         background.drawImage(text, 400-text.getWidth()/2, 300);
         text = new GreenfootImage("Use '2' key to go to Graph2", 32, Color.black, new Color(0, 0, 0, 0));
-        background.drawImage(text, 400-text.getWidth()/2, 340);
+        background.drawImage(text, 400-text.getWidth()/2, 330);
         text = new GreenfootImage("Use '3' key to go to Graph3", 32, Color.black, new Color(0, 0, 0, 0));
-        background.drawImage(text, 400-text.getWidth()/2, 380);
+        background.drawImage(text, 400-text.getWidth()/2, 360);
         text = new GreenfootImage("Use '4' key to go to Graph4", 32, Color.black, new Color(0, 0, 0, 0));
+        background.drawImage(text, 400-text.getWidth()/2, 390);
+        text = new GreenfootImage("Use '5' key to go to Graph5", 32, Color.black, new Color(0, 0, 0, 0));
         background.drawImage(text, 400-text.getWidth()/2, 420);
     }
     
@@ -55,6 +57,12 @@ public class Menu extends World
         {
             Greenfoot.setWorld(new Graph4());
             Key4 = true;
+        }
+        
+        if (!Key5 && Greenfoot.isKeyDown("5"))
+        {
+            Greenfoot.setWorld(new Graph5());
+            Key5 = true;
         }
     }
 }

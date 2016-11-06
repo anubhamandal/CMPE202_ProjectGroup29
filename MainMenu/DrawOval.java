@@ -6,7 +6,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class DrawOval extends Actor
+public class DrawOval extends DrawShapes
 {
     /**
      * Act - do whatever the DrawOval wants to do. This method is called whenever
