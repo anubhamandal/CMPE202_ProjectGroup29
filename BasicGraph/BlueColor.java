@@ -15,9 +15,9 @@ public class BlueColor extends ColorPallet
      */
     public void act() 
     {
-        // Add your action code here.
+        super.act();// Add your action code here.
     }    
-    public Color getColor(){
+    public Color getPickedColor(){
         return color;
     }
     public BlueColor(){
