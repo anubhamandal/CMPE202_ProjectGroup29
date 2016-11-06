@@ -6,6 +6,7 @@ public class Node extends Actor
     private String title;
     Color colorToFill=null;
     boolean isFilled = false;
+    int count=0;
 
     public Node(String pTitle) {
         title = pTitle;
@@ -31,42 +32,40 @@ public class Node extends Actor
     {
         getColorToFill();
         if(isFilled){
-              System.out.println("123");
             int x = this.getX();
             int y = this.getY();
-            getWorld().addObject(new FillNode(colorToFill), x, y);
+            getImage().setColor(colorToFill);
+            getImage().fillOval(0,0,50,50);
+            if(count==0){
              if(colorToFill == Color.RED){
+                
                  getWorld().addObject(new RedColor(), 51,65);
              }
-             else if(colorToFill == Color.blue)
+             else if(colorToFill == Color.blue){
+                
                 getWorld().addObject(new BlueColor(), 104,65);
-             else if(colorToFill == Color.green)
+            }
+             else if(colorToFill == Color.green){
+                  
                 getWorld().addObject(new GreenColor(), 159,65);
-             else if(colorToFill == Color.orange)
+            }
+             else if(colorToFill == Color.orange){
+                  
                 getWorld().addObject(new OrangeColor(), 219,65);
-            
+            }
+            count++;
+           }
         }
     }   
     
     public void getColorToFill(){ 
-            System.out.println("insideget");
-            Actor selectedColor = getOneObjectAtOffset(0,0,ColorPallet.class);
+            
+            ColorPallet selectedColor = (ColorPallet)getOneObjectAtOffset(0,0,ColorPallet.class);
             if(selectedColor !=null){
-                System.out.println("inside");
+                count=0;
                 isFilled = true;
-                if(selectedColor instanceof RedColor){ 
-                   colorToFill = Color.RED;
-                }
-                else if(selectedColor instanceof BlueColor){ 
-                    colorToFill = Color.blue;
-                }
-                else if(selectedColor instanceof GreenColor){ 
-                   colorToFill = Color.green;
-                }
-                else if(selectedColor instanceof OrangeColor){ 
-                    colorToFill = Color.orange;
-                }
-             
+                colorToFill = selectedColor.getPickedColor();
+                getWorld().removeObject(selectedColor);
             }
     }
 }
