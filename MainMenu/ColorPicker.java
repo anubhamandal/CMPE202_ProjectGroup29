@@ -35,9 +35,7 @@ public class ColorPicker extends Actor
             world.updateColor(selectedColor());
             updateImage();
         }
-<<<<<<< HEAD
-    }    
-=======
+
         
         if (Greenfoot.mouseDragged(this))
         {
@@ -45,7 +43,7 @@ public class ColorPicker extends Actor
             setLocation(mouse.getX(), mouse.getY());
         }
     }   
->>>>>>> 44619e80702f6e6e65e7db65f289cad9f0636439
+
 
     public Color selectedColor() {
         if (selectionIndex < 0) {
@@ -53,24 +51,22 @@ public class ColorPicker extends Actor
         }
         return colors[selectionIndex];
     }
-<<<<<<< HEAD
+
     
     private int colorWidth() {
         return (int)Math.floor(width/numColors*1.0);
     }
 
     public ColorPicker(int width, int height, int numColors){
-=======
-    public ColorPicker(){
-         //do nothing 
-     }
-    public ColorPicker(int width, int height){
->>>>>>> 44619e80702f6e6e65e7db65f289cad9f0636439
         this.width = width;
         this.height = height;
         this.numColors = numColors;
 
         updateImage();
+    }
+    
+    public ColorPicker() {
+        // Do Nothing
     }
 
     public void setNumColors(int numColors) {
