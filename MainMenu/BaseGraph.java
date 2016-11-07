@@ -10,7 +10,9 @@ import java.awt.Color;
 public class BaseGraph extends World
 {
 
-    public Color selectedColor = Color.GRAY;
+    public ColorPicker colorPicker;
+    Label validLabel;
+    Label colorSelectLabel;
     
     /**
      * Constructor for objects of class BaseGraph.
@@ -26,5 +28,14 @@ public class BaseGraph extends World
         super(worldWidth, worldHeight, cellSize);
     }
     
+    public Color selectedColor() {
+        return colorPicker.selectedColor();
+    }
+    
+        public void updateColor(Color color) {
+        String colString = "Color Selected: " + Utils.getInstance().colorToString(color);
+        this.colorSelectLabel.setValue( colString);
+        this.validLabel.setValue("Click a country");
+    }
     
 }

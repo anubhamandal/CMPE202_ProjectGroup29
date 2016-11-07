@@ -29,6 +29,9 @@ public class Menu extends World
         background.drawImage(text, 400-text.getWidth()/2, 380);
         text = new GreenfootImage("Use '4' key to go to Graph4", 32, Color.black, new Color(0, 0, 0, 0));
         background.drawImage(text, 400-text.getWidth()/2, 420);
+        
+        Greenfoot.setWorld(new Graph2());
+            Key2 = true;
     }
     
     public void act()

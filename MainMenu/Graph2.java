@@ -17,11 +17,7 @@ public class Graph2 extends BaseGraph
 {
     // int height = 600;
     //int width = 600;
-    Label validLabel;
-    Label colorSelectLabel;
-
-    ColorPicker[] colors;
-    int numColors = 0;
+    
 
     /**
      * Constructor for objects of class MyWorld.
@@ -56,67 +52,17 @@ public class Graph2 extends BaseGraph
         //checkValid();
 
         // Color Picker
-        RedColor red = new RedColor(75, 75);
-        YellowColor yellow = new YellowColor(75, 75);
-        BlueColor blue = new BlueColor(75, 75);
-        GreenColor green = new GreenColor(75, 75);
-        colors = new ColorPicker[]{red, yellow, blue, green};
-        /*
-        addObject(red, 100, 150);
-        addObject(yellow, 200, 150);
-        addObject(blue, 300, 150);
-        addObject(green, 400, 150);
-        numColors = 4;
-*/
+        
         // Color selected label
         colorSelectLabel = new Label("Color Selected: ", 20);
         addObject(colorSelectLabel, 100, 75);
 
-        // Increase or decrease colors
-        addObject(new MinusColorButton(), 50, 25);
-        addObject(new PlusColorButton(), 100, 25);
-        
-        int numCol = Integer.parseInt(Greenfoot.ask("How many colors? (up to 4)"));
-        for (int i = 0; i < numCol && i<4; i++){
-            increaseColors();
-        }            
+        //int numCol = Integer.parseInt(Greenfoot.ask("How many colors? (up to 4)"));
+        int numCol = 3;
+     
+        colorPicker = new ColorPicker(300, 75, numCol);
+        addObject(colorPicker, 150, 150);
 
-    }
-    
-    /**
-     * Update Color picker to denote selected color
-     * Puts a check in selected picker; clears the other
-     */
-    public void updatePicker() {
-        for (int i = 0; i < numColors; i++){
-            ColorPicker cp = colors[i];
-            cp.updateImage();
-        } 
-    }
-    
-    public void increaseColors() {
-        if (numColors >= 4){
-            return;
-        }
-        numColors++;
-        addObject(colors[numColors-1], numColors*100, 150);
-
-    }
-
-    public void decreaseColors() {
-        if (numColors <= 1) {
-            return;
-        }
-        numColors--;
-        removeObject(colors[numColors]);
-
-    }
-
-    public void setSelectedColor(Color color) {
-        this.selectedColor = color;
-        String colString = "Color Selected: " + Utils.getInstance().colorToString(color);
-        this.colorSelectLabel.setValue( colString);
-        this.validLabel.setValue("Click a country");
     }
 
     public void checkValid() {

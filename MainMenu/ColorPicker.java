@@ -4,14 +4,18 @@ import java.awt.Color;
 /**
  * Write a description of class ColorPicker here.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author jonguan 
+ * @version 11-7-16
  */
 public class ColorPicker extends Actor
 {
-    int width, height = 0;
+    int width, height = 75;
+    int numColors = 2;
+
     Color lineColor = Color.WHITE;
     Color fillColor = Color.GRAY;
+    Color[] colors = {Color.RED, Color.YELLOW, Color.GREEN, Color.BLUE};
+    int selectionIndex = -1;
 
     /**
      * Act - do whatever the ColorPicker wants to do. This method is called whenever
@@ -20,50 +24,59 @@ public class ColorPicker extends Actor
     public void act() 
     {
         if(Greenfoot.mouseClicked(this)){
-            //Change line color to black
-            this.lineColor = Color.black;
-
-            // Tell BaseGraph that this color selected
-            Graph2 world = (Graph2)getWorld();
-            world.setSelectedColor(fillColor);
-
-            // Update outline to show selected
-            world.updatePicker();
-            //updateImage();
+            // Set selectionIndex
+            int clickX = Greenfoot.getMouseInfo().getX();
+            selectionIndex = clickX / (colorWidth());
+            BaseGraph world = (BaseGraph)getWorld();
+            world.updateColor(selectedColor());
+            updateImage();
         }
-    }   
+    }    
 
-    public boolean isSelected(){
-        BaseGraph world = (BaseGraph)getWorld();
-        if (world == null) return false;
-        return fillColor == world.selectedColor;
+    public Color selectedColor() {
+        if (selectionIndex < 0) {
+            return null;
+        }
+        return colors[selectionIndex];
     }
     
-    public ColorPicker(int width, int height){
+    private int colorWidth() {
+        return (int)Math.floor(width/numColors*1.0);
+    }
+
+    public ColorPicker(int width, int height, int numColors){
         this.width = width;
         this.height = height;
+        this.numColors = numColors;
 
         updateImage();
     }
 
-    /**
-     * Update the image on screen to show the current value.
-     */
-    void updateImage()
-    {
-        GreenfootImage image = new GreenfootImage(width, height);
-        drawInImage(image);
-        setImage(image);
+    public void setNumColors(int numColors) {
+        this.numColors = numColors;
+        updateImage();
     }
 
-    void drawInImage(GreenfootImage image) {
+    public void updateImage(){
+        GreenfootImage image = new GreenfootImage(width, height);
         image.setColor(lineColor);
         image.drawRect(0, 0, width, height);
-        image.setColor(fillColor);
-        image.fillRect(0, 0, width, height);
-        if (isSelected()){
-            image.setColor(lineColor);
-            image.drawLine(0, 0, width, height);
+        
+        int colorWidth = colorWidth();
+
+        // Fill in colors
+        for (int i = 0; i < numColors; i++) {
+            Color color = colors[i];
+            image.setColor(color);
+            image.fillRect(i*colorWidth, 0, colorWidth, height);
         }
+
+        // Selection color
+        if (selectionIndex >= 0) {
+            image.setColor(Color.BLACK);
+            image.drawLine(selectionIndex*colorWidth, 0, (selectionIndex+1)*colorWidth, height);
+        }
+
+        setImage(image);
     }
 }

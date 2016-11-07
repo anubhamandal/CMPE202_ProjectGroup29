@@ -72,7 +72,7 @@ public class Country extends Actor
         }*/
 
         Graph2 world = (Graph2)getWorld();
-        fillColor = world.selectedColor;
+        fillColor = world.selectedColor();
         updateImage();
         world.checkValid();
     }
