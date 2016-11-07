@@ -18,7 +18,7 @@ public class ColorPicker extends Actor
     int selectionIndex = -1;
 
     public Color getPickedColor(){
-        return null;
+        return selectedColor();
     }
     
     /**
