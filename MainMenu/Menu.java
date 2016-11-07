@@ -9,7 +9,8 @@ public class Menu extends World
     boolean Key2; // tracks the down state of the '2' key (Graph2) //Jon
     boolean Key3; // tracks the down state of the '3' key (Graph3) //Anubha
     boolean Key4; // tracks the down state of the '4' key (Graph4) //Shilpa
-    boolean Key5;  
+    boolean Key5; 
+    boolean Key6; // tracks the down state of the '4' key (Graph6) //Veeresh
     public Menu()
     {
         super(800, 500, 1);        
@@ -31,6 +32,8 @@ public class Menu extends World
         background.drawImage(text, 400-text.getWidth()/2, 390);
         text = new GreenfootImage("Use '5' key to go to Graph5", 32, Color.black, new Color(0, 0, 0, 0));
         background.drawImage(text, 400-text.getWidth()/2, 420);
+        text = new GreenfootImage("Use '6' key to go to Graph6", 32, Color.black, new Color(0, 0, 0, 0));
+        background.drawImage(text, 400-text.getWidth()/2, 450);
     }
     
     public void act()
@@ -63,6 +66,12 @@ public class Menu extends World
         {
             Greenfoot.setWorld(new Graph5());
             Key5 = true;
+        }
+        
+        if (!Key6 && Greenfoot.isKeyDown("6"))
+        {
+            Greenfoot.setWorld(new Graph6());
+            Key6 = true;
         }
     }
 }
