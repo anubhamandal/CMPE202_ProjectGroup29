@@ -13,7 +13,7 @@ public class BaseGraph extends World
     public ColorPicker colorPicker;
     Label validLabel;
     Label colorSelectLabel;
-    
+
     /**
      * Constructor for objects of class BaseGraph.
      * 
@@ -23,19 +23,25 @@ public class BaseGraph extends World
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(600, 400, 1); 
     }
-    
+
     public BaseGraph(int worldWidth, int worldHeight, int cellSize){
         super(worldWidth, worldHeight, cellSize);
     }
-    
+
     public Color selectedColor() {
         return colorPicker.selectedColor();
     }
-    
-        public void updateColor(Color color) {
+
+    public void updateColor(Color color) {
         String colString = "Color Selected: " + Utils.getInstance().colorToString(color);
-        this.colorSelectLabel.setValue( colString);
-        this.validLabel.setValue("Click a country");
+        if (this.colorSelectLabel != null) {
+
+            this.colorSelectLabel.setValue( colString);
+        }
+        if (this.validLabel != null) {
+
+            this.validLabel.setValue("Click a country");
+        }
     }
-    
+
 }

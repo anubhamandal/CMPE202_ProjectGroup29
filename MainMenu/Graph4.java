@@ -22,6 +22,7 @@ public class Graph4 extends World
         addObject(dov,200,200);
         DrawCircle dc=new DrawCircle();
         addObject(dc,190,150);
+        /*
         RedColor rc=new RedColor(dc,dr,dov);
         addObject(rc,550,150);
         BlueColor bc=new BlueColor(dc,dr,dov);
@@ -30,6 +31,7 @@ public class Graph4 extends World
         addObject(gc,650,150);
         YellowColor yc=new YellowColor(dc,dr,dov);
         addObject(yc,700,150);
+        */
         //setPaintOrder(DrawRectangle.class, DrawOval.class);
 
     }

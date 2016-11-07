@@ -14,7 +14,7 @@ public class ColorPicker extends Actor
 
     Color lineColor = Color.WHITE;
     Color fillColor = Color.GRAY;
-    Color[] colors = {Color.RED, Color.YELLOW, Color.GREEN, Color.BLUE};
+    Color[] colors = {Color.RED, Color.YELLOW, Color.GREEN, Color.ORANGE};
     int selectionIndex = -1;
 
     public Color getPickedColor(){
