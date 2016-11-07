@@ -176,13 +176,8 @@ public class Graph1 extends BaseGraph
         addObject(new GraphEdge("N", "O", 2, 230, -20), 811,239);
         
          // add color pallet 
-         
-         addObject(new RedColor(), 51,65);
-         addObject(new BlueColor(), 104,65);
-         addObject(new GreenColor(), 159,65);
-         addObject(new OrangeColor(), 219,65);
-         
-                
+         addObject (new ColorPicker(300, 65, 4), 150, 150);
+                     
          Greenfoot.start();
          
         }
