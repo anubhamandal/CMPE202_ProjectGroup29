@@ -17,6 +17,10 @@ public class ColorPicker extends Actor
     Color[] colors = {Color.RED, Color.YELLOW, Color.GREEN, Color.BLUE};
     int selectionIndex = -1;
 
+    public Color getPickedColor(){
+        return null;
+    }
+    
     /**
      * Act - do whatever the ColorPicker wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
@@ -31,7 +35,17 @@ public class ColorPicker extends Actor
             world.updateColor(selectedColor());
             updateImage();
         }
+<<<<<<< HEAD
     }    
+=======
+        
+        if (Greenfoot.mouseDragged(this))
+        {
+            MouseInfo mouse = Greenfoot.getMouseInfo();
+            setLocation(mouse.getX(), mouse.getY());
+        }
+    }   
+>>>>>>> 44619e80702f6e6e65e7db65f289cad9f0636439
 
     public Color selectedColor() {
         if (selectionIndex < 0) {
@@ -39,12 +53,19 @@ public class ColorPicker extends Actor
         }
         return colors[selectionIndex];
     }
+<<<<<<< HEAD
     
     private int colorWidth() {
         return (int)Math.floor(width/numColors*1.0);
     }
 
     public ColorPicker(int width, int height, int numColors){
+=======
+    public ColorPicker(){
+         //do nothing 
+     }
+    public ColorPicker(int width, int height){
+>>>>>>> 44619e80702f6e6e65e7db65f289cad9f0636439
         this.width = width;
         this.height = height;
         this.numColors = numColors;

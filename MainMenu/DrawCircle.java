@@ -6,7 +6,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class DrawCircle extends Actor
+public class DrawCircle extends DrawShapes
 {
     /**
      * Act - do whatever the DrawCircle wants to do. This method is called whenever

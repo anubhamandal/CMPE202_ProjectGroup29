@@ -7,7 +7,7 @@ import java.lang.Object;
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class DrawRectangle extends Actor
+public class DrawRectangle extends DrawShapes
 {
     /**
      * Act - do whatever the DrawRectangle wants to do. This method is called whenever
