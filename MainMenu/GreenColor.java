@@ -16,6 +16,7 @@ public class GreenColor extends ColorPicker
     DrawCircle dc;
     DrawOval dov;
     DrawRectangle dr;
+    private Color color;
     GreenfootImage image = new GreenfootImage(110,100);
 
     public GreenColor(int width, int height) {
@@ -35,6 +36,23 @@ public class GreenColor extends ColorPicker
         image.setColor(java.awt.Color.GREEN);
         image.fillRect(0,0,50,50);
         setImage(image);
+    }
+      
+    public void act() 
+    {
+        super.act();
+    }    
+    public Color getPickedColor(){
+        return color;
+    }
+    public GreenColor(){
+        color=Color.green;
+        GreenfootImage img = new GreenfootImage(50, 50);
+        img.setColor(color);
+        img.drawOval(0,0,50,50);
+        img.fillOval(0,0,50,50); 
+        setImage(img);
+    
     }
 
 }

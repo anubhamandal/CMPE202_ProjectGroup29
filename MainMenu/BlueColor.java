@@ -16,6 +16,7 @@ public class BlueColor extends ColorPicker
     DrawCircle dc;
     DrawOval dov;
     DrawRectangle dr;
+    private Color color;
     GreenfootImage image = new GreenfootImage(110,100);
 
     public BlueColor(int width, int height) {
@@ -37,5 +38,23 @@ public class BlueColor extends ColorPicker
         setImage(image);
 
     }
+    
+    public void act() 
+    {
+        super.act();// Add your action code here.
+    }    
+    public Color getPickedColor(){
+        return color;
+    }
+    public BlueColor(){
+        color=Color.blue;
+        GreenfootImage img = new GreenfootImage(50, 50);
+        img.setColor(color);
+        img.drawOval(0,0,50,50);
+        img.fillOval(0,0,50,50); 
+        setImage(img);
+    
+    }
+    
 
 }

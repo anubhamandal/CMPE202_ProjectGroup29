@@ -13,6 +13,10 @@ public class ColorPicker extends Actor
     Color lineColor = Color.WHITE;
     Color fillColor = Color.GRAY;
 
+    public Color getPickedColor(){
+        return null;
+    }
+    
     /**
      * Act - do whatever the ColorPicker wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
@@ -31,6 +35,12 @@ public class ColorPicker extends Actor
             world.updatePicker();
             //updateImage();
         }
+        
+        if (Greenfoot.mouseDragged(this))
+        {
+            MouseInfo mouse = Greenfoot.getMouseInfo();
+            setLocation(mouse.getX(), mouse.getY());
+        }
     }   
 
     public boolean isSelected(){
@@ -38,7 +48,9 @@ public class ColorPicker extends Actor
         if (world == null) return false;
         return fillColor == world.selectedColor;
     }
-    
+    public ColorPicker(){
+         //do nothing 
+     }
     public ColorPicker(int width, int height){
         this.width = width;
         this.height = height;
