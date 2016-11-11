@@ -3,16 +3,11 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 /**
  * Write a description of class MyWorld here.
  * 
- * @author (your name) 
+ * @author (Anubha) 
  * @version (a version number or a date)
  */
 public class Graph5 extends BaseGraph
 {
-
-    /**
-     * Constructor for objects of class MyWorld.
-     * 
-     */
     public Graph5()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
@@ -114,5 +109,12 @@ public class Graph5 extends BaseGraph
         addObject(drawsquare43,567,164);
         DrawSquare drawsquare44 = new DrawSquare();
         addObject(drawsquare44,175,307);
+        
+        colorSelectLabel = new Label("Color Selected: ", 20);
+        addObject(colorSelectLabel, 100, 100);
+
+        int numCol = 7;
+        colorPicker = new ColorPicker(300, 75, numCol);
+        addObject(colorPicker, 150, 30);
     }
 }
