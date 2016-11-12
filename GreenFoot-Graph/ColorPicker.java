@@ -14,7 +14,7 @@ public class ColorPicker extends Actor
 
     Color lineColor = Color.WHITE;
     Color fillColor = Color.GRAY;
-    Color[] colors = {Color.RED, Color.YELLOW, Color.GREEN, Color.ORANGE, Color.BLUE, Color.PINK, Color.BLACK};
+    Color[] colors = {Color.RED, Color.YELLOW, Color.GREEN, Color.ORANGE};
     int selectionIndex = -1;
 
     public Color getPickedColor(){
@@ -37,12 +37,11 @@ public class ColorPicker extends Actor
         }
 
         
-      /*  if (Greenfoot.mouseDragged(this))
+        if (Greenfoot.mouseDragged(this))
         {
             MouseInfo mouse = Greenfoot.getMouseInfo();
             setLocation(mouse.getX(), mouse.getY());
         }
-        */
     }   
 
 

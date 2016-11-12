@@ -3,19 +3,18 @@ import greenfoot.GreenfootImage.*;
 import java.lang.Object;
 import java.awt.*;
 /**
- * Write a description of class DrawRectangle here.
+ * Shape class for Graph 5
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author (Anubha) 
+ * @version (11-08-2016)
  */
 public class DrawSquare extends DrawShapes
 {
-    /**
-     * Act - do whatever the DrawRectangle wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
     GreenfootImage image = new GreenfootImage(100,100);
-    int n=0;
+    Color colorToFill=null;
+    boolean isFilled = false;
+    int count=0;
+    
     public DrawSquare() 
     {
         GreenfootImage img = new GreenfootImage(50, 50);
@@ -26,27 +25,21 @@ public class DrawSquare extends DrawShapes
 
     public void act()
     {
-        if(Greenfoot.mouseClicked(this))
+        getColorToFill();
+        if (Greenfoot.mouseClicked(this))
         {
-
-            if(n == 1){
-                image.fillRect(0,0,50,50);
-                setImage(image);
-            }
-
+            getImage().setColor(colorToFill);
+            getImage().fillRect(0,0,50,50);
         }
     }
  
-    public void fillColor(String color)
-    {
-        n=1;
-        if(color=="RED")
-            image.setColor(java.awt.Color.RED);
-        else if(color=="BLUE")
-            image.setColor(java.awt.Color.BLUE);
-        else if(color=="YELLOW")
-            image.setColor(java.awt.Color.YELLOW);
-        else if(color=="GREEN")
-            image.setColor(java.awt.Color.GREEN);
-    }
+    public void getColorToFill()
+    { 
+        BaseGraph world = (BaseGraph)getWorld();
+        Color selectedColor = world.selectedColor();
+        if(selectedColor !=null)
+        {
+            colorToFill = selectedColor;
+        }
+    }    
 }

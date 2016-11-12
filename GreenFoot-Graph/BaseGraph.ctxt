@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=BaseGraph
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ BaseGraph\ here.\r\n\ \r\n\ @author\ jonguan\r\n\ @version\ 11-4-16\r\n
+comment1.params=
+comment1.target=BaseGraph()
+comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ BaseGraph.\r\n\ \r\n
+comment2.params=worldWidth\ worldHeight\ cellSize
+comment2.target=BaseGraph(int,\ int,\ int)
+comment3.params=
+comment3.target=java.awt.Color\ selectedColor()
+comment4.params=color
+comment4.target=void\ updateColor(java.awt.Color)
+numComments=5
