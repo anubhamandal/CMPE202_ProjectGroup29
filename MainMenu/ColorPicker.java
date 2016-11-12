@@ -37,11 +37,12 @@ public class ColorPicker extends Actor
         }
 
         
-        if (Greenfoot.mouseDragged(this))
+      /*  if (Greenfoot.mouseDragged(this))
         {
             MouseInfo mouse = Greenfoot.getMouseInfo();
             setLocation(mouse.getX(), mouse.getY());
         }
+        */
     }   
 
 

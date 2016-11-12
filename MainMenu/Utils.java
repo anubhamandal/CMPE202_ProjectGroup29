@@ -23,6 +23,7 @@ public class Utils
        colorMap.put(Color.GREEN, "Green");
        colorMap.put(Color.BLUE, "Blue");
        colorMap.put(Color.YELLOW, "Yellow");
+       colorMap.put(Color.orange, "orange");
     }
     
     public static Utils getInstance() {
