@@ -10,7 +10,6 @@ import java.awt.*;
  */
 public class DrawSquare extends DrawShapes
 {
-    GreenfootImage image = new GreenfootImage(100,100);
     Color colorToFill=null;
     boolean isFilled = false;
     int count=0;
@@ -19,8 +18,8 @@ public class DrawSquare extends DrawShapes
     {
         GreenfootImage img = new GreenfootImage(50, 50);
         img.setColor(Color.black);
-        image.drawRect(0,0,50,50);
-        setImage(image);
+        img.drawRect(0,0,50,50);
+        setImg(image);
     }    
 
     public void act()
