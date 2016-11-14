@@ -1,4 +1,4 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+1import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import greenfoot.GreenfootImage.*;
 import java.lang.Object;
 import java.awt.*;
@@ -16,10 +16,10 @@ public class DrawSquare extends DrawShapes
     
     public DrawSquare() 
     {
-        GreenfootImage img = new GreenfootImage(50, 50);
+        GreenfootImage img = new GreenfootImage(51, 51);
         img.setColor(Color.black);
         img.drawRect(0,0,50,50);
-        setImg(image);
+        setImage(img);
     }    
 
     public void act()
