@@ -94,16 +94,16 @@ public class Graph6 extends BaseGraph
         
         
         
-        addObject(new Node6("A"), 50, 300);
-        addObject(new Node6("B"), 200, 300);
-        addObject(new Node6("C"), 350, 300);
-        addObject(new Node6("D"), 500, 300);
-        addObject(new Node6("E"), 650, 300);
-        addObject(new Node6("F"), 50, 600);
-        addObject(new Node6("G"), 200, 600);
-        addObject(new Node6("H"), 350, 600);
-        addObject(new Node6("I"), 500, 600);
-        addObject(new Node6("J"), 125, 450);
+        addObject(new Node("A"), 50, 300);
+        addObject(new Node("B"), 200, 300);
+        addObject(new Node("C"), 350, 300);
+        addObject(new Node("D"), 500, 300);
+        addObject(new Node("E"), 650, 300);
+        addObject(new Node("F"), 50, 600);
+        addObject(new Node("G"), 200, 600);
+        addObject(new Node("H"), 350, 600);
+        addObject(new Node("I"), 500, 600);
+        addObject(new Node("J"), 125, 450);
             
         addObject(new Edge(5, 100, 90), 125,300);
         addObject(new Edge(5, 100, 90), 275,300);
