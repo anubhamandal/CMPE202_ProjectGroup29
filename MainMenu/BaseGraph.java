@@ -37,6 +37,7 @@ public class BaseGraph extends World
         if (this.colorSelectLabel != null) {
 
             this.colorSelectLabel.setValue( colString);
+ 
         }
         if (this.validLabel != null) {
 

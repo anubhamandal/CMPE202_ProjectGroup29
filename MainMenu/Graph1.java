@@ -181,8 +181,12 @@ public class Graph1 extends BaseGraph
         // add color pallet 
         colorPicker = new ColorPicker(300, 65, 4);
         addObject (colorPicker, 150, 50);
-        validLabel = new Label("Select a color", 40);
-        addObject(validLabel, 190, 111);          
+        validLabel = new Label("Select a Color", 40);
+        addObject(validLabel, 511, 55);        
+        validLabel.setValue("");
+        //removeObject(validLabel);
+        colorSelectLabel = new Label("Color Selected: ", 30);
+        addObject(colorSelectLabel, 190, 111);
         Greenfoot.start();
          
         }

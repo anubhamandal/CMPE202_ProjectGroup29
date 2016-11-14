@@ -1,4 +1,4 @@
-1import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import greenfoot.GreenfootImage.*;
 import java.lang.Object;
 import java.awt.*;
@@ -27,6 +27,8 @@ public class DrawSquare extends DrawShapes
         getColorToFill();
         if (Greenfoot.mouseClicked(this))
         {
+            //System.out.println(this.getX());
+            //System.out.println(this.getY());
             getImage().setColor(colorToFill);
             getImage().fillRect(0,0,50,50);
         }
