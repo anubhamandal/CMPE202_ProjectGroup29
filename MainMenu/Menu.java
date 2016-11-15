@@ -1,19 +1,37 @@
- 
 
 import greenfoot.*;
 import java.awt.Color;
 
 public class Menu extends World
 {
-    boolean Key1; // tracks the down state of the '1' key (Graph1) //Madhuri
-    boolean Key2; // tracks the down state of the '2' key (Graph2) //Jon
-    boolean Key3; // tracks the down state of the '3' key (Graph3) //Anubha
-    boolean Key4; // tracks the down state of the '4' key (Graph4) //Shilpa
-    boolean Key5; 
-    boolean Key6; // tracks the down state of the '4' key (Graph6) //Veeresh
+    private volatile static Menu menu ;
+
+    private BaseGraph activeGraph;
+
+    // '1' key (Graph1) //Madhuri
+    // '2' key (Graph2) //Jon
+    // '3' key (Graph3) //Anubha
+    //  '4' key (Graph4) //Shilpa
+
+    //  '6' key (Graph6) //Veeresh
+
+    public static Menu getInstance() {
+        if (menu == null) {
+            synchronized (Menu.class){
+                menu = new Menu() ;
+            }
+        }
+        return menu ;
+
+    }
+
     public Menu()
     {
-        super(800, 500, 1);        
+        super(800, 500, 1);   
+        init();
+    }
+
+    private void init(){
         GreenfootImage background = new GreenfootImage("Background.jpg");
         setBackground(background);
         background = getBackground();
@@ -35,43 +53,49 @@ public class Menu extends World
         text = new GreenfootImage("Use '6' key to go to Graph6", 32, Color.black, new Color(0, 0, 0, 0));
         background.drawImage(text, 400-text.getWidth()/2, 450);
     }
-    
+
     public void act()
     {
-        if (!Key1 && Greenfoot.isKeyDown("1"))
-        {
-            Greenfoot.setWorld(new Graph1());
-            Key1 = true;
+        if (activeGraph != null) {
+            return;
         }
 
-        if (!Key2 && Greenfoot.isKeyDown("2"))
+        if (Greenfoot.isKeyDown("1"))
         {
-            Greenfoot.setWorld(new Graph2());
-            Key2 = true;
+            activeGraph = new Graph1();
         }
-        
-        if (!Key3 && Greenfoot.isKeyDown("3"))
+
+        if ( Greenfoot.isKeyDown("2"))
         {
-            Greenfoot.setWorld(new Graph3());
-            Key3 = true;
+            activeGraph = new Graph2();
         }
-        
-        if (!Key4 && Greenfoot.isKeyDown("4"))
+
+        if ( Greenfoot.isKeyDown("3"))
         {
-            Greenfoot.setWorld(new Graph4());
-            Key4 = true;
+            activeGraph = new Graph3();
         }
-        
-        if (!Key5 && Greenfoot.isKeyDown("5"))
+
+        if ( Greenfoot.isKeyDown("4"))
         {
-            Greenfoot.setWorld(new Graph5());
-            Key5 = true;
+            activeGraph = new Graph4();
         }
-        
-        if (!Key6 && Greenfoot.isKeyDown("6"))
+
+        if (Greenfoot.isKeyDown("5"))
         {
-            Greenfoot.setWorld(new Graph6());
-            Key6 = true;
+            activeGraph = new Graph5();
         }
+
+        if ( Greenfoot.isKeyDown("6"))
+        {
+            activeGraph = new Graph6();
+        }
+
+        if (activeGraph != null){
+            Greenfoot.setWorld(activeGraph);
+        }
+    }
+
+    public BaseGraph getActiveGraph() {
+        return activeGraph;
     }
 }

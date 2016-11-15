@@ -1,5 +1,7 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.awt.Color;
+import java.util.Map;
+import java.util.HashMap;
 
 /**
  * Write a description of class BaseGraph here.
@@ -13,6 +15,8 @@ public class BaseGraph extends World
     public ColorPicker colorPicker;
     Label validLabel;
     Label colorSelectLabel;
+    // The following is to keep track of the colors of the nodes
+    public Map<Double, String> colorMap = new HashMap<Double, String>();
 
     /**
      * Constructor for objects of class BaseGraph.
@@ -37,7 +41,7 @@ public class BaseGraph extends World
         if (this.colorSelectLabel != null) {
 
             this.colorSelectLabel.setValue( colString);
- 
+
         }
         if (this.validLabel != null) {
 
@@ -45,6 +49,10 @@ public class BaseGraph extends World
         }
     }
 
+    public void setCountryColor(Double id){
+        colorMap.put(id, Utils.getInstance().colorToString(selectedColor()));
+    }
+    
     /**
      * A method to check if the adjacent colors of the graph nodes are different
      */

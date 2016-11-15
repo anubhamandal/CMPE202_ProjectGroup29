@@ -12,7 +12,7 @@ import java.util.*;
 public class Graph6 extends BaseGraph
 {
     public Map<String, Set<String>> connectedMap;
-    public Map<String, String> colorMap = new HashMap<String, String>();
+
     public Label validLabel;
    
     public Graph6()

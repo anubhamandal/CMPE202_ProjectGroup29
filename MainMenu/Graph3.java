@@ -8,7 +8,7 @@ import java.util.*;
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Graph3 extends World
+public class Graph3 extends BaseGraph
 {
     public Graph3()
     {    

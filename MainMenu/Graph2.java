@@ -49,7 +49,8 @@ public class Graph2 extends BaseGraph
         country4.setRotation(270);
         validLabel = new Label("Select a color", 40);
         addObject(validLabel, 300, 40);
-        //checkValid();
+        
+        
 
         // Color Picker
         

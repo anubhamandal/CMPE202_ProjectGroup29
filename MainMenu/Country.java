@@ -23,6 +23,7 @@ public class Country extends Actor
     private int clickCount;
     boolean isClicked = isClickInRange();
     boolean addedToWorld = false;
+    private double id;
 
     public void addedToWorld(World world) {
         this.addedToWorld = true;
@@ -58,6 +59,7 @@ public class Country extends Actor
      
         BaseGraph world = (BaseGraph)getWorld();
         fillColor = world.selectedColor();
+        world.setCountryColor(id);
         updateImage();
         world.checkValid();
     }
@@ -102,6 +104,7 @@ public class Country extends Actor
     }
     
     public Country() {
+        id = Math.floor(Math.random()*99999999);
         updateImage();
     }
 
@@ -113,6 +116,9 @@ public class Country extends Actor
         updateImage();
     }
 
+    /**
+     * Me
+     */
     void updateColor(Color color){
         fillColor = color;
         updateImage();
@@ -133,5 +139,9 @@ public class Country extends Actor
         image.drawRect(0, 0, width-1, height-1);
         image.setColor(fillColor);
         image.fillRect(1, 1, width-2, height-2);
+    }
+    
+    public Color getColor() {
+        return fillColor;
     }
 }
