@@ -65,6 +65,9 @@ public class Graph2 extends BaseGraph
 
     }
 
+    /**
+     * A method to check if the adjacent colors of the graph nodes are different
+     */
     public void checkValid() {
 
         List<Country> objList = getObjects(Country.class);

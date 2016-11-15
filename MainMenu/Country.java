@@ -55,23 +55,8 @@ public class Country extends Actor
         if (! isClickInRange()){
             return;
         }
-        /*
-        this.clickCount += 1;
-        this.clickCount %= 3;
-
-        switch(clickCount){
-            case 0:
-            fillColor = Color.GRAY;
-            break;
-            case 1:
-            fillColor = Color.RED;
-            break;
-            case 2:
-            fillColor = Color.BLUE;
-            break;
-        }*/
-
-        Graph2 world = (Graph2)getWorld();
+     
+        BaseGraph world = (BaseGraph)getWorld();
         fillColor = world.selectedColor();
         updateImage();
         world.checkValid();

@@ -45,4 +45,10 @@ public class BaseGraph extends World
         }
     }
 
+    /**
+     * A method to check if the adjacent colors of the graph nodes are different
+     */
+    public void checkValid() {
+        // Implement this method in children
+    }
 }
