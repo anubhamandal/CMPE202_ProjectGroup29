@@ -13,6 +13,9 @@ public class GraphResource extends ServerResource {
 
     Menu menu = Menu.getInstance() ;
     BaseGraph base = menu.getActiveGraph();
+    /**
+    * Server returns the state of the Graph Game
+    **/
     @Get
     public Representation get_request() {
 
@@ -35,27 +38,24 @@ public class GraphResource extends ServerResource {
         JacksonRepresentation<GraphJackson> graphAction = new JacksonRepresentation<GraphJackson> (rep, GraphAction.class);
         GraphAction gaction = graphAction.getObject();
 
-        String action = gaction.getAction();
-        System.out.println( "action: " + action ) ;
+        // Check to see if player is valid
+
+        // increment player, then mod
+
+        String color = gaction.getColor();
+        System.out.println( "color: " + color ) ;
+
+        base.updateColor(Utils.getInstance().stringToColor(color));
+        base.setCountryColor(gaction.nodeid);
+
+
+        // return state
+        GraphJackson graphjackson = new GraphJackson();
+        graphjackson.setColorMap(base.getColorMap());
         
-//***************
-// Take hash map, then set it inside BaseGraph usind update method
+        System.out.println("colormap is "+ base.getColorMap());
+        return new JacksonRepresentation<GraphJackson>(graphjackson) ;
 
-        if ( action.equals( "insert-quarter") ){
-           // machine.insertQuarter() ;
-            //System.out.println( "numQuarters: " + machine.quarters ) ;
-        }
-
-
-        if ( action.equals( "turn-crank") ){
-           // machine.turnCrank();
-            //System.out.println( "-numQuarters: " + machine.quarters ) ;
-
-        }
-
-
-
-        System.out.println("machine " + machine.toString());
 //        JSONObject response = new JSONObject() ;
 //        String state = machine.getStateString() ;
 //        response.put( "result", state ) ;

@@ -23,7 +23,7 @@ public class Utils
        colorMap.put(Color.GREEN, "Green");
        colorMap.put(Color.BLUE, "Blue");
        colorMap.put(Color.YELLOW, "Yellow");
-       colorMap.put(Color.orange, "orange");
+       colorMap.put(Color.ORANGE, "Orange");
     }
     
     public static Utils getInstance() {
@@ -42,6 +42,24 @@ public class Utils
      */
     public String colorToString(Color color){
         return colorMap.get(color);
+    }
+    
+    public Color stringToColor(String string){
+        switch (string){
+            case "Red":
+            return Color.RED;
+            case "Yellow":
+            return Color.YELLOW;
+            case "Orange":
+            return Color.ORANGE;
+            case "Green":
+            return Color.GREEN;
+            case "Blue":
+            return Color.BLUE;
+            case "Black":
+            return Color.BLACK;
+        }
+        return Color.WHITE;
     }
 
 }

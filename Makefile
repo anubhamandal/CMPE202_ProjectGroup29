@@ -14,6 +14,7 @@ test: compile app
 
 compile: 
 	javac -cp \
+	dist/MainMenu.jar:\
 	dist/greenfoot.jar:\
 	dist/json.jar:\
 	dist/restlet.jar:\

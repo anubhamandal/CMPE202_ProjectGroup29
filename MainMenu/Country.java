@@ -117,7 +117,7 @@ public class Country extends Actor
     }
 
     /**
-     * Me
+     * Method used to update color of country
      */
     void updateColor(Color color){
         fillColor = color;
