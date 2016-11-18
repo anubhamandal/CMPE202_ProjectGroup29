@@ -3,6 +3,17 @@ import java.awt.Color;
 import java.util.Map;
 import java.util.HashMap;
 
+import java.net.* ;
+import java.util.* ;
+import java.io.* ;
+import org.json.* ;
+import org.restlet.resource.*;
+import org.restlet.representation.* ;
+import org.restlet.ext.json.* ;
+import org.restlet.data.* ;
+import org.restlet.ext.jackson.*;
+
+
 /**
  * Write a description of class BaseGraph here.
  * 
@@ -12,12 +23,15 @@ import java.util.HashMap;
 public class BaseGraph extends World
 {
 
+    private static String url = "http://localhost:8080/graphgame";
     public ColorPicker colorPicker;
     Label validLabel;
     Label colorSelectLabel;
     // The following is to keep track of the colors of the nodes
     public Map<Double, String> colorMap = new HashMap<Double, String>();
 
+    private ClientResource client = new ClientResource(url);
+    
     /**
      * Constructor for objects of class BaseGraph.
      * 
@@ -50,7 +64,15 @@ public class BaseGraph extends World
     }
 
     public void setCountryColor(Double id){
+        // Local
         colorMap.put(id, Utils.getInstance().colorToString(selectedColor()));
+        // Server
+        GraphAction graphAct = new GraphAction();
+        graphAct.setColor(Utils.getInstance().colorToString(selectedColor()));
+        graphAct.setNodeId(id);
+        
+        Representation rep = new JacksonRepresentation<GraphAction>(graphAct) ;
+        client.post(rep, MediaType.APPLICATION_JSON);
     }
     
     /**
@@ -58,5 +80,9 @@ public class BaseGraph extends World
      */
     public void checkValid() {
         // Implement this method in children
+    }
+    
+    public void updateCountries(Map map){
+    
     }
 }

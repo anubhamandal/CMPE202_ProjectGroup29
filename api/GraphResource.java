@@ -43,7 +43,7 @@ public class GraphResource extends ServerResource {
         String color = gaction.getColor();
         System.out.println( "color: " + color ) ;
 
-        gserv.insertMove(gaction.nodeid, color);
+        gserv.insertMove(gaction.getNodeId(), color);
 
 
         // return state
