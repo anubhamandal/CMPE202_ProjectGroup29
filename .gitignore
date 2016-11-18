@@ -3,3 +3,5 @@
 *.ctxt
 **/*.ctxt
 .DS_Store
+dist/app.jar
+

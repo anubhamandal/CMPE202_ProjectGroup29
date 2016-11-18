@@ -7,15 +7,13 @@ clean:
 	find . -name "*.class" -exec rm -rf {} \;
 
 app: compile
-	cd build ; jar -cvfe ../dist/app.jar GraphServer .
+	cd build ; jar -cvfe ../dist/app.jar GraphGameServer .
 
 test: compile app
-	java -cp dist/restlet.jar:dist/restlet-json.jar:dist/json.jar:dist/app.jar api.GraphServer
+	java -cp dist/restlet.jar:dist/restlet-json.jar:dist/json.jar:dist/app.jar api.GraphGameServer
 
 compile: 
 	javac -cp \
-	dist/MainMenu.jar:\
-	dist/greenfoot.jar:\
 	dist/json.jar:\
 	dist/restlet.jar:\
 	dist/restlet-json.jar:\
@@ -23,12 +21,12 @@ compile:
 	dist/jackson-core-2.8.3.jar:\
 	dist/jackson-annotations-2.8.3.jar \
 	-d build \
-	MainMenu/*.java \
+	GraphServer/game/*.java \
 	api/*.java
 
 run:
 	echo Starting Service at:  http://localhost:8080
-	java -cp build:dist/restlet.jar:dist/restlet-json.jar:dist/json.jar:dist/restlet-jackson.jar:dist/jackson-core-2.8.3.jar:dist/jackson-annotations-2.8.3.jar:dist/jackson-dataformat-smile-2.8.3.jar:dist/jackson-databind-2.8.3.jar:dist/jackson-dataformat-xml-2.8.3.jar:dist/jackson-dataformat-yaml-2.8.3.jar:dist/jackson-dataformat-csv-2.8.3.jar api.GraphServer
+	java -cp build:dist/restlet.jar:dist/restlet-json.jar:dist/json.jar:dist/restlet-jackson.jar:dist/jackson-core-2.8.3.jar:dist/jackson-annotations-2.8.3.jar:dist/jackson-dataformat-smile-2.8.3.jar:dist/jackson-databind-2.8.3.jar:dist/jackson-dataformat-xml-2.8.3.jar:dist/jackson-dataformat-yaml-2.8.3.jar:dist/jackson-dataformat-csv-2.8.3.jar api.GraphGameServer
 
 loadtest:
 	echo Starting Load Test on localhost

@@ -1,6 +1,6 @@
- import java.util.HashMap;
- import java.util.Map;
- import java.util.ArrayList;
+package game;
+
+ import java.util.*;
  
 /**
  * This class represents the state of the game.
@@ -13,7 +13,7 @@ public class GraphJackson {
    // private int playerTurn;
 
     // hash map of {countryId:colorString}
-    private Map<String, String> colorMap = new HashMap<String, String>();
+    private Map<Double, String> colorMap = new HashMap<Double, String>();
 
    // private ArrayList<String> playerIds = new ArrayList<String>();
     

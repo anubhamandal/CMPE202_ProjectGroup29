@@ -1,3 +1,5 @@
+package game;
+
 /**
  * Write a description of class GraphAction here.
  * 
@@ -8,7 +10,7 @@ public class GraphAction
 {
     private String color;
     public String playerid;
-    public String nodeid;
+    public Double nodeid;
 
     /**
      * Constructor for objects of class GraphAction

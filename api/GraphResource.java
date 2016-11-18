@@ -1,7 +1,6 @@
 package api ;
 
-import greenfoot.*;
-import MainMenu.*;
+import game.*;
 import org.restlet.ext.jackson.*;
 import org.restlet.ext.json.*;
 import org.restlet.representation.*;
@@ -11,8 +10,7 @@ import java.io.IOException;
 
 public class GraphResource extends ServerResource {
 
-    Menu menu = Menu.getInstance() ;
-    BaseGraph base = menu.getActiveGraph();
+    GraphServer gserv = GraphServer.getInstance() ;
     /**
     * Server returns the state of the Graph Game
     **/
@@ -20,9 +18,9 @@ public class GraphResource extends ServerResource {
     public Representation get_request() {
 
         GraphJackson graphjackson = new GraphJackson();
-        graphjackson.setColorMap(base.getColorMap());
+        graphjackson.setColorMap(gserv.getMoves());
         
-        System.out.println("colormap is "+ base.getColorMap());
+        System.out.println("colormap is "+ gserv.getMoves());
         return new JacksonRepresentation<GraphJackson>(graphjackson) ;
     }
 
@@ -33,9 +31,9 @@ public class GraphResource extends ServerResource {
      * @return
      */
     @Post
-    public void post_request(Representation rep) throws IOException {
+    public Representation post_request(Representation rep) throws IOException {
 
-        JacksonRepresentation<GraphJackson> graphAction = new JacksonRepresentation<GraphJackson> (rep, GraphAction.class);
+        JacksonRepresentation<GraphAction> graphAction = new JacksonRepresentation<GraphAction> (rep, GraphAction.class);
         GraphAction gaction = graphAction.getObject();
 
         // Check to see if player is valid
@@ -45,20 +43,19 @@ public class GraphResource extends ServerResource {
         String color = gaction.getColor();
         System.out.println( "color: " + color ) ;
 
-        base.updateColor(Utils.getInstance().stringToColor(color));
-        base.setCountryColor(gaction.nodeid);
+        gserv.insertMove(gaction.nodeid, color);
 
 
         // return state
         GraphJackson graphjackson = new GraphJackson();
-        graphjackson.setColorMap(base.getColorMap());
+        graphjackson.setColorMap(gserv.getMoves());
         
-        System.out.println("colormap is "+ base.getColorMap());
+        System.out.println("colormap is "+ graphjackson.getColorMap());
         return new JacksonRepresentation<GraphJackson>(graphjackson) ;
 
 //        JSONObject response = new JSONObject() ;
 //        String state = machine.getStateString() ;
-//        response.put( "result", state ) ;
+        // response.put( "result", gj ) ;
 
 
 
