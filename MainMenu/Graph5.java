@@ -1,4 +1,6 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import java.awt.Color;
+import java.util.*;
 
 /**
  * Write a description of class MyWorld here.
@@ -8,6 +10,9 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Graph5 extends BaseGraph
 {
+    public static HashMap<DrawSquare, Color> map = new HashMap<DrawSquare, Color>();
+    public Label validLabel;
+    
     public Graph5()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
@@ -15,6 +20,15 @@ public class Graph5 extends BaseGraph
         prepare();
     }
 
+    public void act()
+    {
+        if(map.size() == 44)
+        {
+            //System.out.println(map);
+            validLabel.setValue("You Won"); 
+        }
+    }
+    
     /**
      * Prepare the world for the start of the program.
      * That is: create the initial objects and add them to the world.
@@ -112,9 +126,22 @@ public class Graph5 extends BaseGraph
         
         colorSelectLabel = new Label("Color Selected: ", 20);
         addObject(colorSelectLabel, 100, 100);
+        validLabel = new Label("Select a Color", 25);
+        addObject(validLabel, 511, 55);        
+        validLabel.setValue("");
 
-        int numCol = 7;
+        int numCol = 4;
         colorPicker = new ColorPicker(300, 75, numCol);
         addObject(colorPicker, 150, 30);
+    }
+    
+    public HashMap<DrawSquare, Color> getMap()
+    {
+        return map;
+    }
+    
+    public void setMap(HashMap<DrawSquare, Color> hm)
+    {
+        map = hm;
     }
 }

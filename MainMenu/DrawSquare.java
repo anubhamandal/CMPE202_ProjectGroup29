@@ -1,7 +1,9 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import greenfoot.GreenfootImage.*;
 import java.lang.Object;
-import java.awt.*;
+import java.awt.Color;
+import java.util.*;
+
 /**
  * Shape class for Graph 5
  * 
@@ -12,7 +14,7 @@ public class DrawSquare extends DrawShapes
 {
     Color colorToFill=null;
     boolean isFilled = false;
-    int count=0;
+    HashMap<DrawSquare, Color> hm = new HashMap<DrawSquare, Color>();
     
     public DrawSquare() 
     {
@@ -27,10 +29,24 @@ public class DrawSquare extends DrawShapes
         getColorToFill();
         if (Greenfoot.mouseClicked(this))
         {
-            //System.out.println(this.getX());
-            //System.out.println(this.getY());
+            Graph5 g = new Graph5();
+            hm = g.getMap();
+            //System.out.println(hm);
+            for(DrawSquare ds : getIntersectingObjects(DrawSquare.class))
+            {
+                if(hm.get(ds) == colorToFill)
+                {
+                    //System.out.println("invalid color");
+                    ((Graph5)getWorld()).validLabel.setValue("Cannot fill the node with this color");
+                    return;
+                }
+            }
+            ((Graph5)getWorld()).validLabel.setValue("");
             getImage().setColor(colorToFill);
             getImage().fillRect(0,0,50,50);
+            hm.put(this, colorToFill);
+            //System.out.println(hm);
+            g.setMap(hm);
         }
     }
  
