@@ -5,22 +5,22 @@ import java.awt.Color;
 import java.util.*;
 
 /**
- * Shape class for Graph 5
+ * Shape class for Graph 3
  * 
  * @author (Anubha) 
  * @version (11-08-2016)
  */
-public class DrawSquare extends DrawShapes
+public class DrawRect extends DrawShapes
 {
     Color colorToFill=null;
     boolean isFilled = false;
-    HashMap<DrawSquare, Color> hm = new HashMap<DrawSquare, Color>();
+    HashMap<DrawRect, Color> hm = new HashMap<DrawRect, Color>();
     
-    public DrawSquare() 
+    public DrawRect() 
     {
-        GreenfootImage img = new GreenfootImage(51, 51);
+        GreenfootImage img = new GreenfootImage(130, 90);
         img.setColor(Color.black);
-        img.drawRect(0,0,50,50);
+        img.drawRect(0,0,129,89);
         setImage(img);
     }    
 
@@ -29,27 +29,27 @@ public class DrawSquare extends DrawShapes
         getColorToFill();
         if (Greenfoot.mouseClicked(this))
         {
-            Graph5 g = new Graph5();
+            Graph3 g = new Graph3();
             hm = g.getMap();
             //System.out.println(hm);
-            for(DrawSquare ds : getIntersectingObjects(DrawSquare.class))
+            for(DrawRect ds : getIntersectingObjects(DrawRect.class))
             {
                 if(hm.get(ds) == colorToFill)
                 {
                     //System.out.println("invalid color");
-                    ((Graph5)getWorld()).validLabel.setValue("Cannot fill the node with this color");
+                    ((Graph3)getWorld()).validLabel.setValue("Cannot fill the node with this color");
                     return;
                 }
             }
-            ((Graph5)getWorld()).validLabel.setValue("");
+            ((Graph3)getWorld()).validLabel.setValue("");
             getImage().setColor(colorToFill);
-            getImage().fillRect(0,0,50,50);
+            getImage().fillRect(0,0,129,89);
             hm.put(this, colorToFill);
             //System.out.println(hm);
             g.setMap(hm);
         }
     }
- 
+    
     public void getColorToFill()
     { 
         BaseGraph world = (BaseGraph)getWorld();
@@ -58,5 +58,5 @@ public class DrawSquare extends DrawShapes
         {
             colorToFill = selectedColor;
         }
-    }    
+    }
 }

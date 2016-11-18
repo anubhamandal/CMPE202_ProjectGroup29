@@ -16,23 +16,11 @@ public class Graph4 extends BaseGraph
     public Graph4()
     {    
         super(800, 600, 1); 
-        DrawRectangle dr=new DrawRectangle();
-        addObject(dr,290,150);
         DrawOval dov=new DrawOval();
         addObject(dov,200,200);
         DrawCircle dc=new DrawCircle();
         addObject(dc,190,150);
-        /*
-        RedColor rc=new RedColor(dc,dr,dov);
-        addObject(rc,550,150);
-        BlueColor bc=new BlueColor(dc,dr,dov);
-        addObject(bc,600,150);
-        GreenColor gc=new GreenColor(dc,dr,dov);
-        addObject(gc,650,150);
-        YellowColor yc=new YellowColor(dc,dr,dov);
-        addObject(yc,700,150);
-        */
-        //setPaintOrder(DrawRectangle.class, DrawOval.class);
-
+        DrawRect dr=new DrawRect();
+        addObject(dr, 300,300);
     }
 }

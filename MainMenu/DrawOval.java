@@ -1,51 +1,34 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import greenfoot.GreenfootImage.*;
+import java.lang.Object;
+import java.awt.Color;
+import java.util.*;
 
 /**
- * Write a description of class DrawOval here.
+ * Shape class for Graph 3
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author (Anubha) 
+ * @version (11-08-2016)
  */
 public class DrawOval extends DrawShapes
 {
-    /**
-     * Act - do whatever the DrawOval wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
-    GreenfootImage image = new GreenfootImage(200,100);
-    int n=0;
+    Color colorToFill=null;
+    boolean isFilled = false;
+    HashMap<DrawOval, Color> hm = new HashMap<DrawOval, Color>();
+    
     public DrawOval() 
     {
-          
-        image.drawOval(0,0,199,99);
-        setImage(image);
-       
+        GreenfootImage img = new GreenfootImage(51, 51);
+        img.setColor(Color.black);
+        img.drawOval(0,0,199,99);
+        setImage(img);
     } 
     public void act()
     {
-    if(Greenfoot.mouseClicked(this))
-        {
-            
-                      if(n == 1){
-            image.fillOval(0,0,199,99);
-            setImage(image);
-            }
-        
+        if(Greenfoot.mouseClicked(this))
+        {           
+            getImage().setColor(colorToFill);
+            getImage().fillOval(0,0,199,99);
         }
     }
-    public void fillColor(String color)
-    {
-        n=1;
-        if(color=="RED")
-        image.setColor(java.awt.Color.RED);
-        else if(color=="BLUE")
-        image.setColor(java.awt.Color.BLUE);
-        else if(color=="YELLOW")
-        image.setColor(java.awt.Color.YELLOW);
-        else if(color=="GREEN")
-        image.setColor(java.awt.Color.GREEN);
-    
-
-}
-    
 }
