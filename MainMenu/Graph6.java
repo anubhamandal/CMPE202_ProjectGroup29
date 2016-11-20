@@ -33,15 +33,16 @@ public class Graph6 extends BaseGraph
         connectedMap = new HashMap();
         Set<String> h1 = new HashSet<String>();
         h1.add("B");
-        h1.add("C");
-        h1.add("E");
+        h1.add("F");
+        h1.add("J");
         connectedMap.put("A", h1);
         
         Set<String> h2 = new HashSet<String>();
+        h2.add("A");
         h2.add("C");
         h2.add("G");
         h2.add("H");
-        h2.add("I");
+        h2.add("J");
         connectedMap.put("B", h2);
         
         Set<String> h3 = new HashSet<String>();
@@ -62,15 +63,15 @@ public class Graph6 extends BaseGraph
         
         Set<String> h6 = new HashSet<String>();
         h6.add("A");
-        h6.add("F");
         h6.add("G");
+        h6.add("J");
         connectedMap.put("F", h6);
         
         Set<String> h7 = new HashSet<String>();
         h7.add("B");
         h7.add("F");
         h7.add("H");
-        h7.add("I");
+        h7.add("J");
         connectedMap.put("G", h7);
         
         Set<String> h8 = new HashSet<String>();
