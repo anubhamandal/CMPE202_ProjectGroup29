@@ -8,7 +8,7 @@ public class Node extends Actor
     private String title;
     Color colorToFill=null;
     String filledColorString;
-    boolean isValid=true;
+    boolean isValid=true,isGameOver=false;
         
     public Node(String pTitle) {
         title = pTitle;
@@ -37,6 +37,12 @@ public class Node extends Actor
                 getImage().setColor(colorToFill);
                 getImage().fillOval(0,0,50,50);
             }
+        }
+        if((((Graph1)getWorld()).colorMap.size() == 16) && !isGameOver){
+            ((BaseGraph)getWorld()).stopTime=System.currentTimeMillis();
+            int timeTaken = (int)(((BaseGraph)getWorld()).stopTime-((BaseGraph)getWorld()).startTime)/1000;
+            ((Graph1)getWorld()).validLabel.setValue("Finished the game in "+ timeTaken + " seconds");
+            isGameOver = true;
         }
        
        

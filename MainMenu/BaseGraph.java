@@ -27,6 +27,8 @@ public class BaseGraph extends World
     public ColorPicker colorPicker;
     Label validLabel;
     Label colorSelectLabel;
+    public long startTime,stopTime;
+
     // The following is to keep track of the colors of the nodes
     public Map<Double, String> colorMap = new HashMap<Double, String>();
 
@@ -44,6 +46,7 @@ public class BaseGraph extends World
 
     public BaseGraph(int worldWidth, int worldHeight, int cellSize){
         super(worldWidth, worldHeight, cellSize);
+        startTime = System.currentTimeMillis();
     }
 
     public Color selectedColor() {
