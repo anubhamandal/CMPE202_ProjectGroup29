@@ -76,7 +76,7 @@ public class Country extends Actor
         int x = clickx - selfx;
         int y = clicky - selfy;
         int rot = getRotation();
-        System.out.printf("rot %d, x %d, y %d\n", rot, Math.abs(x), Math.abs(y));
+        //System.out.printf("rot %d, x %d, y %d\n", rot, Math.abs(x), Math.abs(y));
         return Math.abs(x) < width/2.0 && Math.abs(y) < height/2.0;
     }
 

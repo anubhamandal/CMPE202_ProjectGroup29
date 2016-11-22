@@ -7,12 +7,12 @@ import java.net.* ;
 import java.util.* ;
 import java.io.* ;
 import org.json.* ;
+import com.fasterxml.jackson.databind.*;
 import org.restlet.resource.*;
 import org.restlet.representation.* ;
 import org.restlet.ext.json.* ;
 import org.restlet.data.* ;
 import org.restlet.ext.jackson.*;
-
 
 /**
  * Write a description of class BaseGraph here.
@@ -33,7 +33,7 @@ public class BaseGraph extends World
     public Map<Double, String> colorMap = new HashMap<Double, String>();
 
     private ClientResource client = new ClientResource(url);
-    
+
     /**
      * Constructor for objects of class BaseGraph.
      * 
@@ -73,19 +73,30 @@ public class BaseGraph extends World
         GraphAction graphAct = new GraphAction();
         graphAct.setColor(Utils.getInstance().colorToString(selectedColor()));
         graphAct.setNodeId(id);
-        
-        Representation rep = new JacksonRepresentation<GraphAction>(graphAct) ;
-        client.post(rep, MediaType.APPLICATION_JSON);
+        graphAct.setAction("insertMove");
+
+        //Representation rep = new JacksonRepresentation<GraphAction>(graphAct) ;
+        //client.post(rep, MediaType.APPLICATION_JSON);
+        ObjectMapper mapper = new ObjectMapper();
+        try{
+            String jsonRep = mapper.writeValueAsString(graphAct);
+            //System.out.println(jsonRep);
+            GraphClient.getInstance().send(jsonRep);
+        }catch (Exception e){
+            System.out.println(e);
+        }
+
+
     }
-    
+
     /**
      * A method to check if the adjacent colors of the graph nodes are different
      */
     public void checkValid() {
         // Implement this method in children
     }
-    
+
     public void updateCountries(Map map){
-    
+
     }
 }

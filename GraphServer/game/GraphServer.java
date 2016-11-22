@@ -1,6 +1,7 @@
 package game; 
 
 import java.util.*;
+import org.json.* ;
 
 /**
  * Write a description of class GraphServer here.
@@ -32,6 +33,25 @@ public class GraphServer
         return gserver;
     }
     
+    /**
+    * parse Socket commands
+    */
+    public String parseCommand(String command){
+        //Turn into JSON object first
+        JSONObject json = new JSONObject(command);
+        switch (json.getString("action")) {
+            case "getMoves":
+            return getMoves().toString();
+            case "insertMove":
+            {
+                this.insertMove(new Double(json.getString("nodeId")), json.getString("color"));
+                return getMoves().toString();
+            }
+
+        }
+        return "";
+    }
+
     public void resetGame() {
         colorMap = new HashMap<Double, String>();
     }
