@@ -179,7 +179,7 @@ public class Graph1 extends BaseGraph
         addObject(new GraphEdge("N", "O", 2, 230, -20), 811,239);
         
         // add color pallet 
-        colorPicker = new ColorPicker(300, 65, 4);
+        colorPicker = new ColorPicker(300, 65, 5);
         addObject (colorPicker, 150, 50);
         validLabel = new Label("Select a Color", 40);
         addObject(validLabel, 511, 55);        
