@@ -18,6 +18,8 @@ public class GraphResource extends ServerResource {
     public Representation get_request() {
 
         GraphJackson graphjackson = new GraphJackson();
+        // TODO Get games - not moves
+
         graphjackson.setColorMap(gserv.getMoves());
         
         System.out.println("colormap is "+ gserv.getMoves());
@@ -32,6 +34,10 @@ public class GraphResource extends ServerResource {
      */
     @Post
     public Representation post_request(Representation rep) throws IOException {
+
+// TODO POST game name, # players, 
+        // TODO POST join game
+        
 
         JacksonRepresentation<GraphAction> graphAction = new JacksonRepresentation<GraphAction> (rep, GraphAction.class);
         GraphAction gaction = graphAction.getObject();

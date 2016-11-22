@@ -26,7 +26,23 @@ compile:
 
 run:
 	echo Starting Service at:  http://localhost:8080
-	java -cp build:dist/restlet.jar:dist/restlet-json.jar:dist/json.jar:dist/restlet-jackson.jar:dist/jackson-core-2.8.3.jar:dist/jackson-annotations-2.8.3.jar:dist/jackson-dataformat-smile-2.8.3.jar:dist/jackson-databind-2.8.3.jar:dist/jackson-dataformat-xml-2.8.3.jar:dist/jackson-dataformat-yaml-2.8.3.jar:dist/jackson-dataformat-csv-2.8.3.jar api.GraphGameServer
+	java -cp \
+	build:\
+	dist/restlet.jar:\
+	dist/restlet-json.jar:\
+	dist/json.jar:\
+	dist/restlet-jackson.jar:\
+	dist/jackson-core-2.8.3.jar:\
+	dist/jackson-annotations-2.8.3.jar:\
+	dist/jackson-dataformat-smile-2.8.3.jar:\
+	dist/jackson-databind-2.8.3.jar:\
+	dist/jackson-dataformat-xml-2.8.3.jar:\
+	dist/jackson-dataformat-yaml-2.8.3.jar:\
+	dist/jackson-dataformat-csv-2.8.3.jar \
+	api.GraphGameServer
+
+runtest:
+	cd ../test ; java KnockKnockServer 8080
 
 loadtest:
 	echo Starting Load Test on localhost

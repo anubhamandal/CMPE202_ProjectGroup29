@@ -52,7 +52,7 @@ public class TriangleCountry extends Country
         // Get rotation
         int rot = getRotation();
 
-        System.out.printf("%d, %d, %d, %d\n", clickx, clicky, selfx, selfy);
+        //System.out.printf("%d, %d, %d, %d\n", clickx, clicky, selfx, selfy);
         // Break into half triangle regions
         switch (rot) {
             case 0:{
