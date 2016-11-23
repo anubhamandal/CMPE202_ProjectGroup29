@@ -1,4 +1,4 @@
-package graphgame;
+ 
 
 
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
@@ -107,17 +107,7 @@ public class BaseGraph extends World implements IClientDelegate
     }
 
     public void receiveMove(String move){
-<<<<<<< Updated upstream
-        try{
-            JSONObject json = new JSONObject(move);
-            Double nodeId = json.getDouble("nodeId");
-            String color = json.getString("color");
-            colorMap.put(nodeId, color);
-            refreshNodeColors();
-        }catch (JSONException e){
-            System.out.println(e);
-        }
-=======
+
         // try{
             // JSONObject json = new JSONObject(move);
             // Integer nodeId = json.getInt("nodeId");
@@ -127,7 +117,6 @@ public class BaseGraph extends World implements IClientDelegate
         // }catch (JSONException e){
             // System.out.println(e);
         // }
->>>>>>> Stashed changes
 
          
     }
