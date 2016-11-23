@@ -1,4 +1,3 @@
- 
 
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.awt.Color;
@@ -56,12 +55,12 @@ public class Country extends Actor
         if (! isClickInRange()){
             return;
         }
-     
+
         BaseGraph world = (BaseGraph)getWorld();
         fillColor = world.selectedColor();
         world.setCountryColor(id);
-        updateImage();
-        world.checkValid();
+        //updateImage();
+        //world.checkValid();
     }
 
     boolean isClickInRange() {
@@ -91,7 +90,7 @@ public class Country extends Actor
         if (this.fillColor == Color.GRAY) {
             return true;
         }
-        
+
         List<Country> countries = getIntersectingObjects(Country.class);
         ListIterator<Country> it = countries.listIterator();
         while (it.hasNext()){
@@ -102,7 +101,7 @@ public class Country extends Actor
         }
         return true;
     }
-    
+
     public Country() {
         id = Math.floor(Math.random()*99999999);
         updateImage();
@@ -122,6 +121,8 @@ public class Country extends Actor
     void updateColor(Color color){
         fillColor = color;
         updateImage();
+        BaseGraph world = (BaseGraph)getWorld();
+        world.checkValid();
     }
 
     /**
@@ -140,8 +141,12 @@ public class Country extends Actor
         image.setColor(fillColor);
         image.fillRect(1, 1, width-2, height-2);
     }
-    
+
     public Color getColor() {
         return fillColor;
+    }
+
+    public Double getId(){
+        return this.id;
     }
 }

@@ -45,18 +45,19 @@ public class Utils
     }
     
     public Color stringToColor(String string){
+        string = string.toLowerCase();
         switch (string){
-            case "Red":
+            case "red":
             return Color.RED;
-            case "Yellow":
+            case "yellow":
             return Color.YELLOW;
-            case "Orange":
+            case "orange":
             return Color.ORANGE;
-            case "Green":
+            case "green":
             return Color.GREEN;
-            case "Blue":
+            case "blue":
             return Color.BLUE;
-            case "Black":
+            case "black":
             return Color.BLACK;
         }
         return Color.WHITE;
