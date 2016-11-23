@@ -11,7 +11,7 @@ import org.restlet.routing.Router;
 import game.*;
 
 
-public class GraphGameServerThread implements Runnable {
+public class GraphGameServerThread extends Thread {
     private Socket socket = null;
 
     public GraphGameServerThread(Socket socket){
@@ -24,7 +24,7 @@ public class GraphGameServerThread implements Runnable {
         System.out.println("What the what ");
 
         try ( 
-            PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
+            PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
             BufferedReader in = new BufferedReader(
                 new InputStreamReader(socket.getInputStream()));
             ) {
@@ -47,9 +47,8 @@ public class GraphGameServerThread implements Runnable {
             }
             socket.close();
         } catch (IOException e) {
-            System.out.println("Exception caught when trying to listen on port "
-                + portNumber + " or listening for a connection");
-            System.out.println(e.getMessage());
+            
+            System.err.println(e);
         }
     }
 }
