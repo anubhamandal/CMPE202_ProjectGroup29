@@ -11,7 +11,7 @@ public class GraphAction
 {
     private String color;
     private String playerid;
-    private Double nodeid;
+    private Integer nodeid;
     private String action;
 
     /**
@@ -30,11 +30,11 @@ public class GraphAction
         this.color = color;
     }
     
-    public Double getNodeId(){
+    public Integer getNodeId(){
         return nodeid;
     }
     
-    public void setNodeId(Double nodeid){
+    public void setNodeId(Integer nodeid){
         this.nodeid = nodeid;
     }
     

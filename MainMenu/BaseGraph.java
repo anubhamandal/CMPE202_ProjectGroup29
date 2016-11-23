@@ -5,7 +5,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.awt.Color;
 import java.util.*;
 
-/*
+
 import java.net.* ;
 import java.util.* ;
 import java.io.* ;
@@ -16,7 +16,7 @@ import org.restlet.representation.* ;
 import org.restlet.ext.json.* ;
 import org.restlet.data.* ;
 import org.restlet.ext.jackson.*;
-*/
+
 /**
  * Write a description of class BaseGraph here.
  * 
@@ -33,9 +33,9 @@ public class BaseGraph extends World implements IClientDelegate
     public long startTime,stopTime;
 
     // The following is to keep track of the colors of the nodes
-    public Map<Double, String> colorMap = new HashMap<Double, String>();
+    public Map<Integer, String> colorMap = new HashMap<Integer, String>();
 
-   // private ClientResource client = new ClientResource(url);
+    private ClientResource client = new ClientResource(url);
 
     /**
      * Constructor for objects of class BaseGraph.
@@ -51,7 +51,7 @@ public class BaseGraph extends World implements IClientDelegate
         super(worldWidth, worldHeight, cellSize);
         startTime = System.currentTimeMillis();
         //GraphClient.getInstance().reset();
-        //GraphClient.getInstance().setDelegate(this);
+        GraphClient.getInstance().setDelegate(this);
 
     }
     
@@ -72,7 +72,7 @@ public class BaseGraph extends World implements IClientDelegate
         }
     }
 
-    public void setCountryColor(Double id){
+    public void setCountryColor(Integer id){
         // Local
         colorMap.put(id, Utils.getInstance().colorToString(selectedColor()));
         // Server
@@ -83,7 +83,7 @@ public class BaseGraph extends World implements IClientDelegate
 
         //Representation rep = new JacksonRepresentation<GraphAction>(graphAct) ;
         //client.post(rep, MediaType.APPLICATION_JSON);
-        /*
+        
         ObjectMapper mapper = new ObjectMapper();
         try{
             String jsonRep = mapper.writeValueAsString(graphAct);
@@ -92,7 +92,7 @@ public class BaseGraph extends World implements IClientDelegate
         }catch (Exception e){
             System.out.println(e);
         }
-        */
+        
 
     }
     /**
@@ -108,15 +108,15 @@ public class BaseGraph extends World implements IClientDelegate
 
     public void receiveMove(String move){
 
-        // try{
-            // JSONObject json = new JSONObject(move);
-            // Integer nodeId = json.getInt("nodeId");
-            // String color = json.getString("color");
-            // colorMap.put(nodeId, color);
-            // refreshNodeColors();
-        // }catch (JSONException e){
-            // System.out.println(e);
-        // }
+        try{
+            JSONObject json = new JSONObject(move);
+            Integer nodeId = json.getInt("nodeId");
+            String color = json.getString("color");
+            colorMap.put(nodeId, color);
+            refreshNodeColors();
+        }catch (JSONException e){
+            System.out.println(e);
+        }
 
          
     }

@@ -3,18 +3,21 @@ all: clean compile
 
 clean:
 	rm -rf build/*
+	rm -rf buildgf/*
 	rm -f dist/app.jar
 	find . -name "*.class" -exec rm -rf {} \;
 
 app: compile
 	cd build ; jar -cvfe ../dist/app.jar GraphGameServer .
 
+appgf: compilegf
+	cd buildgf ; jar cvfe ../dist/appgf.jar *
+
 test: compile app
 	java -cp dist/restlet.jar:dist/restlet-json.jar:dist/json.jar:dist/app.jar api.GraphGameServer
 
 compile: 
 	javac -cp \
-	dist/greenfoot.jar:\
 	dist/json.jar:\
 	dist/restlet.jar:\
 	dist/restlet-json.jar:\
@@ -24,8 +27,18 @@ compile:
 	-d build \
 	GraphServer/game/*.java \
 	api/*.java \
+
+compilegf:
+	javac -cp \
+	dist/greenfoot.jar:\
+	dist/json.jar:\
+	dist/restlet.jar:\
+	dist/restlet-json.jar:\
+	dist/restlet-jackson.jar:\
+	dist/jackson-core-2.8.3.jar:\
+	dist/jackson-annotations-2.8.3.jar \
+	-d buildgf \
 	MainMenu/*.java \
-	-verbose
 
 run:
 	echo Starting Service at:  http://localhost:8080

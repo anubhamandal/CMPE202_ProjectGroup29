@@ -23,7 +23,7 @@ public class Country extends Actor
     private int clickCount;
     boolean isClicked = isClickInRange();
     boolean addedToWorld = false;
-    private double id;
+    private int id;
 
     public void addedToWorld(World world) {
         this.addedToWorld = true;
@@ -104,7 +104,7 @@ public class Country extends Actor
     }
 
     public Country() {
-        id = Math.floor(Math.random()*99999999);
+        //id = Math.floor(Math.random()*99999999);
         updateImage();
     }
 
@@ -147,7 +147,7 @@ public class Country extends Actor
         return fillColor;
     }
 
-    public Double getId(){
+    public Integer getId(){
         return this.id;
     }
 }
