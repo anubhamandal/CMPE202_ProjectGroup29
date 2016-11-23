@@ -15,13 +15,13 @@ public class TriangleCountry extends Country
      * Triangle will always be drawn with flat part on bottom and one point facing up. 
      * rotateDeg is measured in degrees rotation around the center clockwise.
      */
-    public TriangleCountry(int x, int y, int width, int height) {
-        super(); // called to set country id
+    public TriangleCountry(int x, int y, int width, int height, int id) {
+        
         this.xPos = x;
         this.yPos = y;
         this.width = width;
         this.height = height;
-        //this.rotateDeg = rotateDeg;
+        this.id = id;
         updateImage();
     }
 

@@ -35,10 +35,10 @@ public class Graph2 extends BaseGraph
         //Country country2 = new Country(0, 300, 600, 200);
         //Country country3 = new Country(0, 100, 600, 200);
         //Country country4 = new Country(0, 300, 600, 200);
-        TriangleCountry country1 = new TriangleCountry(0, 0, 600, 200);
-        TriangleCountry country2 = new TriangleCountry(0, 0, 600, 200);
-        TriangleCountry country3 = new TriangleCountry(0, 0, 400, 300);
-        TriangleCountry country4 = new TriangleCountry(0, 0, 400, 300);
+        TriangleCountry country1 = new TriangleCountry(0, 0, 600, 200, 1);
+        TriangleCountry country2 = new TriangleCountry(0, 0, 600, 200, 2);
+        TriangleCountry country3 = new TriangleCountry(0, 0, 400, 300, 3);
+        TriangleCountry country4 = new TriangleCountry(0, 0, 400, 300, 4);
 
         addObject( country1, 300, 299);
         country1.setRotation(180);

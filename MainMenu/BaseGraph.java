@@ -30,7 +30,7 @@ public class BaseGraph extends World implements IClientDelegate
     public long startTime,stopTime;
 
     // The following is to keep track of the colors of the nodes
-    public Map<Double, String> colorMap = new HashMap<Double, String>();
+    public Map<Integer, String> colorMap = new HashMap<Integer, String>();
 
     private ClientResource client = new ClientResource(url);
 
@@ -69,7 +69,7 @@ public class BaseGraph extends World implements IClientDelegate
         }
     }
 
-    public void setCountryColor(Double id){
+    public void setCountryColor(Integer id){
         // Local
         colorMap.put(id, Utils.getInstance().colorToString(selectedColor()));
         // Server
@@ -104,7 +104,7 @@ public class BaseGraph extends World implements IClientDelegate
     public void receiveMove(String move){
         try{
             JSONObject json = new JSONObject(move);
-            Double nodeId = json.getDouble("nodeId");
+            Integer nodeId = json.getInt("nodeId");
             String color = json.getString("color");
             colorMap.put(nodeId, color);
             refreshNodeColors();
