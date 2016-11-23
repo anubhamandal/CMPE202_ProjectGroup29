@@ -1,3 +1,5 @@
+package graphgame;
+
 import greenfoot.*;
 import java.awt.Color;
  
