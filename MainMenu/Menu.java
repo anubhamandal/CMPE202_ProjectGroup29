@@ -1,4 +1,3 @@
-  
 
 import greenfoot.*;
 import java.awt.Color;
@@ -9,6 +8,7 @@ public class Menu extends World
 
     private BaseGraph activeGraph;
 
+    Label label;
     // '1' key (Graph1) //Madhuri
     // '2' key (Graph2) //Jon
     // '3' key (Graph3) //Anubha
@@ -91,11 +91,25 @@ public class Menu extends World
             activeGraph = new Graph6();
         }
 
-        if (activeGraph != null){
-            Greenfoot.setWorld(activeGraph);
-        }
-    }
+        if (Greenfoot.mouseClicked(this)){
+            GreenfootImage background = getBackground();
+            label = new Label("test", 40);
+            addObject(label, 300, 270);
 
+           // activeGraph = new TestWorld();
+           Greenfoot.setWorld(new TestWorld());
+           return;
+        }
+
+        try{
+            if (activeGraph != null){
+                Greenfoot.setWorld(activeGraph);
+            }
+        }catch (Exception e){
+            System.err.println(e);
+        }
+
+    }
     public BaseGraph getActiveGraph() {
         return activeGraph;
     }

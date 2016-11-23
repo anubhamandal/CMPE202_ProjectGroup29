@@ -14,6 +14,7 @@ test: compile app
 
 compile: 
 	javac -cp \
+	dist/greenfoot.jar:\
 	dist/json.jar:\
 	dist/restlet.jar:\
 	dist/restlet-json.jar:\
@@ -22,7 +23,9 @@ compile:
 	dist/jackson-annotations-2.8.3.jar \
 	-d build \
 	GraphServer/game/*.java \
-	api/*.java
+	api/*.java \
+	MainMenu/*.java \
+	-verbose
 
 run:
 	echo Starting Service at:  http://localhost:8080
