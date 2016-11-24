@@ -108,11 +108,12 @@ public class Country extends Actor
         updateImage();
     }
 
-    public Country(int x, int y, int w, int h) {
+    public Country(int x, int y, int w, int h, int id) {
         xPos = x;
         yPos = y;
         width = w;
         height = h;
+        this.id = id;
         updateImage();
     }
 

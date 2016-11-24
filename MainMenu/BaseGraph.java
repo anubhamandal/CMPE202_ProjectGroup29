@@ -88,7 +88,7 @@ public class BaseGraph extends World implements IClientDelegate
         try{
             String jsonRep = mapper.writeValueAsString(graphAct);
             //System.out.println(jsonRep);
-            //GraphClient.getInstance().send(jsonRep);
+            GraphClient.getInstance().send(jsonRep);
         }catch (Exception e){
             System.out.println(e);
         }
