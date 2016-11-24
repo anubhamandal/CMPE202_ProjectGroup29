@@ -13,6 +13,23 @@ We have decided the game to be designed as follows:
 1. Pre-built Graphs: Built the graph like continuous curve and fill the intersecting regions.  
 2. Designing graphs with predefined shapes as objects and fill them with the given colors as shown  
 
+## Running the game  
+
+The multiplayer game requires that a server is running.  Try it out on localhost.
+From base path...
+`make compile`
+`make run`
+
+### Multiple clients
+Greenfoot IDE is one client, but for other clients, you will need the jar.  
+On top right, there is a Share button.  
+Click Share, then go to Application.  
+Hit Export.  
+The jar file will be compiled and stored in the path.  
+Double click the jar file to run the second client.  
+
+
+
 
 ## TODO - Free-form graph creation.  Open Issues:  
 
