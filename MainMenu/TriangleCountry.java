@@ -17,7 +17,6 @@ public class TriangleCountry extends Country
      * rotateDeg is measured in degrees rotation around the center clockwise.
      */
     public TriangleCountry(int x, int y, int width, int height, int id) {
-
         super(x, y, width, height, id);
     }
 
