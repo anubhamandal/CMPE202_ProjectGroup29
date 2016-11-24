@@ -21,51 +21,27 @@ public class GraphGameServer extends Application {
     // }
 
     // @Override
-    // public Restlet createInboundRoot() {
+        // public Restlet createInboundRoot() {
     //     Router router = new Router(getContext()) ;
     //     router.attach("/graphgame", GraphResource.class);        
     //     return router;
     // }
 
-            System.out.println("What the what ");
+        System.out.println("Starting main server ");
 
-    int portNumber = 8080;
+        int portNumber = 8080;
+        boolean listening = true;
 
-    try ( 
-            ServerSocket serverSocket = new ServerSocket(portNumber);
-            Socket clientSocket = serverSocket.accept();
-            PrintWriter out =
-                new PrintWriter(clientSocket.getOutputStream(), true);
-            BufferedReader in = new BufferedReader(
-                new InputStreamReader(clientSocket.getInputStream()));
-        ) {
-            System.out.println("Starting server with hello jon ");
-             
-            // Initiate conversation with client
-            // KnockKnockProtocol kkp = new KnockKnockProtocol();
-            // outputLine = kkp.processInput(null);
+        try (ServerSocket serverSocket = new ServerSocket(portNumber)) {
 
-            out.println("Hello player");
- 
- String inputLine = null;
-            while (true) {
-                if (in.ready()){
-                 inputLine = in.readLine();
-                 if (inputLine != null){
-                    System.out.println(inputLine);
-                    out.println(inputLine);
-                }
-                }
-
-                
-                // outputLine = kkp.processInput(inputLine);
-                //if (outputLine.equals("Bye."))
-                //    break;
+            while (listening) {
+                new GraphGameServerThread(serverSocket.accept()).start();
             }
+
         } catch (IOException e) {
-            System.out.println("Exception caught when trying to listen on port "
+            System.err.println("Exception caught when trying to listen on port "
                 + portNumber + " or listening for a connection");
-            System.out.println(e.getMessage());
+            System.err.println(e.getMessage());
         }
     }
 
