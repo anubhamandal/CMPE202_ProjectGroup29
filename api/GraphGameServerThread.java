@@ -30,8 +30,6 @@ public class GraphGameServerThread extends Thread {
             ) {
             System.out.println("Starting server with hello jon ");
 
-            out.println("Hello player");
-
             String inputLine = null;
             while (true) {
                 if (in.ready()){

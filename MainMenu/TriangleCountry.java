@@ -1,4 +1,5 @@
  
+ 
 
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
@@ -16,13 +17,7 @@ public class TriangleCountry extends Country
      * rotateDeg is measured in degrees rotation around the center clockwise.
      */
     public TriangleCountry(int x, int y, int width, int height, int id) {
-        
-        this.xPos = x;
-        this.yPos = y;
-        this.width = width;
-        this.height = height;
-        this.id = id;
-        updateImage();
+        super(x, y, width, height, id);
     }
 
     /**

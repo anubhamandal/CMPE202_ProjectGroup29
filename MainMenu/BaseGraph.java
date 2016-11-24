@@ -1,7 +1,10 @@
+ 
+
+
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.awt.Color;
-import java.util.Map;
-import java.util.HashMap;
+import java.util.*;
+
 
 import java.net.* ;
 import java.util.* ;
@@ -80,6 +83,7 @@ public class BaseGraph extends World implements IClientDelegate
 
         //Representation rep = new JacksonRepresentation<GraphAction>(graphAct) ;
         //client.post(rep, MediaType.APPLICATION_JSON);
+        
         ObjectMapper mapper = new ObjectMapper();
         try{
             String jsonRep = mapper.writeValueAsString(graphAct);
@@ -88,6 +92,7 @@ public class BaseGraph extends World implements IClientDelegate
         }catch (Exception e){
             System.out.println(e);
         }
+        
 
     }
     /**
@@ -102,6 +107,7 @@ public class BaseGraph extends World implements IClientDelegate
     }
 
     public void receiveMove(String move){
+
         try{
             JSONObject json = new JSONObject(move);
             Integer nodeId = json.getInt("nodeId");

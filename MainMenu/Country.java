@@ -1,3 +1,4 @@
+ 
 
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.awt.Color;
@@ -22,6 +23,7 @@ public class Country extends Actor
     private int clickCount;
     boolean isClicked = isClickInRange();
     boolean addedToWorld = false;
+
     int id;
 
     public void addedToWorld(World world) {
@@ -146,7 +148,6 @@ public class Country extends Actor
     public Color getColor() {
         return fillColor;
     }
-
 
     public Integer getId(){
         return this.id;
