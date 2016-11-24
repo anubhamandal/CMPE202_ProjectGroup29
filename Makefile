@@ -5,7 +5,7 @@ clean:
 	rm -rf build/*
 	rm -rf buildgf/*
 	rm -f dist/app.jar
-	find . -name "*.class" -exec rm -rf {} \;
+	# find . -name "*.class" -exec rm -rf {} \;
 
 app: compile
 	cd build ; jar -cvfe ../dist/app.jar api.GraphGameServer .
