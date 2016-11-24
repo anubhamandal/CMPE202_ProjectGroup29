@@ -10,7 +10,7 @@ public class GraphAction
 {
     private String color;
     private String playerId;
-    private Double nodeId;
+    private Integer nodeId;
 
     /**
      * Constructor for objects of class GraphAction
@@ -28,11 +28,11 @@ public class GraphAction
         this.color = color;
     }
     
-    public Double getNodeId(){
+    public Integer getNodeId(){
         return nodeId;
     }
     
-    public void setNodeId(Double nodeid){
+    public void setNodeId(Integer nodeid){
         this.nodeId = nodeid;
     }
     

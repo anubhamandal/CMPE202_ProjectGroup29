@@ -110,9 +110,10 @@ public class BaseGraph extends World implements IClientDelegate
 
         try{
             JSONObject json = new JSONObject(move);
-            Integer nodeId = json.getInt("nodeId");
-            String color = json.getString("color");
-            colorMap.put(nodeId, color);
+            colorMap = Utils.getInstance().getMapFromJSON(json);
+            // Integer nodeId = json.getInt("nodeId");
+            // String color = json.getString("color");
+            // colorMap.put(nodeId, color);
             refreshNodeColors();
         }catch (JSONException e){
             System.out.println(e);

@@ -3,6 +3,7 @@ package api ;
 
 import java.net.*;
 import java.io.*;
+import java.util.*;
 
 import org.restlet.*;
 import org.restlet.data.Protocol;
@@ -28,14 +29,16 @@ public class GraphGameServer extends Application {
     // }
 
         System.out.println("Starting main server ");
-
         int portNumber = 8080;
         boolean listening = true;
 
         try (ServerSocket serverSocket = new ServerSocket(portNumber)) {
 
             while (listening) {
-                new GraphGameServerThread(serverSocket.accept()).start();
+                GraphGameServerThread t = new GraphGameServerThread(serverSocket.accept());
+                t.setDelegate(GraphGameMonitor.getInstance());
+                GraphGameMonitor.getInstance().addThread(t);
+                t.start();
             }
 
         } catch (IOException e) {
@@ -44,6 +47,8 @@ public class GraphGameServer extends Application {
             System.err.println(e.getMessage());
         }
     }
+
+    
 
 
 }

@@ -14,14 +14,14 @@ public class GraphServer
 
     private volatile static GraphServer gserver;
 
-    private Map<Double, String> colorMap;
-    
+    private Map<Integer, String> colorMap;
+
     /**
      * Constructor for objects of class GraphServer
      */
     private GraphServer()
     {
-       resetGame();
+        resetGame();
     }
 
     public static GraphServer getInstance() {
@@ -32,20 +32,20 @@ public class GraphServer
         }
         return gserver;
     }
-    
+
     /**
-    * parse Socket commands
-    */
+     * parse Socket commands
+     */
     public String parseCommand(String command){
         //Turn into JSON object first
         JSONObject json = new JSONObject(command);
         switch (json.getString("action")) {
             case "getMoves":
-            return getMoves().toString();
+            return getMovesString();
             case "insertMove":
             {
-                this.insertMove(new Double(json.getString("nodeId")), json.getString("color"));
-                return getMoves().toString();
+                this.insertMove(json.getInt("nodeId"), json.getString("color"));
+                return getMovesString();
             }
 
         }
@@ -53,18 +53,24 @@ public class GraphServer
     }
 
     public void resetGame() {
-        colorMap = new HashMap<Double, String>();
+        colorMap = new HashMap<Integer, String>();
     }
-    
-    public void insertMove(Double nodeId, String color) {
+
+    public void insertMove(Integer nodeId, String color) {
         colorMap.put(nodeId, color);
     }
-    
-    public Map getMoves() {
+
+    public Map getMoves() {  
         return colorMap;
     }
-    
-    public String getNodeColor(Double nodeId){
+
+    public String getMovesString(){
+        return new JSONObject(colorMap).toString();
+    }
+
+    public String getNodeColor(Integer nodeId){
         return colorMap.get(nodeId);
     }
+    
+
 }
