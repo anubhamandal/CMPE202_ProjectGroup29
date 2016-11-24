@@ -3,4 +3,6 @@
 .DS_Store
 .idea
 out/**
-
+!com/**
+!org/**
+!rmiextension/**
