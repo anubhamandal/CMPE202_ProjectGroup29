@@ -16,14 +16,18 @@ We have decided the game to be designed as follows:
 ## Running the game  
 
 The multiplayer game requires that a server is running.  Try it out on localhost.
-From base path...
-`make compile`
-`make run`
+From base path...  
+`make compile`  
+`make run`  
 
 ### Multiple clients
 Greenfoot IDE is one client, but for other clients, you will need the jar.  
 On top right, there is a Share button.  
+![Share button](./share.png)
+
 Click Share, then go to Application.  
+![Greenfoot export screen](./export.png)
+
 Hit Export.  
 The jar file will be compiled and stored in the path.  
 Double click the jar file to run the second client.  
