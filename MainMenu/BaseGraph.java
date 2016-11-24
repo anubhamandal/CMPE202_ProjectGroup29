@@ -31,6 +31,7 @@ public class BaseGraph extends World implements IClientDelegate
     Label validLabel;
     Label colorSelectLabel;
     public long startTime,stopTime;
+    String playerName;
 
     // The following is to keep track of the colors of the nodes
     public Map<Integer, String> colorMap = new HashMap<Integer, String>();
@@ -51,7 +52,9 @@ public class BaseGraph extends World implements IClientDelegate
         super(worldWidth, worldHeight, cellSize);
         startTime = System.currentTimeMillis();
         //GraphClient.getInstance().reset();
+        playerName = Greenfoot.ask("What is your name?");
         GraphClient.getInstance().setDelegate(this);
+        
 
     }
     
@@ -80,6 +83,7 @@ public class BaseGraph extends World implements IClientDelegate
         graphAct.setColor(Utils.getInstance().colorToString(selectedColor()));
         graphAct.setNodeId(id);
         graphAct.setAction("insertMove");
+        graphAct.setPlayerId(playerName);
 
         //Representation rep = new JacksonRepresentation<GraphAction>(graphAct) ;
         //client.post(rep, MediaType.APPLICATION_JSON);

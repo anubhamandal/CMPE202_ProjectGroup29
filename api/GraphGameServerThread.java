@@ -26,6 +26,7 @@ public class GraphGameServerThread extends Thread {
         {
           out = new PrintWriter(socket.getOutputStream(), true);
           in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+          
       } catch (IOException e){
         System.err.println(e);
     }
@@ -34,6 +35,9 @@ public class GraphGameServerThread extends Thread {
 
 public void setDelegate(IGraphGameServerDelegate d){
     delegate = d;
+    // return current state of board
+    String moves = GraphServer.getInstance().parseCommand("{\"action\":\"getMoves\"}");
+    d.notifyPlayers(moves);
 }
 
 public void notifyPlayer(String colorMap){

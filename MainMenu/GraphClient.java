@@ -43,8 +43,12 @@ public class GraphClient
         
         public void run() {
             System.out.println("runnable run");
+            
             try  {
-
+                // Get initial state of board
+                out.println("{\"action\":\"getMoves\"}");
+                out.flush();
+                
                 while (running) {
 
                     String fromServer = null;
