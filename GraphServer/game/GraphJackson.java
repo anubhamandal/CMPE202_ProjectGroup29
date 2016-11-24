@@ -13,7 +13,7 @@ public class GraphJackson {
    // private int playerTurn;
 
     // hash map of {countryId:colorString}
-    private Map<Double, String> colorMap = new HashMap<Double, String>();
+    private Map<Integer, String> colorMap = new HashMap<Integer, String>();
 
    // private ArrayList<String> playerIds = new ArrayList<String>();
     

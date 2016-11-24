@@ -1,6 +1,5 @@
 
 
-
 import game.*;
 import static org.junit.Assert.*;
 import org.junit.After;
@@ -49,14 +48,30 @@ public class GraphServerTest
     @Test
     public void testMove() {
         assertNotNull(gserv.getMoves());
-        gserv.insertMove(123.0, "red");
-        assertEquals("red", gserv.getMoves().get(123.0));
+        gserv.insertMove(1, "red");
+        assertEquals("red", gserv.getMoves().get(1));
     }
 
     @Test
     public void testGetNodeColor() {
-        gserv.insertMove(456.0, "blue");
-        assertEquals("blue", gserv.getNodeColor(456.0));
+        gserv.insertMove(4, "blue");
+        assertEquals("blue", gserv.getNodeColor(4));
+    }
+
+    @Test
+    public void testColorMapGet() {
+        String actionString = "{\"color\":\"Yellow\",\"action\":\"insertMove\",\"nodeId\":1,\"playerId\":null}";
+        assertEquals("{\"1\":\"Yellow\"}", gserv.parseCommand(actionString));
+    }
+
+    @Test
+    public void testColorMapGetMore() {
+        String actionString = "{\"color\":\"Yellow\",\"action\":\"insertMove\",\"nodeId\":1,\"playerId\":null}";
+
+        assertEquals("{\"1\":\"Yellow\"}", gserv.parseCommand(actionString));
+
+        actionString = "{\"color\":\"Red\",\"action\":\"insertMove\",\"nodeId\":2,\"playerId\":null}";
+        assertEquals("{\"1\":\"Yellow\",\"2\":\"Red\"}", gserv.parseCommand(actionString));
     }
 
 }
