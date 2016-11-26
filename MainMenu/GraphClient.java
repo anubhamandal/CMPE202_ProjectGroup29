@@ -1,4 +1,3 @@
- 
 
 import java.io.*;
 import java.net.*;
@@ -40,15 +39,15 @@ public class GraphClient
         public void end(){
             running = false;
         }
-        
+
         public void run() {
             System.out.println("runnable run");
-            
+
             try  {
                 // Get initial state of board
-                out.println("{\"action\":\"getMoves\"}");
-                out.flush();
-                
+                // out.println("{\"action\":\"getMoves\"}");
+                // out.flush();
+
                 while (running) {
 
                     String fromServer = null;
@@ -58,10 +57,11 @@ public class GraphClient
                     if (fromServer != null){
                         System.out.println("Server: " + fromServer);
                         if (delegate != null){
-                            delegate.receiveMove(fromServer);
+                            boolean keepGoing = delegate.receiveMove(fromServer);
+                            if (! keepGoing)
+                                break;
                         }
-                        if (fromServer.equals("Bye."))
-                            break;
+
                     }
 
                     // else if fromServer has colorMap
@@ -82,7 +82,8 @@ public class GraphClient
                     hostName);
                 System.exit(1);
             } catch (Exception e) {
-                System.err.println("Exception caused " + e);
+                e.printStackTrace();
+                // System.err.println("Exception caused " + e);
                 System.exit(1);
             } finally{
                 try{
@@ -109,7 +110,7 @@ public class GraphClient
             kkSocket = new Socket(hostName, portNumber);
             out = new PrintWriter(kkSocket.getOutputStream(), true);
             in = new BufferedReader(new InputStreamReader(kkSocket.getInputStream()));
-            
+
             sr = new SocketRunnable();
             Thread t = new Thread(sr);
             t.start();
@@ -152,7 +153,7 @@ public class GraphClient
                 sr.end();
                 init();
             }
-            
+
         }
         catch (Exception e){
             System.err.println(e);

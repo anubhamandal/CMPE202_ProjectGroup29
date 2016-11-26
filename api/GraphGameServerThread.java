@@ -7,6 +7,7 @@ import java.io.*;
 import org.restlet.*;
 import org.restlet.data.Protocol;
 import org.restlet.routing.Router;
+import org.json.* ;
 
 import game.*;
 
@@ -36,8 +37,8 @@ public class GraphGameServerThread extends Thread {
 public void setDelegate(IGraphGameServerDelegate d){
     delegate = d;
     // return current state of board
-    String moves = GraphServer.getInstance().parseCommand("{\"action\":\"getMoves\"}");
-    d.notifyPlayers(moves);
+    JSONObject moves = GraphServer.getInstance().parseCommand("{\"action\":\"getMoves\"}");
+    d.notifyPlayers(moves.toString());
 }
 
 public void notifyPlayer(String colorMap){
@@ -60,8 +61,11 @@ public void run() {
                     if (inputLine.equals("Bye"))
                         break;
                         // register input line to game instance
-                    String colorMap = GraphServer.getInstance().parseCommand(inputLine);
-                    delegate.notifyPlayers(colorMap);
+                    JSONObject returnObj = GraphServer.getInstance().parseCommand(inputLine);
+                    if (returnObj.getString("error").length() > 0) 
+                        out.println(returnObj.toString());
+                    else
+                        delegate.notifyPlayers(returnObj.toString());
                     // out.println(colorMap);
                     // out.flush();
 

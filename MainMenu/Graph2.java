@@ -29,6 +29,7 @@ public class Graph2 extends BaseGraph
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(600, 600, 1); 
         prepare();
+        joinGame();
     }
 
     private void prepare() {
@@ -48,9 +49,12 @@ public class Graph2 extends BaseGraph
         country3.setRotation(90);
         addObject(country4, 452, 400);
         country4.setRotation(270);
-        validLabel = new Label("Select a color", 40);
-        addObject(validLabel, 300, 40);
         
+        validLabel = new Label("", 40);
+        addObject(validLabel, 450, 40);
+        
+        turnLabel = new Label("Select a color", 30);
+        addObject(turnLabel, 150, 40);
         
 
         // Color Picker

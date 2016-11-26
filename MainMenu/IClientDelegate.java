@@ -10,6 +10,8 @@ public interface IClientDelegate
 {
     /**
      * Server responds with move to client
+     * If continue, returns true;
+     * If game over, return false;
      */
-    public void receiveMove(String move);
+    public boolean receiveMove(String move);
 }
