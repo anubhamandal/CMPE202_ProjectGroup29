@@ -14,31 +14,36 @@ import java.util.*;
  */
 public class DrawRect extends DrawShapes
 {
+    private int id;
     Color colorToFill=null;
     boolean isFilled = false;
-    HashMap<DrawRect, Color> hm = new HashMap<DrawRect, Color>();
+    String filledColorString;
     boolean isGameOver=false;
-    public DrawRect() 
+    
+    public DrawRect(int nodeid) 
     {
+        this.id = nodeid;
         GreenfootImage img = new GreenfootImage(130, 90);
         img.setColor(Color.black);
         img.drawRect(0,0,129,89);
         setImage(img);
     }    
 
+    public int getTitle() {
+        return id;
+    }
+    
     public void act()
     {
         getColorToFill();
         if (Greenfoot.mouseClicked(this))
         {
             Graph3 g = new Graph3();
-            hm = g.getMap();
-            //System.out.println(hm);
+            filledColorString = Utils.getInstance().colorToString(colorToFill);
             for(DrawRect ds : getIntersectingObjects(DrawRect.class))
             {
-                if(hm.get(ds) == colorToFill)
+                if(((Graph3)getWorld()).colorMap.get(ds.getTitle()) == filledColorString)
                 {
-                    //System.out.println("invalid color");
                     ((Graph3)getWorld()).validLabel.setValue("Cannot fill the node with this color");
                     return;
                 }
@@ -46,9 +51,7 @@ public class DrawRect extends DrawShapes
             ((Graph3)getWorld()).validLabel.setValue("");
             getImage().setColor(colorToFill);
             getImage().fillRect(0,0,129,89);
-            hm.put(this, colorToFill);
-            //System.out.println(hm);
-            g.setMap(hm);
+            ((Graph3)getWorld()).colorMap.put(this.id, filledColorString);
         }
        checkEndGame();
     }
@@ -63,7 +66,7 @@ public class DrawRect extends DrawShapes
         }
     }
      public void checkEndGame(){
-        if((((Graph3)getWorld()).map.size() == 18) && !isGameOver){
+        if((((Graph3)getWorld()).colorMap.size() == 18) && !isGameOver){
             ((BaseGraph)getWorld()).stopTime=System.currentTimeMillis();
             int timeTaken = (int)(((BaseGraph)getWorld()).stopTime-((BaseGraph)getWorld()).startTime)/1000;
             isGameOver = true;
