@@ -65,24 +65,24 @@ loadtest:
 	java -cp build:dist/restlet.jar:dist/restlet-json.jar:dist/json.jar RunLoadTest 5
 
 docker-build: app
-	docker build -t gumball .
+	docker build -t graphgame .
 	docker images
 
 docker-clean:
-	docker stop gumball
-	docker rm gumball
-	docker rmi gumball
+	docker stop graphgame
+	docker rm graphgame
+	docker rmi graphgame
 
 docker-run:
-	docker run --name gumball -td gumball
+	docker run --name graphgame -td graphgame
 	docker ps
 
 docker-run-host:
-	docker run --name gumball -td --net=host gumball
+	docker run --name graphgame -td --net=host graphgame
 	docker ps
 
 docker-run-bridge:
-	docker run --name gumball -td -p 80:8080 gumball
+	docker run --name graphgame -td -p 80:8080 graphgame
 	docker ps
 
 docker-network:
@@ -90,9 +90,9 @@ docker-network:
 	docker network inspect bridge
 
 docker-stop:
-	docker stop gumball
-	docker rm gumball
+	docker stop graphgame
+	docker rm graphgame
 
 docker-shell:
-	docker exec -it gumball bash 
+	docker exec -it graphgame bash 
 	

@@ -1,6 +1,7 @@
 package api ;
 
 import game.*;
+import org.json.* ;
 import org.restlet.ext.jackson.*;
 import org.restlet.ext.json.*;
 import org.restlet.representation.*;
@@ -14,16 +15,25 @@ public class GraphResource extends ServerResource {
     /**
     * Server returns the state of the Graph Game
     **/
-    @Get
-    public Representation get_request() {
+    // @Get
+    // public Representation get_request() {
 
-        GraphJackson graphjackson = new GraphJackson();
-        // TODO Get games - not moves
+    //     GraphJackson graphjackson = new GraphJackson();
+    //     // TODO Get games - not moves
 
-        graphjackson.setColorMap(gserv.getMoves());
+    //     graphjackson.setColorMap(gserv.getMoves());
         
-        System.out.println("colormap is "+ gserv.getMoves());
-        return new JacksonRepresentation<GraphJackson>(graphjackson) ;
+    //     System.out.println("colormap is "+ gserv.getMoves());
+    //     return new JacksonRepresentation<GraphJackson>(graphjackson) ;
+    // }
+
+     @Get
+    public Representation get_request() throws JSONException {
+       JSONObject mail = new JSONObject() ;
+       mail.put( "status", "Received" ) ;
+       mail.put( "subject", "RE: Message to Self" ) ;
+       mail.put( "content", "Hello There!" ) ;
+       return new JsonRepresentation ( mail ) ;
     }
 
 

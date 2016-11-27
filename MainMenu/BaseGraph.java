@@ -156,17 +156,17 @@ public class BaseGraph extends World implements IClientDelegate
      * }
      */
     public boolean receiveMove(String move){
-
+        System.out.println("received " + move); 
         try{
             JSONObject json = new JSONObject(move);
             String err = json.getString("error");
-            System.out.println("err is" + err);
+            System.out.println("err is " + err);
             if (err != null && err.length() > 0 && turnLabel != null){
                 turnLabel.setValue(err);
                 return (err.indexOf("Bye") < 0);
             }
             colorMap = Utils.getInstance().getMapFromJSON(json.getJSONObject("colorMap"));
-            currentPlayer = json.getString("currentPlayer");
+            currentPlayer = json.optString("currentPlayer");
 
             updatePlayerTurnLabel();
             refreshNodeColors();
@@ -182,7 +182,7 @@ public class BaseGraph extends World implements IClientDelegate
     }
 
     public void updatePlayerTurnLabel(){
-        if (currentPlayer == null) {
+        if (currentPlayer == null || currentPlayer.length() == 0) {
             turnLabel.setValue("Waiting for players");
         } else if (currentPlayer.equals(playerName)) {
             turnLabel.setValue("Your Turn");

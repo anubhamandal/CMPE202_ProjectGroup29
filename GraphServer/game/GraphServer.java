@@ -92,7 +92,7 @@ public class GraphServer
                 if (playerArray.size() < desiredNumPlayers) {
                     return getMovesJson("Waiting for players");
                 } else if (playerArray.size() == desiredNumPlayers){
-                    currentPlayer = player;
+                    currentPlayer = playerArray.get(0);
                     return getMovesJson("");
                 } else {
                     playerArray.remove(playerArray.size()-1);
