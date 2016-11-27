@@ -20,6 +20,19 @@ From base path...
 `make compile`  
 `make run`  
 
+### Docker -  local machine
+Docker allows this game to be packaged and thrown onto the web.
+Commands to run docker locally are as follows:  
+
+1. Find out the local IP address via `docker-machine ls`.  The local ip address of the docker machine will be printed.  
+2. Modify `MainMenu/GraphClient.java` to match this ip.  Docker machine will be running at port 80.
+2. `make compile`  
+3. `make app`  
+4. `make docker-build`  
+5. `make docker-run-bridge`
+6. Docker machine will be running at docker-machine ip address at port 80  
+
+
 ### Multiple clients
 Greenfoot IDE is one client, but for other clients, you will need the jar.  
 On top right, there is a Share button.  
