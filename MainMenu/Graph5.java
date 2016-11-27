@@ -24,11 +24,7 @@ public class Graph5 extends BaseGraph
 
     public void act()
     {
-        if(map.size() == 44)
-        {
-            //System.out.println(map);
-            validLabel.setValue("You Won"); 
-        }
+       
     }
     
     /**

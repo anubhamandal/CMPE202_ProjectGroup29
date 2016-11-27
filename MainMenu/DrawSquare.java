@@ -17,7 +17,7 @@ public class DrawSquare extends DrawShapes
     Color colorToFill=null;
     boolean isFilled = false;
     HashMap<DrawSquare, Color> hm = new HashMap<DrawSquare, Color>();
-    
+    boolean isGameOver=false;
     public DrawSquare() 
     {
         GreenfootImage img = new GreenfootImage(51, 51);
@@ -50,6 +50,7 @@ public class DrawSquare extends DrawShapes
             //System.out.println(hm);
             g.setMap(hm);
         }
+        checkEndGame();
     }
  
     public void getColorToFill()
@@ -60,5 +61,14 @@ public class DrawSquare extends DrawShapes
         {
             colorToFill = selectedColor;
         }
-    }    
+    } 
+    public void checkEndGame(){
+        if((((Graph5)getWorld()).map.size() == 44) && !isGameOver){
+            ((BaseGraph)getWorld()).stopTime=System.currentTimeMillis();
+            int timeTaken = (int)(((BaseGraph)getWorld()).stopTime-((BaseGraph)getWorld()).startTime)/1000;
+            isGameOver = true;
+            EndGame endgame = new EndGame(timeTaken);
+            Greenfoot.setWorld(endgame);
+        }
+    }
 }

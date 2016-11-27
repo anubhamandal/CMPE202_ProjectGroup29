@@ -23,11 +23,7 @@ public class Graph3 extends BaseGraph
     
     public void act()
     {
-        if(map.size() == 18)
-        {
-            //System.out.println(map);
-            validLabel.setValue("You Won"); 
-        }
+        
     }
     
     private void prepare() 

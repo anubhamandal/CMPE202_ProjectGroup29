@@ -96,6 +96,9 @@ public class Image1 extends Graph4Creation
                 drawImage();
                 world.removeObjects(world.getObjects(Alert.class));
             }
+            else{
+                
+            }
         }
     }
 

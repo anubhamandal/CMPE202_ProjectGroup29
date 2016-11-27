@@ -17,7 +17,7 @@ public class DrawRect extends DrawShapes
     Color colorToFill=null;
     boolean isFilled = false;
     HashMap<DrawRect, Color> hm = new HashMap<DrawRect, Color>();
-    
+    boolean isGameOver=false;
     public DrawRect() 
     {
         GreenfootImage img = new GreenfootImage(130, 90);
@@ -50,6 +50,7 @@ public class DrawRect extends DrawShapes
             //System.out.println(hm);
             g.setMap(hm);
         }
+       checkEndGame();
     }
     
     public void getColorToFill()
@@ -61,4 +62,14 @@ public class DrawRect extends DrawShapes
             colorToFill = selectedColor;
         }
     }
+     public void checkEndGame(){
+        if((((Graph3)getWorld()).map.size() == 18) && !isGameOver){
+            ((BaseGraph)getWorld()).stopTime=System.currentTimeMillis();
+            int timeTaken = (int)(((BaseGraph)getWorld()).stopTime-((BaseGraph)getWorld()).startTime)/1000;
+            isGameOver = true;
+            EndGame endgame = new EndGame(timeTaken);
+            Greenfoot.setWorld(endgame);
+        }
+    }
+    
 }
