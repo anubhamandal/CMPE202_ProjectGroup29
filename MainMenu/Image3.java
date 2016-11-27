@@ -1,4 +1,3 @@
- 
 
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.awt.*;
@@ -16,31 +15,42 @@ public class Image3 extends Graph4Creation
      */
     private String title;
     Color colorToFill=null;
-    boolean isFilled = false;
+    boolean isFilled = false,isGameOver=false;
     int count=0;
     String color;
+    Image1 image1;
     Image2 image2;
+    Image3 image3;
     Image4 image4;
+    Image5 image5;
+    Image6 image6;
     Image7 image7;
- GreenfootImage img= new GreenfootImage(145, 295);
+    GreenfootImage img= new GreenfootImage(145, 295);
     public Image3()
     {
-        
-    }
- public void setAdjacents(Image2 image2,Image4 image4,Image7 image7)
-    {
-     this.image2=image2;
-        this.image4=image4;
-               this.image7=image7;
 
     }
+
+    public void setAdjacents(Image1 image1,Image2 image2,Image3 image3,Image4 image4,Image5 image5,Image6 image6,Image7 image7)
+    {
+        this.image1=image1;
+        this.image2=image2;
+        this.image3=image3;
+        this.image4=image4;
+        this.image5=image5;
+        this.image6=image6;
+        this.image7=image7;
+
+    }
+
     public void DrawImage()
     {
         isFilled=false;
-   img.setColor(java.awt.Color.BLACK);
+        img.setColor(java.awt.Color.BLACK);
         img.drawRect(0,0,140,290);
         setImage(img);
     }
+
     public void act() 
     {
         // Add your action code here.
@@ -53,7 +63,7 @@ public class Image3 extends Graph4Creation
             isFilled=true; 
             color=colorToFill.toString();
             getImage().fillRect(0,0,140,290);
-if(image2.getColor().equals(colorToFill.toString()))
+            if(image2.getColor().equals(colorToFill.toString()))
             {
                 BaseGraph world = (BaseGraph)getWorld();
                 world.addObject(new Alert(" The Color You Picked Match With The Adjacent Color  "),350,300);
@@ -80,16 +90,33 @@ if(image2.getColor().equals(colorToFill.toString()))
                 DrawImage();
                 world.removeObjects(world.getObjects(Alert.class));
             }
-       
+            else if(image1.isFilled==true&&image2.isFilled==true&&image4.isFilled==true&&image5.isFilled==true&&image6.isFilled==true&&image7.isFilled==true)
+            {
+                isGameOver=true;
+            }
         }
-        }
-     public String getColor()
+        checkEndGame();
+    }
+
+    public String getColor()
     {
-    if(isFilled)
-    return color;
-   else 
-   return "PINK";
+        if(isFilled)
+            return color;
+        else 
+            return "PINK";
+    }
+
+    public void checkEndGame(){
+        if(isGameOver){
+            ((BaseGraph)getWorld()).stopTime=System.currentTimeMillis();
+            int timeTaken = (int)(((BaseGraph)getWorld()).stopTime-((BaseGraph)getWorld()).startTime)/1000;
+            // ((Graph1)getWorld()).validLabel.setValue("Finished the game in "+ timeTaken + " seconds");
+            isGameOver = true;
+            EndGame endgame = new EndGame(timeTaken);
+            Greenfoot.setWorld(endgame);
+
         }
+    }
 
     public void getColorToFill(){ 
 
