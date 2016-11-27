@@ -42,6 +42,8 @@ public void setDelegate(IGraphGameServerDelegate d){
 }
 
 public void notifyPlayer(String colorMap){
+    System.out.println("notifying " + colorMap);
+
     out.println(colorMap);
     out.flush();
 }
@@ -62,6 +64,8 @@ public void run() {
                         break;
                         // register input line to game instance
                     JSONObject returnObj = GraphServer.getInstance().parseCommand(inputLine);
+                    System.out.println(returnObj.toString());
+
                     if (returnObj.getString("error").length() > 0) 
                         out.println(returnObj.toString());
                     else

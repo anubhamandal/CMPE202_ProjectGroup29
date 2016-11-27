@@ -12,6 +12,8 @@ import java.util.*;
 public class GraphClient  
 {
     private volatile static GraphClient uniqueInstance;
+    // private static String hostName = "192.168.99.100";
+    // private static int portNumber = 80;
     private static String hostName = "localhost";
     private static int portNumber = 8080;
     private Socket kkSocket;
