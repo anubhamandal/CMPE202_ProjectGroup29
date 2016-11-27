@@ -1,3 +1,6 @@
+ 
+ 
+
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.awt.Color;
 
@@ -14,7 +17,7 @@ public class ColorPicker extends Actor
 
     Color lineColor = Color.WHITE;
     Color fillColor = Color.GRAY;
-    Color[] colors = {Color.RED, Color.YELLOW, Color.GREEN, Color.ORANGE};
+    Color[] colors = {Color.RED, Color.YELLOW, Color.GREEN, Color.BLUE, Color.ORANGE, Color.BLACK};
     int selectionIndex = -1;
 
     public Color getPickedColor(){
@@ -37,11 +40,12 @@ public class ColorPicker extends Actor
         }
 
         
-        if (Greenfoot.mouseDragged(this))
+      /*  if (Greenfoot.mouseDragged(this))
         {
             MouseInfo mouse = Greenfoot.getMouseInfo();
             setLocation(mouse.getX(), mouse.getY());
         }
+        */
     }   
 
 

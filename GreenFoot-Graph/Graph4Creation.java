@@ -1,9 +1,11 @@
+ 
+
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.awt.*;
 /**
  * Write a description of class GraphCreation here.
  * 
- * @author (your name) 
+ * @author (Shilpa Chandra) 
  * @version (a version number or a date)
  */
 public class Graph4Creation extends Actor
@@ -15,9 +17,8 @@ public class Graph4Creation extends Actor
 
     public Graph4Creation()
     {
-        //
+       
 
-        
         
         
     }

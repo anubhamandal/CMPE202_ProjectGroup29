@@ -1,9 +1,11 @@
+ 
+
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.awt.*;
 /**
  * Write a description of class Image4 here.
  * 
- * @author (your name) 
+ * @author (Shilpa Chandra) 
  * @version (a version number or a date)
  */
 public class Image4 extends Graph4Creation

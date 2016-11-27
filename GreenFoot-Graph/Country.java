@@ -24,6 +24,8 @@ public class Country extends Actor
     boolean isClicked = isClickInRange();
     boolean addedToWorld = false;
 
+    int id;
+
     public void addedToWorld(World world) {
         this.addedToWorld = true;
     }
@@ -55,26 +57,12 @@ public class Country extends Actor
         if (! isClickInRange()){
             return;
         }
-        /*
-        this.clickCount += 1;
-        this.clickCount %= 3;
 
-        switch(clickCount){
-            case 0:
-            fillColor = Color.GRAY;
-            break;
-            case 1:
-            fillColor = Color.RED;
-            break;
-            case 2:
-            fillColor = Color.BLUE;
-            break;
-        }*/
-
-        Graph2 world = (Graph2)getWorld();
+        BaseGraph world = (BaseGraph)getWorld();
         fillColor = world.selectedColor();
-        updateImage();
-        world.checkValid();
+        world.setCountryColor(id);
+        //updateImage();
+        //world.checkValid();
     }
 
     boolean isClickInRange() {
@@ -89,7 +77,7 @@ public class Country extends Actor
         int x = clickx - selfx;
         int y = clicky - selfy;
         int rot = getRotation();
-        System.out.printf("rot %d, x %d, y %d\n", rot, Math.abs(x), Math.abs(y));
+        //System.out.printf("rot %d, x %d, y %d\n", rot, Math.abs(x), Math.abs(y));
         return Math.abs(x) < width/2.0 && Math.abs(y) < height/2.0;
     }
 
@@ -104,7 +92,7 @@ public class Country extends Actor
         if (this.fillColor == Color.GRAY) {
             return true;
         }
-        
+
         List<Country> countries = getIntersectingObjects(Country.class);
         ListIterator<Country> it = countries.listIterator();
         while (it.hasNext()){
@@ -115,22 +103,29 @@ public class Country extends Actor
         }
         return true;
     }
-    
+
     public Country() {
+        //id = Math.floor(Math.random()*99999999);
         updateImage();
     }
 
-    public Country(int x, int y, int w, int h) {
+    public Country(int x, int y, int w, int h, int id) {
         xPos = x;
         yPos = y;
         width = w;
         height = h;
+        this.id = id;
         updateImage();
     }
 
+    /**
+     * Method used to update color of country
+     */
     void updateColor(Color color){
         fillColor = color;
         updateImage();
+        BaseGraph world = (BaseGraph)getWorld();
+        world.checkValid();
     }
 
     /**
@@ -149,4 +144,13 @@ public class Country extends Actor
         image.setColor(fillColor);
         image.fillRect(1, 1, width-2, height-2);
     }
+
+    public Color getColor() {
+        return fillColor;
+    }
+
+    public Integer getId(){
+        return this.id;
+    }
+    
 }

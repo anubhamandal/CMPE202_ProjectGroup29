@@ -1,3 +1,4 @@
+ 
 
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.List;
@@ -28,6 +29,7 @@ public class Graph2 extends BaseGraph
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(600, 600, 1); 
         prepare();
+        joinGame();
     }
 
     private void prepare() {
@@ -35,10 +37,10 @@ public class Graph2 extends BaseGraph
         //Country country2 = new Country(0, 300, 600, 200);
         //Country country3 = new Country(0, 100, 600, 200);
         //Country country4 = new Country(0, 300, 600, 200);
-        TriangleCountry country1 = new TriangleCountry(0, 0, 600, 200);
-        TriangleCountry country2 = new TriangleCountry(0, 0, 600, 200);
-        TriangleCountry country3 = new TriangleCountry(0, 0, 400, 300);
-        TriangleCountry country4 = new TriangleCountry(0, 0, 400, 300);
+        TriangleCountry country1 = new TriangleCountry(0, 0, 600, 200, 1);
+        TriangleCountry country2 = new TriangleCountry(0, 0, 600, 200, 2);
+        TriangleCountry country3 = new TriangleCountry(0, 0, 400, 300, 3);
+        TriangleCountry country4 = new TriangleCountry(0, 0, 400, 300, 4);
 
         addObject( country1, 300, 299);
         country1.setRotation(180);
@@ -47,9 +49,13 @@ public class Graph2 extends BaseGraph
         country3.setRotation(90);
         addObject(country4, 452, 400);
         country4.setRotation(270);
-        validLabel = new Label("Select a color", 40);
-        addObject(validLabel, 300, 40);
-        //checkValid();
+        
+        validLabel = new Label("", 40);
+        addObject(validLabel, 450, 40);
+        
+        turnLabel = new Label("Select a color", 30);
+        addObject(turnLabel, 150, 40);
+        
 
         // Color Picker
         
@@ -65,6 +71,9 @@ public class Graph2 extends BaseGraph
 
     }
 
+    /**
+     * A method to check if the adjacent colors of the graph nodes are different
+     */
     public void checkValid() {
 
         List<Country> objList = getObjects(Country.class);

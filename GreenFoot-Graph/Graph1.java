@@ -1,4 +1,5 @@
  
+ 
 
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.awt.*;
@@ -12,6 +13,9 @@ import java.util.*;
  */
 public class Graph1 extends BaseGraph
 {
+    public Map<String,Set<String>> connectedMap;
+    public Map<String,String> colorMap = new HashMap<String,String>();
+    public Label validLabel;
     public Graph1()
     {    
         // Create a new world with 600x600 cells with a cell size of 1x1 pixels.
@@ -24,7 +28,7 @@ public class Graph1 extends BaseGraph
         bg.setColor(Color.white);
         bg.fill();
         //A-2 B-1 c-2 D-5 E-3 F-5 G-3 H-3 I-4J-5  k2 L3 M6 N4 O3 P3
-        Map<String,Set<String>> connectedMap = new HashMap();
+        connectedMap = new HashMap();
         Set<String> h1 = new HashSet<String>();
         h1.add("E");
         h1.add("J");
@@ -118,13 +122,13 @@ public class Graph1 extends BaseGraph
         Set<String> h15 = new HashSet<String>();
         h15.add("M");
         h15.add("N");
-        h15.add("O");
+        h15.add("P");
         connectedMap.put("O",h15);
         
         Set<String> h16 = new HashSet<String>();
         h16.add("M");
         h16.add("N");
-        h16.add("P");
+        h16.add("O");
         connectedMap.put("P",h16);
         
         // adding nodes 
@@ -144,7 +148,7 @@ public class Graph1 extends BaseGraph
         addObject(new Node("M"), 837, 566);
         addObject(new Node("N"), 758, 111);
         addObject(new Node("O"), 864, 365);
-        addObject(new Node("p"), 957, 260);
+        addObject(new Node("P"), 957, 260);
         
         // adding edges for the graph 
         addObject(new GraphEdge("A", "E", 2, 400, 35), 157,358);
@@ -175,11 +179,16 @@ public class Graph1 extends BaseGraph
         addObject(new GraphEdge("M", "O", 2, 160, 10), 862,465);
         addObject(new GraphEdge("N", "O", 2, 230, -20), 811,239);
         
-         // add color pallet 
-         colorPicker = new ColorPicker(300, 65, 4);
-         addObject (colorPicker, 150, 50);
-                     
-         Greenfoot.start();
+        // add color pallet 
+        colorPicker = new ColorPicker(300, 65, 5);
+        addObject (colorPicker, 150, 50);
+        validLabel = new Label("Select a Color", 40);
+        addObject(validLabel, 511, 55);        
+        validLabel.setValue("");
+        //removeObject(validLabel);
+        colorSelectLabel = new Label("Color Selected: ", 30);
+        addObject(colorSelectLabel, 190, 111);
+        Greenfoot.start();
          
         }
 }

@@ -1,3 +1,5 @@
+ 
+
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.awt.*;
 import javax.swing.JOptionPane;
@@ -5,7 +7,7 @@ import javax.swing.JInternalFrame;
 /**
  * Write a description of class Image1 here.
  * 
- * @author (your name) 
+ * @author (Shilpa Chandra) 
  * @version (a version number or a date)
  */
 public class Image1 extends Graph4Creation

@@ -1,4 +1,5 @@
  
+ 
 
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
@@ -15,13 +16,8 @@ public class TriangleCountry extends Country
      * Triangle will always be drawn with flat part on bottom and one point facing up. 
      * rotateDeg is measured in degrees rotation around the center clockwise.
      */
-    public TriangleCountry(int x, int y, int width, int height) {
-        this.xPos = x;
-        this.yPos = y;
-        this.width = width;
-        this.height = height;
-        //this.rotateDeg = rotateDeg;
-        updateImage();
+    public TriangleCountry(int x, int y, int width, int height, int id) {
+        super(x, y, width, height, id);
     }
 
     /**
@@ -51,7 +47,7 @@ public class TriangleCountry extends Country
         // Get rotation
         int rot = getRotation();
 
-        System.out.printf("%d, %d, %d, %d\n", clickx, clicky, selfx, selfy);
+        //System.out.printf("%d, %d, %d, %d\n", clickx, clicky, selfx, selfy);
         // Break into half triangle regions
         switch (rot) {
             case 0:{
