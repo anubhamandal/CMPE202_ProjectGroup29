@@ -32,6 +32,15 @@ Commands to run docker locally are as follows:
 5. `make docker-run-bridge`
 6. Docker machine will be running at docker-machine ip address at port 80  
 
+### Docker - cloud
+Once docker is running on your local machine, it's time to push to the cloud.
+Use the script `./docker.sh` in the top level directory to make this job easy.
+Prerequisite Accounts:
+* AWS Account  
+* Docker Hub account  
+* Docker Cloud account  
+* Docker toolbox  
+
 
 ### Multiple clients
 Greenfoot IDE is one client, but for other clients, you will need the jar.  
