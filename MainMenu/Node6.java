@@ -9,6 +9,7 @@ public class Node6 extends Actor
     private String title;
     Color colorToFill=null;
     String filledColorString;
+    boolean isGameOver=false;
         
     public Node6(String pTitle) {
         title = pTitle;
@@ -35,7 +36,7 @@ public class Node6 extends Actor
             ((Graph6)getWorld()).colorMap.put(title,filledColorString);    
             validateGraph();
         }
-       
+        checkEndGame();
        
     }   
 
@@ -62,5 +63,15 @@ public class Node6 extends Actor
         }
         ((Graph6)getWorld()).validLabel.setValue("");
     }
-         
+     public void checkEndGame(){
+       if((((Graph6)getWorld()).colorMap.size() == 10) && !isGameOver  && !((Graph6)getWorld()).validLabel.getValue().equals("Filled Color is invalid") ){
+            ((BaseGraph)getWorld()).stopTime=System.currentTimeMillis();
+            int timeTaken = (int)(((BaseGraph)getWorld()).stopTime-((BaseGraph)getWorld()).startTime)/1000;
+           // ((Graph1)getWorld()).validLabel.setValue("Finished the game in "+ timeTaken + " seconds");
+           isGameOver = true;
+           EndGame endgame = new EndGame(timeTaken);
+           Greenfoot.setWorld(endgame);
+            
+        }
+    }
 }

@@ -19,6 +19,7 @@ public class Graph4 extends BaseGraph
     {    
         super(800, 600, 1); 
         prepare();
+        
     }
 
     public void prepare()
@@ -55,4 +56,9 @@ public class Graph4 extends BaseGraph
         addObject (colorPicker, 150, 50);
         Greenfoot.start();
     }
+
+   public void act()
+   {
+        
+   }
 }

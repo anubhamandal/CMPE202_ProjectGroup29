@@ -14,31 +14,36 @@ import java.util.*;
  */
 public class DrawSquare extends DrawShapes
 {
+    private int id;
     Color colorToFill=null;
     boolean isFilled = false;
-    HashMap<DrawSquare, Color> hm = new HashMap<DrawSquare, Color>();
+    String filledColorString;
+    boolean isGameOver=false;
     
-    public DrawSquare() 
+    public DrawSquare(int nodeid) 
     {
+        this.id = nodeid;
         GreenfootImage img = new GreenfootImage(51, 51);
         img.setColor(Color.black);
         img.drawRect(0,0,50,50);
         setImage(img);
     }    
 
+    public int getTitle() {
+        return id;
+    }
+    
     public void act()
     {
         getColorToFill();
         if (Greenfoot.mouseClicked(this))
         {
             Graph5 g = new Graph5();
-            hm = g.getMap();
-            //System.out.println(hm);
+            filledColorString = Utils.getInstance().colorToString(colorToFill);
             for(DrawSquare ds : getIntersectingObjects(DrawSquare.class))
             {
-                if(hm.get(ds) == colorToFill)
+                if(((Graph5)getWorld()).colorMap.get(ds.getTitle()) == filledColorString)
                 {
-                    //System.out.println("invalid color");
                     ((Graph5)getWorld()).validLabel.setValue("Cannot fill the node with this color");
                     return;
                 }
@@ -46,10 +51,9 @@ public class DrawSquare extends DrawShapes
             ((Graph5)getWorld()).validLabel.setValue("");
             getImage().setColor(colorToFill);
             getImage().fillRect(0,0,50,50);
-            hm.put(this, colorToFill);
-            //System.out.println(hm);
-            g.setMap(hm);
+            ((Graph5)getWorld()).colorMap.put(this.id, filledColorString);
         }
+        checkEndGame();
     }
  
     public void getColorToFill()
@@ -60,5 +64,14 @@ public class DrawSquare extends DrawShapes
         {
             colorToFill = selectedColor;
         }
-    }    
+    } 
+    public void checkEndGame(){
+        if((((Graph5)getWorld()).colorMap.size() == 44) && !isGameOver){
+            ((BaseGraph)getWorld()).stopTime=System.currentTimeMillis();
+            int timeTaken = (int)(((BaseGraph)getWorld()).stopTime-((BaseGraph)getWorld()).startTime)/1000;
+            isGameOver = true;
+            EndGame endgame = new EndGame(timeTaken);
+            Greenfoot.setWorld(endgame);
+        }
+    }
 }

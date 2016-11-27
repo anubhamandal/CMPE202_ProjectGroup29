@@ -39,13 +39,7 @@ public class Node extends Actor
                 getImage().fillOval(0,0,50,50);
             }
         }
-        if((((Graph1)getWorld()).colorMap.size() == 16) && !isGameOver){
-            ((BaseGraph)getWorld()).stopTime=System.currentTimeMillis();
-            int timeTaken = (int)(((BaseGraph)getWorld()).stopTime-((BaseGraph)getWorld()).startTime)/1000;
-            ((Graph1)getWorld()).validLabel.setValue("Finished the game in "+ timeTaken + " seconds");
-            isGameOver = true;
-        }
-       
+        checkEndGame();  
        
     }   
 
@@ -57,7 +51,10 @@ public class Node extends Actor
         }
     }
    public boolean validateGraph(){
-        
+            if(filledColorString==null){
+                ((Graph1)getWorld()).validLabel.setValue("Please select a Color");
+                return false;
+            }
             Set<String> connectedNodes = ((Graph1)getWorld()).connectedMap.get(title);
             Iterator iterator = connectedNodes.iterator(); 
             while (iterator.hasNext()){
@@ -72,21 +69,15 @@ public class Node extends Actor
         ((Graph1)getWorld()).validLabel.setValue("");
         return true;
     }
-    public void validateGraph(String graphName){
-        Set<String> filledNodes = ((Graph1)getWorld()).colorMap.keySet();
-        for(String node : filledNodes){
-            Set<String> connectedNodes = ((Graph1)getWorld()).connectedMap.get(node);
-            Iterator iterator = connectedNodes.iterator(); 
-            while (iterator.hasNext()){
-                String adjNode = (String)iterator.next();
-                String adjColor =((Graph1)getWorld()).colorMap.get(adjNode);
-                if(adjColor!=null && adjColor.equals(((Graph1)getWorld()).colorMap.get(node))){
-                    ((Graph1)getWorld()).validLabel.setValue("Filled Color is invalid");
-                    return;
-                }
-            }
+   public void checkEndGame(){
+      if((((Graph1)getWorld()).colorMap.size() == 16) && !isGameOver){
+            ((BaseGraph)getWorld()).stopTime=System.currentTimeMillis();
+            int timeTaken = (int)(((BaseGraph)getWorld()).stopTime-((BaseGraph)getWorld()).startTime)/1000;
+           // ((Graph1)getWorld()).validLabel.setValue("Finished the game in "+ timeTaken + " seconds");
+           isGameOver = true;
+           EndGame endgame = new EndGame(timeTaken);
+           Greenfoot.setWorld(endgame);
+            
         }
-        ((Graph1)getWorld()).validLabel.setValue("");
     }
-         
 }
