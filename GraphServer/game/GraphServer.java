@@ -13,23 +13,31 @@ public class GraphServer
 {
 
     private volatile static GraphServer gserver;
-    private String currentPlayer;
-    private Integer desiredNumPlayers;
-    private ArrayList<String> playerArray = new ArrayList<String>();
+    //private String currentPlayer;
+    //private Integer desiredNumPlayers;
+    //private ArrayList<String> playerArray = new ArrayList<String>();
+    private Integer gameCount = 1;
+    
+    // multi game, multi-player
+    // {gameId:Integer : {gameId:Integer, desiredNumPlayers:Integer, currentPlayer:String, numPlayersWaiting:Integer}}
+    private Map<Integer, JSONObject> gameMetaDataMap;
 
-    // TBD - multi game, multi-player
-    // {gameId: {mapId:Integer, numPlayers:Integer, currentPlayer:String}}
-    private Map<Integer, Object> gameMap;
-
+    // {gameId:Integer : {nodeId:Integer : color:String}}
+    private Map<Integer, Map<Integer, String>> gameColorMap;
+    
+    // {gameId:Integer : [playerIds]}
+    private Map<Integer, ArrayList<String>> playerMap;
+    
     // {nodeId: color}
-    private Map<Integer, String> colorMap;
+    //private Map<Integer, String> colorMap;
 
     /**
      * Constructor for objects of class GraphServer
      */
     private GraphServer()
     {
-        resetGame();
+        gameMetaDataMap = new HashMap<Integer, JSONObject>();
+        gameColorMap = new HashMap<Integer, Map<Integer, String>>();
     }
 
     public static GraphServer getInstance() {
@@ -49,84 +57,136 @@ public class GraphServer
      *  nodeId:Integer (required for insertMove),
      *  color:String (required for insertMove)
     gameId:String (future feature - multiple concurrent game support),
-    numPlayers:Integer (used for createGame - future feature - more than 2 player game),
-
+    metaData:{
+        numPlayers:Integer (used for createGame - future feature - more than 2 player game),
+        graphNum: Integer (Map number from 1-6)
+    
+}
     }
      */
     public JSONObject parseCommand(String command){
         //Turn into JSON object first
         JSONObject json = new JSONObject(command);
+        Integer gameId = json.optInt("gameId");
+        
         switch (json.getString("action")) {
             case "getMoves":
-            return getMovesJson("");
+            return getMovesJson("", gameId);
             case "insertMove":
             {
-                if (desiredNumPlayers > playerArray.size()){
-                    return getMovesJson("Waiting for players");
+                Map<Integer, String> colorMap = gameColorMap.get(gameId);
+                
+                JSONObject gameMetaData = gameMetaDataMap.get(gameId);
+                ArrayList<String> playerArray = playerMap.get(gameId);
+                if (gameMetaData.getInt("numPlayers") > playerArray.size()){
+                    return getMovesJson("Waiting for players", gameId);
                 }
                 String player = json.getString("playerId");
+                String currentPlayer = gameMetaData.getString("currentPlayer");
                 if (player.equals(currentPlayer)){
-                    this.insertMove(json.getInt("nodeId"), json.getString("color"));
+                    this.insertMove(json.getInt("nodeId"), json.getString("color"), gameId);
                     // Next player moves
                     int playerIdx = playerArray.indexOf(player);
                     int nextIdx = ++playerIdx % playerArray.size();
                     currentPlayer = playerArray.get(nextIdx);
+                    // Save currentPlayer into meta Data
+                    gameMetaData.put("currentPlayer", currentPlayer);
+                    gameMetaDataMap.put(gameId, gameMetaData);
                 }
-                return getMovesJson("");
+                return getMovesJson("", gameId);
             }
             case "createGame":
+            {
+                // Should have minimum number of players, playerId, graphNum
+                // RETURNS: graphId, gameMetaData
+                JSONObject metaData = new JSONObject();
+                metaData.put("gameId", gameCount);
+                metaData.put("numPlayers", json.getInt("numPlayers"));
+                metaData.put("graphNum", json.getInt("graphNum"));
+                gameMetaDataMap.put(gameCount, metaData);
+                gameColorMap.put(gameCount, new HashMap<Integer, String>());
+                // Register game
+                String playerId = json.getString("playerId");
+                ArrayList<String> playerArray = new ArrayList<String>();
+                playerArray.add(playerId);
+                
+                playerMap = new HashMap<Integer, ArrayList<String>>();
+                playerMap.put(gameCount, playerArray);
+                
+                // Increment gameId
+                gameCount++;
+                
+                return metaData;
+            }
             case "getGames":
+            {
+                // Return list of games
+                return getGamesJson(gameId);
+            }
             case "joinGame":
             {
+                // Requirements: playerId, gameId                
                 String player = json.getString("playerId");
+                
                 // Error check player name
+                ArrayList<String> playerArray = playerMap.get(gameId);
                 if (playerArray.contains(player)) {
-                    return getMovesJson("name exists; try again. Bye");
+                    return getMovesJson("name exists; try again. Bye", gameId);
                 }
+                
                 // Set current player
-                if (currentPlayer == null){
-                    desiredNumPlayers = json.getInt("numPlayers");
-                }
+                JSONObject gameMetaData = gameMetaDataMap.get(gameId);
+                String currentPlayer = gameMetaData.optString("currentPlayer");
+                Integer desiredNumPlayers = gameMetaData.getInt("numPlayers");
+                
                 playerArray.add(player);
                 // Error check multi player
                 if (playerArray.size() < desiredNumPlayers) {
-                    return getMovesJson("Waiting for players");
+                    playerMap.put(gameId, playerArray);
+                    gameMetaData.put("players", playerArray);
+                    gameMetaDataMap.put(gameId, gameMetaData);
+                    return getMovesJson("Waiting for players", gameId);
                 } else if (playerArray.size() == desiredNumPlayers){
                     currentPlayer = playerArray.get(0);
-                    return getMovesJson("");
+                    gameMetaData.put("currentPlayer", currentPlayer);
+                    gameMetaDataMap.put(gameId, gameMetaData);
+                    return getMovesJson("", gameId);
                 } else {
                     playerArray.remove(playerArray.size()-1);
-                    return getMovesJson("Sorry. Game full. Bye");
+                    return getMovesJson("Sorry. Game full. Bye", gameId);
                 }
             }
             default:
-            return getMovesJson("");
+            return getMovesJson("", gameId);
         }
 
     }
 
-    public void resetGame() {
-        colorMap = new HashMap<Integer, String>();
+    public void resetGame(Integer gameId) {
+        gameColorMap.remove(gameId);
     }
 
-    public void insertMove(Integer nodeId, String color) {
+    public void insertMove(Integer nodeId, String color, Integer gameId) {
+        Map<Integer, String> colorMap = gameColorMap.get(gameId);
         colorMap.put(nodeId, color);
+        gameColorMap.put(gameId, colorMap);
     }
 
-    public Map getMoves() {  
-        return colorMap;
+    public Map getMoves(Integer gameId) {  
+        return gameColorMap.get(gameId);
     }
 
-    public JSONObject getMovesJson(String error){
+    public JSONObject getMovesJson(String error, Integer gameId){
         JSONObject j = new JSONObject();
-        j.put("colorMap", new JSONObject(colorMap));
-        j.put("currentPlayer", currentPlayer);
+        j.put("colorMap", new JSONObject(gameColorMap.get(gameId)));
+        j.put("currentPlayer", gameMetaDataMap.get(gameId).getString("currentPlayer"));
+        j.put("gameMetaData", gameMetaDataMap.get(gameId));
         j.put("error", error);
         return j;
     }
-
-    public String getNodeColor(Integer nodeId){
-        return colorMap.get(nodeId);
+    
+    public JSONObject getGamesJson(Integer gameId){
+        return gameMetaDataMap.get(gameId);
     }
 
 }
