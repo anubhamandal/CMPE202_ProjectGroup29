@@ -64,32 +64,32 @@ public class Menu extends World
 
         if (Greenfoot.isKeyDown("1"))
         {
-            activeGraph = new Graph1();
+            activeGraph = new NumberOfPlayers(1);
         }
 
         if ( Greenfoot.isKeyDown("2"))
         {
-            activeGraph = new Graph2();
+            activeGraph = new NumberOfPlayers(2);
         }
 
         if ( Greenfoot.isKeyDown("3"))
         {
-            activeGraph = new Graph3();
+            activeGraph = new NumberOfPlayers(3);
         }
 
         if ( Greenfoot.isKeyDown("4"))
         {
-            activeGraph = new Graph4();
+             activeGraph = new NumberOfPlayers(4);
         }
 
         if (Greenfoot.isKeyDown("5"))
         {
-            activeGraph = new Graph5();
+            activeGraph = new NumberOfPlayers(5);
         }
 
         if ( Greenfoot.isKeyDown("6"))
         {
-            activeGraph = new Graph6();
+            activeGraph = new NumberOfPlayers(6);
         }
 
         if (Greenfoot.mouseClicked(this)){
