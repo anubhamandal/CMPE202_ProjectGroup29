@@ -53,6 +53,8 @@ public class Graph4 extends BaseGraph
         addObject(image7,460,345);
         colorPicker = new ColorPicker(300, 65, 4);
         addObject (colorPicker, 150, 50);
+        colorSelectLabel = new Label("Color Selected: ", 30);
+        addObject(colorSelectLabel, 190, 111);
         Greenfoot.start();
     }
 
