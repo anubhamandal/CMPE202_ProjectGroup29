@@ -62,13 +62,26 @@ public class GraphServerTest
     }
 
     @Test
-    public void testMove() {
-        assertNotNull(gserv.getMoves(gameId));
-        gserv.insertMove(1, "red", gameId);
-        assertEquals("red", gserv.getMoves(gameId).get(1));
+    public void testGetGames(){
+        createGame();
+        String actionString = "{\"action\":\"getGames\"}";
+        assertEquals("{\"games\":[{\"gameId\":1,\"graphNum\":2,\"numPlayers\":3},{\"gameId\":2,\"graphNum\":2,\"numPlayers\":3}]}", gserv.parseCommand(actionString).toString());
     }
 
+    @Test 
+    public void testJoinGame(){
+        createGame();
+        String actionString = "{\"action\":\"joinGame\",\"gameId\":1,\"playerId\":\"foobar\"}";
+        assertEquals("{\"currentPlayer\":\"\",\"error\":\"Waiting for players\",\"colorMap\":{},\"gameMetaData\":{\"gameId\":1,\"players\":[\"jonny5\",\"foobar\"],\"graphNum\":2,\"numPlayers\":3}}", gserv.parseCommand(actionString).toString());
+    }
     /*
+    @Test
+    public void testMove() {
+    assertNotNull(gserv.getMoves(gameId));
+    gserv.insertMove(1, "red", gameId);
+    assertEquals("red", gserv.getMoves(gameId).get(1));
+    }
+
     @Test
     public void testGetNodeColor() {
     gserv.insertMove(4, "blue");

@@ -38,6 +38,7 @@ public class GraphServer
     {
         gameMetaDataMap = new HashMap<Integer, JSONObject>();
         gameColorMap = new HashMap<Integer, Map<Integer, String>>();
+        playerMap = new HashMap<Integer, ArrayList<String>>();
     }
 
     public static GraphServer getInstance() {
@@ -109,8 +110,6 @@ public class GraphServer
                 String playerId = json.getString("playerId");
                 ArrayList<String> playerArray = new ArrayList<String>();
                 playerArray.add(playerId);
-                
-                playerMap = new HashMap<Integer, ArrayList<String>>();
                 playerMap.put(gameCount, playerArray);
                 
                 // Increment gameId
@@ -121,7 +120,7 @@ public class GraphServer
             case "getGames":
             {
                 // Return list of games
-                return getGamesJson(gameId);
+                return getGamesJson();
             }
             case "joinGame":
             {
@@ -179,14 +178,17 @@ public class GraphServer
     public JSONObject getMovesJson(String error, Integer gameId){
         JSONObject j = new JSONObject();
         j.put("colorMap", new JSONObject(gameColorMap.get(gameId)));
-        j.put("currentPlayer", gameMetaDataMap.get(gameId).getString("currentPlayer"));
+        j.put("currentPlayer", gameMetaDataMap.get(gameId).optString("currentPlayer"));
         j.put("gameMetaData", gameMetaDataMap.get(gameId));
         j.put("error", error);
+        //System.out.println(j);
         return j;
     }
     
-    public JSONObject getGamesJson(Integer gameId){
-        return gameMetaDataMap.get(gameId);
+    public JSONObject getGamesJson(){
+        JSONObject j = new JSONObject();
+        j.put("games", gameMetaDataMap.values());
+        return j;
     }
 
 }
