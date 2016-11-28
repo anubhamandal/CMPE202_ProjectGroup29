@@ -20,7 +20,7 @@ import org.restlet.ext.jackson.*;
  * @author jonguan
  * @version 11-4-16
  */
-public class BaseGraph extends World implements IClientDelegate
+public class BaseGraph extends World implements IServerCallbackDelegate
 {
 
     private static String url = "http://localhost:8080/graphgame";

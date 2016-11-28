@@ -9,7 +9,7 @@ import java.util.*;
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class GraphClient  
+public class GraphClient implements IServerProxy
 {
     private volatile static GraphClient uniqueInstance;
     // private static String hostName = "192.168.99.100";
@@ -19,22 +19,22 @@ public class GraphClient
     private Socket kkSocket;
     private PrintWriter out;
     private BufferedReader in;
-    private IClientDelegate delegate = null;
+    private IServerCallbackDelegate delegate = null;
     private SocketRunnable sr;
 
     private ArrayList<String> actions = new ArrayList<String>();
 
-    public class ThreadRunnable implements Runnable{
-        public void run(){
-            try {
-                while (actions.size() == 0){
-                    Thread.sleep(1000);
-                }
-            } catch (InterruptedException ie) {
-                System.out.println("Child thread interrupted! " + ie);
-            }
-        }
-    }
+    // public class ThreadRunnable implements Runnable{
+        // public void run(){
+            // try {
+                // while (actions.size() == 0){
+                    // Thread.sleep(1000);
+                // }
+            // } catch (InterruptedException ie) {
+                // System.out.println("Child thread interrupted! " + ie);
+            // }
+        // }
+    // }
 
     public class SocketRunnable implements Runnable {
         private volatile boolean running = true;
@@ -131,7 +131,7 @@ public class GraphClient
         actions.add(payload);
     }
 
-    public void setDelegate(IClientDelegate delegate){
+    public void setDelegate(IServerCallbackDelegate delegate){
         this.delegate = delegate;
     }
 

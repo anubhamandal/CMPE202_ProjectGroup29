@@ -1,12 +1,12 @@
  
 
 /**
- * Write a description of class IClientDelegate here.
+ * IServerCallbackDelegate - Implements protocol for Observer pattern callback from server.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author jonguan
+ * @version 11-27-16
  */
-public interface IClientDelegate  
+public interface IServerCallbackDelegate  
 {
     /**
      * Server responds with move to client
