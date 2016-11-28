@@ -148,6 +148,7 @@ public class GraphServer
                 } else if (playerArray.size() == desiredNumPlayers){
                     currentPlayer = playerArray.get(0);
                     gameMetaData.put("currentPlayer", currentPlayer);
+                    gameMetaData.put("players", playerArray);
                     gameMetaDataMap.put(gameId, gameMetaData);
                     return getMovesJson("", gameId);
                 } else {
@@ -162,7 +163,16 @@ public class GraphServer
     }
 
     public void resetGame(Integer gameId) {
+        gameMetaDataMap.remove(gameId);
         gameColorMap.remove(gameId);
+        playerMap.remove(gameId);
+    }
+    
+    public void resetAll(){
+        gameMetaDataMap.clear();
+        gameColorMap.clear();
+        playerMap.clear();
+        gameCount = 1;
     }
 
     public void insertMove(Integer nodeId, String color, Integer gameId) {
@@ -181,14 +191,21 @@ public class GraphServer
         j.put("currentPlayer", gameMetaDataMap.get(gameId).optString("currentPlayer"));
         j.put("gameMetaData", gameMetaDataMap.get(gameId));
         j.put("error", error);
-        //System.out.println(j);
+        System.out.println(j);
         return j;
     }
     
     public JSONObject getGamesJson(){
         JSONObject j = new JSONObject();
         j.put("games", gameMetaDataMap.values());
+                System.out.println(j);
         return j;
+    }
+    
+    public String getNodeColor(Integer nodeId, Integer gameId){
+        Map<Integer, String> colorMap = gameColorMap.get(gameId);
+        return colorMap.get(nodeId);
+        
     }
 
 }
