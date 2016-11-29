@@ -7,4 +7,5 @@ dist/app.jar
 !com/**
 !org/**
 MainMenu.jar
+*.bak
 
