@@ -55,6 +55,8 @@ The jar file will be compiled and stored in the path.
 Double click the jar file to run the second client.  
 
 
+## UML Diagrams & Architecture Design
+Check out the [documentation here](./UML/README.md).  
 
 
 ## TODO - Free-form graph creation.  Open Issues:  
@@ -65,4 +67,6 @@ Double click the jar file to run the second client.
 Solution #1: Have a way to detect bisection or complete encapsulation based on vertices.  (HARD)  
 Solution #2: Use predefined maps (MED)  
 Solution #3: Ask user to click inside the map to create vertices, and have program randomly connect the vertices to create shapes. (MED-HARD)  
+
+
 
