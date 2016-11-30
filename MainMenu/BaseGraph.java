@@ -127,6 +127,10 @@ public class BaseGraph extends World implements IServerCallbackDelegate
         sendAction(graphAct);
     }
 
+    /**
+     * sendAction - sends actions to the server.
+     * @param - graphAct: GraphAction - data to send to the server
+     */
     public void sendAction(GraphAction graphAct){
         ObjectMapper mapper = new ObjectMapper();
         try{

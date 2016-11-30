@@ -8,11 +8,17 @@
  */
 public class GraphAction  
 {
+    // used for insertMove
     private String color;
+    // required - playerName
     private String playerId;
+    // used for insertMove
     private Integer nodeId;
+    // Valid actions: getMoves, insertMove, createGame, getGames, joinGame
     private String action;
+    // gameId is created by server and sent to client.  joinGame returns gameId to join
     private Integer gameId;
+    // used for createGame
     private Integer numPlayers;
 
     /**
