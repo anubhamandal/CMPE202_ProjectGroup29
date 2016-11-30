@@ -73,12 +73,19 @@ public class NumberOfPlayers extends BaseGraph implements ActionListener
         }
         else if(c==multiplayer)
         {
-            text = new GreenfootImage("Please Enter Number Of Players", 20, Color.black, new Color(0, 0, 0, 0));
-            background.drawImage(text,  300, 350);
+             /*text = new GreenfootImage("Please Enter Number Of Players", 20, Color.black, new Color(0, 0, 0, 0));
+             background.drawImage(text,  300, 350);
              numberofplayers = new TextField(10);
              numberofplayers.addActionListener(this);
              numberofplayers.requestFocus();    
-            addObject( numberofplayers, 400, 400);
+             addObject( numberofplayers, 400, 400); */
+             String numPlayers = Greenfoot.ask("How many players?");
+             desiredPlayers = Integer.parseInt(numPlayers);
+             if(desiredPlayers!=0){
+               JoinGame g = new JoinGame();
+               g.getCurrentGames(graphnumber);
+               Greenfoot.setWorld(g);
+            }
         }
         
 
