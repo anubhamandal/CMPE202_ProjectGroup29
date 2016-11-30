@@ -1,4 +1,3 @@
- 
 
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.List;
@@ -18,7 +17,6 @@ public class Graph2 extends BaseGraph
 {
     // int height = 600;
     //int width = 600;
-    
 
     /**
      * Constructor for objects of class MyWorld.
@@ -49,23 +47,21 @@ public class Graph2 extends BaseGraph
         country3.setRotation(90);
         addObject(country4, 452, 400);
         country4.setRotation(270);
-        
+
         validLabel = new Label("", 40);
         addObject(validLabel, 450, 40);
-        
+
         turnLabel = new Label("Select a color", 30);
         addObject(turnLabel, 150, 40);
-        
 
         // Color Picker
-        
         // Color selected label
         colorSelectLabel = new Label("Color Selected: ", 20);
         addObject(colorSelectLabel, 100, 75);
 
         //int numCol = Integer.parseInt(Greenfoot.ask("How many colors? (up to 4)"));
         int numCol = 3;
-     
+
         colorPicker = new ColorPicker(300, 75, numCol);
         addObject(colorPicker, 150, 150);
 
@@ -74,7 +70,7 @@ public class Graph2 extends BaseGraph
     /**
      * A method to check if the adjacent colors of the graph nodes are different
      */
-    public void checkValid() {
+    public boolean checkValid() {
 
         List<Country> objList = getObjects(Country.class);
         ListIterator<Country> li = objList.listIterator();
@@ -83,9 +79,12 @@ public class Graph2 extends BaseGraph
             Country c = li.next();
             if (! c.checkColor()){
                 this.validLabel.setValue("invalid");
-                return;
+                return false;
             }
         }
         this.validLabel.setValue("valid");
+        return true;
     }
+
+    
 }

@@ -125,7 +125,8 @@ public class Country extends Actor
         fillColor = color;
         updateImage();
         BaseGraph world = (BaseGraph)getWorld();
-        world.checkValid();
+        // isValid is wrapped in checkEndGame
+        world.checkEndGame();
     }
 
     /**

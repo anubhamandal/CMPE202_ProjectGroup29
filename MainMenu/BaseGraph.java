@@ -140,8 +140,9 @@ public class BaseGraph extends World implements IServerCallbackDelegate
     /**
      * A method to check if the adjacent colors of the graph nodes are different
      */
-    public void checkValid() {
+    public boolean checkValid() {
         // Implement this method in children
+        return false;
     }
 
 
@@ -204,5 +205,23 @@ public class BaseGraph extends World implements IServerCallbackDelegate
             }
         }
 
+    }
+    
+    /**
+     * Check if game is over
+     */
+    public void checkEndGame(){
+        List items = getObjects(Country.class);
+        boolean isGameOver = checkValid() && items.size() == colorMap.size() ;
+        
+        if (isGameOver) {
+
+            stopTime=System.currentTimeMillis();
+            int timeTaken = (int)(stopTime-startTime)/1000;
+
+            EndGame endgame = new EndGame(timeTaken);
+            Greenfoot.setWorld(endgame);
+
+        }
     }
 }
