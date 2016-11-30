@@ -132,13 +132,7 @@ public class BaseGraph extends World implements IServerCallbackDelegate
      * @param - graphAct: GraphAction - data to send to the server
      */
     public void sendAction(GraphAction graphAct){
-        ObjectMapper mapper = new ObjectMapper();
-        try{
-            String jsonRep = mapper.writeValueAsString(graphAct);
-            GraphClient.getInstance().send(jsonRep);
-        }catch (Exception e){
-            System.out.println(e);
-        }
+        GraphClient.getInstance().sendAction(graphAct);
     }
 
     /**

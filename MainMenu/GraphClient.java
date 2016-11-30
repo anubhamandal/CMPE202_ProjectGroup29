@@ -3,6 +3,7 @@ import java.io.*;
 import java.net.*;
 import java.util.*;
 
+import com.fasterxml.jackson.databind.*;
 /**
  * Write a description of class GraphClient here.
  * 
@@ -126,6 +127,16 @@ public class GraphClient implements IServerProxy
         } 
     }
 
+    public void sendAction(GraphAction action){
+        ObjectMapper mapper = new ObjectMapper();
+        try{
+            String jsonRep = mapper.writeValueAsString(action);
+            send(jsonRep);
+        }catch (Exception e){
+            System.out.println(e);
+        }
+    }
+    
     public void send(String payload){
         System.out.println("queue payload" + payload);
         actions.add(payload);
