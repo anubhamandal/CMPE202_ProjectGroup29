@@ -82,8 +82,8 @@ public class NumberOfPlayers extends BaseGraph implements ActionListener
             String numPlayers = Greenfoot.ask("How many players?");
             desiredPlayers = Integer.parseInt(numPlayers);
             if(desiredPlayers!=0){
-                JoinGame g = new JoinGame();
-                g.getCurrentGames(graphnumber);
+                JoinGame g = new JoinGame(graphnumber);
+                g.getGamesActionToServer();
                 Greenfoot.setWorld(g);
             }
         }

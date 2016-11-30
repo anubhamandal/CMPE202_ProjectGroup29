@@ -17,37 +17,59 @@ import java.awt.Color;
  */
 public class JoinGame extends World
 {
-
-    GraphServer graphServer;
     BaseGraph activegraph;
     List<GameMetaData> gamesList = new ArrayList<GameMetaData>();
-    public JoinGame()
+    public int graphNumber;
+    GreenfootImage background;
+    public JoinGame(int graphNumber)
     {    
-        // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(800, 500, 1); 
-
-    }
-
-    public void getCurrentGames(int graphNumber){
-        GreenfootImage background = new GreenfootImage("Background.jpg");
+        this.graphNumber=graphNumber;
+        background= new GreenfootImage("Background.jpg");
         setBackground(background);
         background = getBackground();
 
-        graphServer  = GraphServer.getInstance();     
-        String actionString = "{\"action\":\"getGames\"}";  
-        JSONObject jObject = graphServer.parseCommand(actionString);
-
-        JSONArray array = jObject.getJSONArray("games");
-        for(int i = 0 ; i < array.length() ; i++){
-            if(array.getJSONObject(i).getInt("graphNum") == graphNumber) {
-                GameMetaData gm =  new GameMetaData();
-                gm.gameid = array.getJSONObject(i).getInt("gameId");
-                gm.numofPlayers = array.getJSONObject(i).getInt("numPlayers");
-                gm.graphnumber = array.getJSONObject(i).getInt("graphNum");
-                gamesList.add(gm);
+    }
+    // Prepare the action and send the action to the client 
+    
+    public void getGamesActionToServer(){
+        GraphAction graphAct = new GraphAction();
+        graphAct.setAction("getGames");
+        GraphClient.getInstance().sendAction(graphAct);
+    }
+    //receive available games from the server
+    
+    public boolean receiveMove(String move){
+       System.out.println("received " + move); 
+        try{
+            JSONObject json = new JSONObject(move);
+            String err = json.getString("error");
+            System.out.println("err is " + err);
+            if (err != null && err.length() > 0 ){
+                 return (err.indexOf("Bye") < 0);
             }
+            JSONArray array = json.getJSONArray("games");
+            for(int i = 0 ; i < array.length() ; i++){
+                if(array.getJSONObject(i).getInt("graphNum") == graphNumber) {
+                    GameMetaData gm =  new GameMetaData();
+                    gm.gameid = array.getJSONObject(i).getInt("gameId");
+                    gm.numofPlayers = array.getJSONObject(i).getInt("numPlayers");
+                    gm.graphnumber = array.getJSONObject(i).getInt("graphNum");
+                    gamesList.add(gm);
+                }
+           }
+           showCurrentGames();
+        }catch (JSONException e){
+            System.out.println(e);
+            return false;
+        } catch (Exception e){
+            e.printStackTrace();
+            return false;
         }
-
+        return true;
+    }
+    //show currrent games in greenfoot
+    public void showCurrentGames(){  
         int datax = 100;
         int datak = 130;
         if(gamesList.size()>0){
