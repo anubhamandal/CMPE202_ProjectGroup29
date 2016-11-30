@@ -32,7 +32,7 @@ public class NumberOfPlayers extends BaseGraph implements ActionListener
         this.graphnumber=n;
         setBackground(background);
         background = getBackground();
-        
+
         text = new GreenfootImage("Welcome to the Graph"+n+"!!", 40, Color.black, new Color(0, 0, 0, 0));
         background.drawImage(text, 400-text.getWidth()/2, 50);
         text = new GreenfootImage("Please Select Single or Multi Player", 32, Color.black, new Color(0, 0, 0, 0));
@@ -51,46 +51,44 @@ public class NumberOfPlayers extends BaseGraph implements ActionListener
         {
             switch(graphnumber)
             {
-                            case 1:
-                            activegraph=new Graph1();
-                            break;
-                            case 2:
-                            activegraph=new Graph2();
-                            break;
-                            case 3:
-                            activegraph=new Graph3();
-                            break;
-                            case 4:
-                            activegraph=new Graph4();
-                            break;
-                            case 5:
-                            activegraph=new Graph5();
-                            break;
-                            case 6:
-                            activegraph=new Graph6();
-                            break;
-        }
+                case 1:
+                activegraph=new Graph1();
+                break;
+                case 2:
+                activegraph=new Graph2();
+                break;
+                case 3:
+                activegraph=new Graph3();
+                break;
+                case 4:
+                activegraph=new Graph4();
+                break;
+                case 5:
+                activegraph=new Graph5();
+                break;
+                case 6:
+                activegraph=new Graph6();
+                break;
+            }
         }
         else if(c==multiplayer)
         {
-             /*text = new GreenfootImage("Please Enter Number Of Players", 20, Color.black, new Color(0, 0, 0, 0));
-             background.drawImage(text,  300, 350);
-             numberofplayers = new TextField(10);
-             numberofplayers.addActionListener(this);
-             numberofplayers.requestFocus();    
-             addObject( numberofplayers, 400, 400); */
-             String numPlayers = Greenfoot.ask("How many players?");
-             desiredPlayers = Integer.parseInt(numPlayers);
-             if(desiredPlayers!=0){
-               JoinGame g = new JoinGame();
-               g.getCurrentGames(graphnumber);
-               Greenfoot.setWorld(g);
+            /*text = new GreenfootImage("Please Enter Number Of Players", 20, Color.black, new Color(0, 0, 0, 0));
+            background.drawImage(text,  300, 350);
+            numberofplayers = new TextField(10);
+            numberofplayers.addActionListener(this);
+            numberofplayers.requestFocus();    
+            addObject( numberofplayers, 400, 400); */
+            String numPlayers = Greenfoot.ask("How many players?");
+            desiredPlayers = Integer.parseInt(numPlayers);
+            if(desiredPlayers!=0){
+                JoinGame g = new JoinGame();
+                g.getCurrentGames(graphnumber);
+                Greenfoot.setWorld(g);
             }
         }
-        
 
     }
-
     public void act()
     {
         try{
