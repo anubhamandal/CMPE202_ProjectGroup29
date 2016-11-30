@@ -26,6 +26,7 @@ public class Graph6 extends BaseGraph
         bg.fill();
         
         createGraph();
+        joinGame();
     }
     
        
@@ -129,8 +130,12 @@ public class Graph6 extends BaseGraph
         colorPicker = new ColorPicker(300, 65, 6);
         addObject (colorPicker, 150, 50);
         validLabel = new Label("Select a color", 40);
-        addObject(validLabel, 190, 111);          
+        addObject(validLabel, 190, 111); 
+        
+        colorSelectLabel = new Label("Color Selected: ", 30);
+        addObject(colorSelectLabel, 190, 150);
         Greenfoot.start();
+        
         
     }
 }    
