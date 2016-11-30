@@ -144,9 +144,7 @@ public class BaseGraph extends World implements IServerCallbackDelegate
         // Implement this method in children
     }
 
-    public void updateCountries(Map map){
 
-    }
 
     /**
      * Receives move from GraphServer
