@@ -89,7 +89,6 @@ public class NumberOfPlayers extends BaseGraph implements ActionListener
             }*/
             
             DecideGame decideGame = new DecideGame();
-            decideGame.decideGame(graphnumber);
             Greenfoot.setWorld(decideGame);
         }
         

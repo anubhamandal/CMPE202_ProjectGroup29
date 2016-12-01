@@ -28,6 +28,7 @@ public class Graph2 extends BaseGraph
         super(600, 600, 1); 
         prepare();
         //joinGame();
+        GraphClient.getInstance().setDelegate(this);
     }
 
     private void prepare() {
@@ -86,5 +87,4 @@ public class Graph2 extends BaseGraph
         return true;
     }
 
-    
 }

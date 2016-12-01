@@ -37,8 +37,8 @@ public class GraphGameServerThread extends Thread {
 public void setDelegate(IGraphGameServerDelegate d){
     delegate = d;
     // return current state of board
-    JSONObject moves = GraphServer.getInstance().parseCommand("{\"action\":\"getMoves\"}");
-    d.notifyPlayers(moves.toString());
+    //JSONObject moves = GraphServer.getInstance().parseCommand("{\"action\":\"getMoves\"}");
+    //d.notifyPlayers(moves.toString());
 }
 
 public void notifyPlayer(String colorMap){

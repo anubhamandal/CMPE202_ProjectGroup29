@@ -147,5 +147,9 @@ public class HostGame extends World implements ActionListener, IServerCallbackDe
         }
         return bg;
     }
+    
+    public void setPlayerName(String playName){
+        this.playerName.setText(playName);
+    }
 
 }

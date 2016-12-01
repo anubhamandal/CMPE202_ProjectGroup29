@@ -1,7 +1,8 @@
 package game; 
 
 import java.util.*;
-import org.json.* ;
+import java.util.stream.*;
+import org.json.*;
 
 /**
  * Write a description of class GraphServer here.
@@ -115,10 +116,9 @@ public class GraphServer
                 playerArray.add(playerId);
                 playerMap.put(gameCount, playerArray);
 
-
                 JSONObject retJSON = new JSONObject(metaData.toString());
                 retJSON.put("error", "Waiting for players");
-                
+
                 System.out.println(retJSON.toString());
                 return retJSON;
             }
@@ -194,7 +194,7 @@ public class GraphServer
         JSONObject j = new JSONObject();
         if (error.length() > 0) 
             j.put("error", error);
-            
+
         if (gameId > 0) {
             j.put("colorMap", new JSONObject(gameColorMap.get(gameId)));
             j.put("currentPlayer", gameMetaDataMap.get(gameId).optString("currentPlayer"));
@@ -206,7 +206,15 @@ public class GraphServer
 
     public JSONObject getGamesJson(){
         JSONObject j = new JSONObject();
-        j.put("games", gameMetaDataMap.values());
+        Collection<JSONObject> availableGames = gameMetaDataMap.values();
+        Iterator<JSONObject> it = availableGames.iterator();
+        while( it.hasNext() ) {
+            JSONObject game = it.next();
+            JSONArray array = game.optJSONArray("players");
+            if( array != null && array.length() >= game.getInt("numPlayers") ) 
+                it.remove();
+        }
+        j.put("games", availableGames );
         System.out.println(j);
         return j;
     }

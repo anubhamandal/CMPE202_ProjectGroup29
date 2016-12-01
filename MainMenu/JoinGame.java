@@ -15,50 +15,75 @@ import java.awt.Color;
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class JoinGame extends World
+public class JoinGame extends World implements ActionListener,IServerCallbackDelegate
 {
     BaseGraph activegraph;
     List<GameMetaData> gamesList = new ArrayList<GameMetaData>();
     public int graphNumber;
-    GreenfootImage background;
-    public JoinGame(int graphNumber)
+    private String playerName;
+    GreenfootImage background = new GreenfootImage("Background.jpg");
+
+    Button createGame, back, joinGame;
+    TextField joinGameTextField;
+    private Integer gameId;
+
+    public JoinGame()
     {    
         super(800, 500, 1); 
-        this.graphNumber=graphNumber;
-        background= new GreenfootImage("Background.jpg");
         setBackground(background);
-        background = getBackground();
+        GraphClient.getInstance().setDelegate(this);
+        init();
+        getGamesFromServer();
+    }
 
+    public void init(){
+        // Back Button
+        back = new Button("Back", 8474);
+        back.addActionListener(this);
+        addObject(back, 50, 50);  
+
+        // Ask for player name
+        playerName = Greenfoot.ask("What is your player name?");
     }
     // Prepare the action and send the action to the client 
-    
-    public void getGamesActionToServer(){
+
+    public void getGamesFromServer(){
         GraphAction graphAct = new GraphAction();
         graphAct.setAction("getGames");
         GraphClient.getInstance().sendAction(graphAct);
     }
-    //receive available games from the server
-    
+
+    public void joinGame(Integer gameId){
+        GraphAction graphAct = new GraphAction();
+        graphAct.setAction("joinGame");
+        graphAct.setGameId(gameId);
+        graphAct.setPlayerId(playerName);
+        GraphClient.getInstance().sendAction(graphAct);
+    }
+
+    /**
+     * receive available games from the server
+     */
     public boolean receiveMove(String move){
-       System.out.println("received " + move); 
+        System.out.println("received " + move); 
         try{
             JSONObject json = new JSONObject(move);
             String err = json.optString("error");
             System.out.println("err is " + err);
             if (err != null && err.length() > 0 ){
-                 return (err.indexOf("Bye") < 0);
+                return (err.indexOf("Bye") < 0);
             }
-            JSONArray array = json.getJSONArray("games");
-            for(int i = 0 ; i < array.length() ; i++){
-                if(array.getJSONObject(i).getInt("graphNum") == graphNumber) {
-                    GameMetaData gm =  new GameMetaData();
-                    gm.gameid = array.getJSONObject(i).getInt("gameId");
-                    gm.numofPlayers = array.getJSONObject(i).getInt("numPlayers");
-                    gm.graphnumber = array.getJSONObject(i).getInt("graphNum");
-                    gamesList.add(gm);
-                }
-           }
-           showCurrentGames();
+
+            JSONArray array = json.optJSONArray("games");
+            if (array != null){
+                // get games
+                populateGamesList(array);
+                showCurrentGames();
+            } else if (json.optString("gameMetaData") != null){
+                // joined a game
+                transitionToGraph(move);
+            }
+
         }catch (JSONException e){
             System.out.println(e);
             return false;
@@ -68,39 +93,120 @@ public class JoinGame extends World
         }
         return true;
     }
+
+    private void populateGamesList(JSONArray array){
+        for(int i = 0 ; i < array.length() ; i++){
+            GameMetaData gm =  new GameMetaData();
+            gm.gameid = array.getJSONObject(i).getInt("gameId");
+            gm.numofPlayers = array.getJSONObject(i).getInt("numPlayers");
+            gm.graphnumber = array.getJSONObject(i).getInt("graphNum");
+            gamesList.add(gm);
+        }
+    }
+
+    private void transitionToGraph(String move){
+        GameMetaData metaData = gamesList.get(gameId-1); // index is offset by 1
+        int graphNum = metaData.graphnumber;
+        BaseGraph bg = getGraphGameFromNum(graphNum);
+
+        bg.setGameId(gameId);
+        bg.setPlayerName(playerName);
+        bg.receiveMove(move);
+
+        Greenfoot.setWorld(bg);
+    }
     //show currrent games in greenfoot
     public void showCurrentGames(){  
         int datax = 100;
         int datak = 130;
         if(gamesList.size()>0){
             for(int i=0;i<gamesList.size();i++){
+                GameMetaData metaData = gamesList.get(i);
                 StringBuffer sb = new StringBuffer();
-                sb.append("Game Id : ");
-                sb.append(gamesList.get(i).gameid);
-                sb.append("Number of Players ");
-                sb.append(gamesList.get(i).numofPlayers);
-                GreenfootImage gd =  new GreenfootImage( sb.toString(),32,Color.black, new Color(0, 0, 0, 0));
-                GreenfootImage text = new GreenfootImage("Use"+ (i+1) +" key to Join above Game", 32, Color.black, new Color(0, 0, 0, 0));
-                background.drawImage(gd, 400-text.getWidth()/2,datax );
-                background.drawImage(text, 400-text.getWidth()/2, datak);
+                sb.append("Game Id: ");
+                sb.append(metaData.gameid);
+                sb.append(" ; #Players: ");
+                sb.append(metaData.numofPlayers);
+                sb.append(" ;Graph# ");
+                sb.append(metaData.graphnumber);
+                GreenfootImage gd =  new GreenfootImage( sb.toString(),20,Color.black, new Color(0, 0, 0, 0));
+                background.drawImage(gd, 400-gd.getWidth()/2,datax );
                 datax += (30);
-                datak += (30);
+
             }
+
+            // Select Game label
+            GreenfootImage select =  new GreenfootImage( "Select GameId to join", 20, Color.black, new Color(0, 0, 0, 0));
+            background.drawImage(select, (800-select.getWidth())/2, 430);
+            // select game text field
+            joinGameTextField = new TextField("", 10);
+            joinGameTextField.requestFocus();    
+            addObject(joinGameTextField, 360, 470);
+
+            joinGame = new Button("Join Game", 743473);
+            joinGame.addActionListener(this);
+            addObject(joinGame, 460, 470);
         }
         else{
 
-            GreenfootImage text = new GreenfootImage("No Present games for selected graph", 32, Color.black, new Color(0, 0, 0, 0));
+            GreenfootImage text = new GreenfootImage("No games available yet.  Create one?", 32, Color.black, new Color(0, 0, 0, 0));
             background.drawImage(text, 400-text.getWidth()/2, datak);
-            Button createGame = new Button("Create Game", 2000);
+            createGame = new Button("Create Game", 2000);
+            createGame.addActionListener(this);
             addObject(createGame, 392, 241);
 
         }
     }
 
+    public void actionPerformed(GUIComponent c){
+        if(c == back){
+            DecideGame d = new DecideGame();
+            Greenfoot.setWorld(d);
+            return;
+        } 
+
+        if (c == createGame){
+            HostGame hg = new HostGame();
+            hg.setPlayerName(playerName);
+            Greenfoot.setWorld(hg);
+            return;
+        }
+        if (c == joinGame){
+            gameId = new Integer(joinGameTextField.getText());
+            joinGame(gameId);
+            return;
+        }
+    }
+
+    private BaseGraph getGraphGameFromNum(int num){
+        BaseGraph bg = null;
+
+        switch (num){
+            case 1:
+            bg = new Graph1();
+            break;
+            case 2:
+            bg = new Graph2();
+            break;
+            case 3:
+            bg = new Graph3();
+            break;
+            case 4:
+            bg = new Graph4();
+            break;
+            case 5:
+            bg = new Graph5();
+            break;
+            case 6:
+            bg = new Graph6();
+            break;
+        }
+        return bg;
+    }
+
     public void act()
     {        
         // add the JoinGame Logic based on the user input
-
     }
 }
 

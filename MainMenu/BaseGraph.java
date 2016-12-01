@@ -58,6 +58,7 @@ public class BaseGraph extends World implements IServerCallbackDelegate
 
         // ATTENTION
         // joinGame(); NEEDS to be called as soon as child subclass finishes init
+        GraphClient.getInstance().setDelegate(this);
     }
 
     public Color selectedColor() {
@@ -78,7 +79,7 @@ public class BaseGraph extends World implements IServerCallbackDelegate
         return currentPlayer != null && currentPlayer.equals(playerName);
     }
 
-    // Connect to server with sockets
+    // TEMP - Connect to server with sockets
     public void joinGame(){
 
         // Single or multi-player game
@@ -161,7 +162,11 @@ public class BaseGraph extends World implements IServerCallbackDelegate
                 turnLabel.setValue(err);
                 return (err.indexOf("Bye") < 0);
             }
-            colorMap = Utils.getInstance().getMapFromJSON(json.getJSONObject("colorMap"));
+            JSONObject colMap = json.optJSONObject("colorMap");
+            if (colMap != null){
+                colorMap = Utils.getInstance().getMapFromJSON(colMap);
+            }
+
             currentPlayer = json.optString("currentPlayer");
 
             updatePlayerTurnLabel();
