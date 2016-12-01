@@ -28,9 +28,17 @@ public class Graph2 extends BaseGraph
         super(600, 600, 1); 
         prepare();
         //joinGame();
-        GraphClient.getInstance().setDelegate(this);
     }
 
+    public Graph2(int numPlayers){
+        super(600, 600, 1); 
+        prepare();
+        desiredPlayers = numPlayers;
+        if (numPlayers > 1){
+            GraphClient.getInstance().setDelegate(this);
+        }
+    }
+    
     private void prepare() {
         //Country country1 = new Country(0, 100, 600, 200);
         //Country country2 = new Country(0, 300, 600, 200);

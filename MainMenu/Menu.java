@@ -52,32 +52,32 @@ public class Menu extends World
 
         if (Greenfoot.isKeyDown("1"))
         {
-            activeGraph = new NumberOfPlayers(1);
+            activeGraph = new Graph1();
         }
 
         if ( Greenfoot.isKeyDown("2"))
         {
-            activeGraph = new NumberOfPlayers(2);
+            activeGraph = new Graph2(1);
         }
 
         if ( Greenfoot.isKeyDown("3"))
         {
-            activeGraph = new NumberOfPlayers(3);
+            activeGraph = new Graph3();
         }
 
         if ( Greenfoot.isKeyDown("4"))
         {
-             activeGraph = new NumberOfPlayers(4);
+             activeGraph = new Graph4();
         }
 
         if (Greenfoot.isKeyDown("5"))
         {
-            activeGraph = new NumberOfPlayers(5);
+            activeGraph = new Graph5();
         }
 
         if ( Greenfoot.isKeyDown("6"))
         {
-            activeGraph = new NumberOfPlayers(6);
+            activeGraph = new Graph6();
         }
 
         if (Greenfoot.mouseClicked(this)){
@@ -92,6 +92,9 @@ public class Menu extends World
 
         try{
             if (activeGraph != null){
+                String playerName = "player";
+                activeGraph.setPlayerName(playerName);
+                activeGraph.setCurrentPlayer(playerName);
                 Greenfoot.setWorld(activeGraph);
             }
         }catch (Exception e){

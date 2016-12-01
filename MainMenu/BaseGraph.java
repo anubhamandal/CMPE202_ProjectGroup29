@@ -57,8 +57,8 @@ public class BaseGraph extends World implements IServerCallbackDelegate
         //GraphClient.getInstance().reset();
 
         // ATTENTION
-        // joinGame(); NEEDS to be called as soon as child subclass finishes init
-        GraphClient.getInstance().setDelegate(this);
+        // GraphClient.getInstance().setDelegate(this); NEEDS to be called as soon as child subclass finishes init
+
     }
 
     public Color selectedColor() {
@@ -111,7 +111,7 @@ public class BaseGraph extends World implements IServerCallbackDelegate
         // Local
         colorMap.put(id, Utils.getInstance().colorToString(selectedColor()));
 
-        if (desiredPlayers == 1) {
+        if (desiredPlayers <= 1) {
             refreshNodeColors();
             return;
         }
@@ -233,6 +233,10 @@ public class BaseGraph extends World implements IServerCallbackDelegate
 
     public void setPlayerName(String playerName){
         this.playerName = playerName;
+    }
+    
+    public void setCurrentPlayer(String playerName){
+        this.currentPlayer = playerName;
     }
 
     public void setError(String err){
