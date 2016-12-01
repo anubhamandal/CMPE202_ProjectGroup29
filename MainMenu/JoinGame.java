@@ -43,7 +43,7 @@ public class JoinGame extends World
        System.out.println("received " + move); 
         try{
             JSONObject json = new JSONObject(move);
-            String err = json.getString("error");
+            String err = json.optString("error");
             System.out.println("err is " + err);
             if (err != null && err.length() > 0 ){
                  return (err.indexOf("Bye") < 0);

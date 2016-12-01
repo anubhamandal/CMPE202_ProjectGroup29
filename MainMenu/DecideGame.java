@@ -64,6 +64,8 @@ public class DecideGame extends World implements ActionListener
         if(c == hostGame) 
         {
             //Logic to Host a New Game
+            HostGame h = new HostGame();
+            Greenfoot.setWorld(h);
         }
         else if(c == joinGame)
         {
@@ -83,8 +85,8 @@ public class DecideGame extends World implements ActionListener
                 
              if(desiredPlayers!=0)
                      {              
-                       JoinGame g = new JoinGame();
-                       g.getCurrentGames(graphNumber);
+                       JoinGame g = new JoinGame(2);
+                       //g.getCurrentGames(graphNumber);
                        Greenfoot.setWorld(g);
                      }   
                 

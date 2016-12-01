@@ -34,6 +34,7 @@ public class BaseGraph extends World implements IServerCallbackDelegate
     public String playerName;
     public String currentPlayer;
     int desiredPlayers;
+    private Integer gameId;
 
     // The following is to keep track of the colors of the nodes
     public Map<Integer, String> colorMap = new HashMap<Integer, String>();
@@ -54,7 +55,7 @@ public class BaseGraph extends World implements IServerCallbackDelegate
         super(worldWidth, worldHeight, cellSize);
         startTime = System.currentTimeMillis();
         //GraphClient.getInstance().reset();
-        
+
         // ATTENTION
         // joinGame(); NEEDS to be called as soon as child subclass finishes init
     }
@@ -72,22 +73,21 @@ public class BaseGraph extends World implements IServerCallbackDelegate
             this.turnLabel.setValue("Click a country");
         }
     }
-    
+
     public boolean isMyTurn() {
         return currentPlayer != null && currentPlayer.equals(playerName);
     }
 
+    // Connect to server with sockets
     public void joinGame(){
-        playerName = Greenfoot.ask("What is your name?");
-        String numPlayers = Greenfoot.ask("How many players?");
-        desiredPlayers = Integer.parseInt(numPlayers);
+
         // Single or multi-player game
         if (desiredPlayers == 1){
             currentPlayer = playerName;
         } else {
             // Init client server connection
             GraphClient.getInstance().setDelegate(this);
-            
+
             // Register for game
             GraphAction graphAct = new GraphAction();
             graphAct.setPlayerId(playerName);
@@ -109,7 +109,7 @@ public class BaseGraph extends World implements IServerCallbackDelegate
         }
         // Local
         colorMap.put(id, Utils.getInstance().colorToString(selectedColor()));
-        
+
         if (desiredPlayers == 1) {
             refreshNodeColors();
             return;
@@ -120,6 +120,7 @@ public class BaseGraph extends World implements IServerCallbackDelegate
         graphAct.setNodeId(id);
         graphAct.setAction("insertMove");
         graphAct.setPlayerId(playerName);
+        graphAct.setGameId(gameId);
 
         //Representation rep = new JacksonRepresentation<GraphAction>(graphAct) ;
         //client.post(rep, MediaType.APPLICATION_JSON);
@@ -143,8 +144,6 @@ public class BaseGraph extends World implements IServerCallbackDelegate
         return false;
     }
 
-
-
     /**
      * Receives move from GraphServer
      * move:String - in format of {
@@ -156,7 +155,7 @@ public class BaseGraph extends World implements IServerCallbackDelegate
         System.out.println("received " + move); 
         try{
             JSONObject json = new JSONObject(move);
-            String err = json.getString("error");
+            String err = json.optString("error");
             System.out.println("err is " + err);
             if (err != null && err.length() > 0 && turnLabel != null){
                 turnLabel.setValue(err);
@@ -204,14 +203,14 @@ public class BaseGraph extends World implements IServerCallbackDelegate
         }
 
     }
-    
+
     /**
      * Check if game is over
      */
     public void checkEndGame(){
         List items = getObjects(Country.class);
         boolean isGameOver = checkValid() && items.size() == colorMap.size() ;
-        
+
         if (isGameOver) {
 
             stopTime=System.currentTimeMillis();
@@ -220,6 +219,20 @@ public class BaseGraph extends World implements IServerCallbackDelegate
             EndGame endgame = new EndGame(timeTaken);
             Greenfoot.setWorld(endgame);
 
+        }
+    }
+
+    public void setGameId(Integer gameId){
+        this.gameId = gameId;
+    }
+
+    public void setPlayerName(String playerName){
+        this.playerName = playerName;
+    }
+
+    public void setError(String err){
+        if (err != null && err.length() > 0 && turnLabel != null){
+            turnLabel.setValue(err);
         }
     }
 }

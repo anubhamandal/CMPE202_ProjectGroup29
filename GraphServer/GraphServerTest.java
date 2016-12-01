@@ -58,17 +58,19 @@ public class GraphServerTest
         gserv.parseCommand(actionString);
     }
 
-    /*
     @Test
     public void testCreateGame() {
-    String actionString = "{\"action\":\"createGame\",\"numPlayers\":3,\"playerId\":\"jonny5\",\"graphNum\":2}";
-    JSONObject metaData = new JSONObject();
-    metaData.put("gameId", 1);
-    metaData.put("numPlayers", 3);
-    metaData.put("graphNum", 2);
-    assertEquals(metaData.toString(), gserv.parseCommand(actionString).toString());
+        gserv.resetAll();
+        String actionString = "{\"action\":\"createGame\",\"numPlayers\":3,\"playerId\":\"jonny5\",\"graphNum\":2}";
+        JSONObject metaData = new JSONObject();
+        metaData.put("gameId", 1);
+        metaData.put("numPlayers", 3);
+        metaData.put("graphNum", 2);
+        metaData.put("error", "Waiting for players");
+        System.out.println(metaData.toString());
+        assertEquals(metaData.toString(), gserv.parseCommand(actionString).toString());
     }
-     */
+
     @Test
     public void testGetGames(){
 

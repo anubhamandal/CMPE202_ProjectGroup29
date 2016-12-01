@@ -5,8 +5,6 @@ import java.awt.Color;
 
 public class Menu extends World
 {
-    private volatile static Menu menu ;
-
     private BaseGraph activeGraph;
 
     Label label;
@@ -16,16 +14,6 @@ public class Menu extends World
     //  '4' key (Graph4) //Shilpa
 
     //  '6' key (Graph6) //Veeresh
-
-    public static Menu getInstance() {
-        if (menu == null) {
-            synchronized (Menu.class){
-                menu = new Menu() ;
-            }
-        }
-        return menu ;
-
-    }
 
     public Menu()
     {

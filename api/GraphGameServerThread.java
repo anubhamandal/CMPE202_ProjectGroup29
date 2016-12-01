@@ -66,7 +66,8 @@ public void run() {
                     JSONObject returnObj = GraphServer.getInstance().parseCommand(inputLine);
                     System.out.println(returnObj.toString());
 
-                    if (returnObj.getString("error").length() > 0) 
+                    String errString = returnObj.optString("error");
+                    if (errString != null && errString.length() > 0) 
                         out.println(returnObj.toString());
                     else
                         delegate.notifyPlayers(returnObj.toString());

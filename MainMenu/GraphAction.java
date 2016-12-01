@@ -20,6 +20,8 @@ public class GraphAction
     private Integer gameId;
     // used for createGame
     private Integer numPlayers;
+    // used for createGame
+    private Integer graphNum;
 
     /**
      * Constructor for objects of class GraphAction
@@ -75,5 +77,15 @@ public class GraphAction
     public void setNumPlayers(Integer numPlayers){
         this.numPlayers = numPlayers;
     }
+    
+    public Integer getGraphNum(){
+        return graphNum;
+    }
+    
+    public void setGraphNum(Integer graphNum){
+        this.graphNum = graphNum;
+    }
+    
+    
 
 }

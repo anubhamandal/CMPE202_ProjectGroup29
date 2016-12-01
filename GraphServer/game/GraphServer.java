@@ -16,18 +16,18 @@ public class GraphServer
     //private String currentPlayer;
     //private Integer desiredNumPlayers;
     //private ArrayList<String> playerArray = new ArrayList<String>();
-    private Integer gameCount = 1;
-    
+    private Integer gameCount = 0;
+
     // multi game, multi-player
     // {gameId:Integer : {gameId:Integer, desiredNumPlayers:Integer, currentPlayer:String, numPlayersWaiting:Integer}}
     private Map<Integer, JSONObject> gameMetaDataMap;
 
     // {gameId:Integer : {nodeId:Integer : color:String}}
     private Map<Integer, Map<Integer, String>> gameColorMap;
-    
+
     // {gameId:Integer : [playerIds]}
     private Map<Integer, ArrayList<String>> playerMap;
-    
+
     // {nodeId: color}
     //private Map<Integer, String> colorMap;
 
@@ -59,24 +59,24 @@ public class GraphServer
      *  color:String (required for insertMove)
     gameId:String (future feature - multiple concurrent game support),
     metaData:{
-        numPlayers:Integer (used for createGame - future feature - more than 2 player game),
-        graphNum: Integer (Map number from 1-6)
-    
-}
+    numPlayers:Integer (used for createGame - future feature - more than 2 player game),
+    graphNum: Integer (Map number from 1-6)
+
+    }
     }
      */
     public JSONObject parseCommand(String command){
         //Turn into JSON object first
         JSONObject json = new JSONObject(command);
         Integer gameId = json.optInt("gameId");
-        
+
         switch (json.getString("action")) {
             case "getMoves":
             return getMovesJson("", gameId);
             case "insertMove":
             {
                 Map<Integer, String> colorMap = gameColorMap.get(gameId);
-                
+
                 JSONObject gameMetaData = gameMetaDataMap.get(gameId);
                 ArrayList<String> playerArray = playerMap.get(gameId);
                 if (gameMetaData.getInt("numPlayers") > playerArray.size()){
@@ -101,6 +101,9 @@ public class GraphServer
                 // Should have minimum number of players, playerId, graphNum
                 // RETURNS: graphId, gameMetaData
                 JSONObject metaData = new JSONObject();
+                // Increment gameCount
+                gameCount++;
+
                 metaData.put("gameId", gameCount);
                 metaData.put("numPlayers", json.getInt("numPlayers"));
                 metaData.put("graphNum", json.getInt("graphNum"));
@@ -111,11 +114,13 @@ public class GraphServer
                 ArrayList<String> playerArray = new ArrayList<String>();
                 playerArray.add(playerId);
                 playerMap.put(gameCount, playerArray);
+
+
+                JSONObject retJSON = new JSONObject(metaData.toString());
+                retJSON.put("error", "Waiting for players");
                 
-                // Increment gameId
-                gameCount++;
-                
-                return metaData;
+                System.out.println(retJSON.toString());
+                return retJSON;
             }
             case "getGames":
             {
@@ -126,18 +131,18 @@ public class GraphServer
             {
                 // Requirements: playerId, gameId                
                 String player = json.getString("playerId");
-                
+
                 // Error check player name
                 ArrayList<String> playerArray = playerMap.get(gameId);
                 if (playerArray.contains(player)) {
                     return getMovesJson("name exists; try again. Bye", gameId);
                 }
-                
+
                 // Set current player
                 JSONObject gameMetaData = gameMetaDataMap.get(gameId);
                 String currentPlayer = gameMetaData.optString("currentPlayer");
                 Integer desiredNumPlayers = gameMetaData.getInt("numPlayers");
-                
+
                 playerArray.add(player);
                 // Error check multi player
                 if (playerArray.size() < desiredNumPlayers) {
@@ -167,12 +172,12 @@ public class GraphServer
         gameColorMap.remove(gameId);
         playerMap.remove(gameId);
     }
-    
+
     public void resetAll(){
         gameMetaDataMap.clear();
         gameColorMap.clear();
         playerMap.clear();
-        gameCount = 1;
+        gameCount = 0;
     }
 
     public void insertMove(Integer nodeId, String color, Integer gameId) {
@@ -187,25 +192,29 @@ public class GraphServer
 
     public JSONObject getMovesJson(String error, Integer gameId){
         JSONObject j = new JSONObject();
-        j.put("colorMap", new JSONObject(gameColorMap.get(gameId)));
-        j.put("currentPlayer", gameMetaDataMap.get(gameId).optString("currentPlayer"));
-        j.put("gameMetaData", gameMetaDataMap.get(gameId));
-        j.put("error", error);
+        if (error.length() > 0) 
+            j.put("error", error);
+            
+        if (gameId > 0) {
+            j.put("colorMap", new JSONObject(gameColorMap.get(gameId)));
+            j.put("currentPlayer", gameMetaDataMap.get(gameId).optString("currentPlayer"));
+            j.put("gameMetaData", gameMetaDataMap.get(gameId));
+        }
         System.out.println(j);
         return j;
     }
-    
+
     public JSONObject getGamesJson(){
         JSONObject j = new JSONObject();
         j.put("games", gameMetaDataMap.values());
-                System.out.println(j);
+        System.out.println(j);
         return j;
     }
-    
+
     public String getNodeColor(Integer nodeId, Integer gameId){
         Map<Integer, String> colorMap = gameColorMap.get(gameId);
         return colorMap.get(nodeId);
-        
+
     }
 
 }
