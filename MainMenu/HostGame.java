@@ -124,13 +124,13 @@ public class HostGame extends World implements ActionListener, IServerCallbackDe
 
     private BaseGraph getGraphGameFromNum(String num){
         BaseGraph bg = null;
-
+        Integer numPeeps = new Integer(numPlayers.getText());
         switch (num){
             case "1":
             bg = new Graph1();
             break;
             case "2":
-            bg = new Graph2();
+            bg = new Graph2(numPeeps);
             break;
             case "3":
             bg = new Graph3();

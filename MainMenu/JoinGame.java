@@ -7,6 +7,7 @@ import org.restlet.ext.json.* ;
 import org.restlet.data.* ;
 import org.restlet.ext.jackson.*;
 import java.util.*;
+import java.util.stream.*;
 import game.GraphServer;
 import java.awt.Color;
 /**
@@ -25,7 +26,7 @@ public class JoinGame extends World implements ActionListener,IServerCallbackDel
 
     Button createGame, back, joinGame;
     TextField joinGameTextField;
-    private Integer gameId;
+    private GameMetaData chosenGame;
 
     public JoinGame()
     {    
@@ -105,16 +106,25 @@ public class JoinGame extends World implements ActionListener,IServerCallbackDel
     }
 
     private void transitionToGraph(String move){
-        GameMetaData metaData = gamesList.get(gameId-1); // index is offset by 1
-        int graphNum = metaData.graphnumber;
+
+        int graphNum = chosenGame.graphnumber;
         BaseGraph bg = getGraphGameFromNum(graphNum);
 
-        bg.setGameId(gameId);
+        bg.setGameId(chosenGame.gameid);
         bg.setPlayerName(playerName);
         bg.receiveMove(move);
 
         Greenfoot.setWorld(bg);
     }
+    
+    private GameMetaData metaDataForId(Integer id){
+       List<GameMetaData> result = gamesList.stream().filter(metaData -> metaData.gameid == id).collect(Collectors.toList()); 
+       if (result.size() > 0){
+           return result.get(0);
+        }
+        return null;
+    }
+    
     //show currrent games in greenfoot
     public void showCurrentGames(){  
         int datax = 100;
@@ -172,7 +182,8 @@ public class JoinGame extends World implements ActionListener,IServerCallbackDel
             return;
         }
         if (c == joinGame){
-            gameId = new Integer(joinGameTextField.getText());
+            Integer gameId = new Integer(joinGameTextField.getText());
+            chosenGame = metaDataForId(gameId);
             joinGame(gameId);
             return;
         }
@@ -186,7 +197,7 @@ public class JoinGame extends World implements ActionListener,IServerCallbackDel
             bg = new Graph1();
             break;
             case 2:
-            bg = new Graph2();
+            bg = new Graph2(chosenGame.numofPlayers);
             break;
             case 3:
             bg = new Graph3();

@@ -108,6 +108,9 @@ public class BaseGraph extends World implements IServerCallbackDelegate
             updatePlayerTurnLabel();
             return;
         }
+        if (selectedColor() == null){
+            return;
+        }
         // Local
         colorMap.put(id, Utils.getInstance().colorToString(selectedColor()));
 
