@@ -1,65 +1,76 @@
+ 
 
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-import java.awt.Color;
+import java.awt.*;
+import java.util.*;
+
 /**
- * Write a description of class GraphColoringWorld here.
+ * Write a description of class MyWorld here.
  * 
- * @author (Shilpa Chandra) 
+ * @author (your name) 
  * @version (a version number or a date)
  */
 public class Graph4 extends BaseGraph
 {
-
-    /**
-     * Constructor for objects of class GraphColoringWorld.
-     * 
-     */
+    public HashMap<Integer, String> colorMap = new HashMap<Integer, String>();
+    public Label validLabel;
     public Graph4()
     {    
-        super(800, 600, 1); 
+        // Create a new world with 600x600 cells with a cell size of 1x1 pixels.
+        super(800, 500, 1); 
         prepare();
-
     }
-
-    public void prepare()
-    {
-        Image2 image2=new Image2();
-        Image3 image3=new Image3();
-        Image4 image4=new Image4();
-        Image5 image5=new Image5();
-        Image6 image6=new Image6();
-        Image7 image7=new Image7();
-        Image1 image1=new Image1();
-        image1.drawImage();
-        image1.setAdjacents(image1,image2,image3,image4,image5,image6,image7);
-        addObject(image1,200,300);
-        image2.DrawImage();
-        image2.setAdjacents(image1,image2,image3,image4,image5,image6,image7);
-        addObject(image2,460,200);
-        image3.DrawImage();
-        image3.setAdjacents(image1,image2,image3,image4,image5,image6,image7);
-        addObject(image3,580,390);
-        image4.DrawImage();
-        image4.setAdjacents(image1,image2,image3,image4,image5,image6,image7);
-        addObject(image4,325,490);
-        image5.DrawImage();
-        image5.setAdjacents(image1,image2,image3,image4,image5,image6,image7);
-        addObject(image5,340,290);
-        image6.DrawImage();
-        image6.setAdjacents(image1,image2,image3,image4,image5,image6,image7);
-        addObject(image6,340,390);
-        image7.DrawImage();
-        image7.setAdjacents(image1,image2,image3,image4,image5,image6,image7);
-        addObject(image7,460,345);
-        colorPicker = new ColorPicker(300, 65, 4);
-        addObject (colorPicker, 150, 50);
-        colorSelectLabel = new Label("Color Selected: ", 30);
-        addObject(colorSelectLabel, 190, 111);
-        Greenfoot.start();
-    }
-
+    
     public void act()
     {
+        
+    }
+    
+    private void prepare() 
+    {
+        
+        DrawRectangle drawrect = new DrawRectangle(1);
+        addObject(drawrect,240,150);
+        DrawRectangle drawrect2 = new DrawRectangle(2);
+        addObject(drawrect2,170,200);
+        DrawRectangle drawrect3 = new DrawRectangle(3);
+        addObject(drawrect3,370,200);
+        DrawRectangle drawrect4 = new DrawRectangle(4);
+        addObject(drawrect4,500,150);
+        DrawRectangle drawrect5 = new DrawRectangle(5);
+        addObject(drawrect5,570,200);
+        DrawRectangle drawrect6 = new DrawRectangle(6);
+        addObject(drawrect6,300,250);
+        DrawRectangle drawrect7 = new DrawRectangle(7);
+        addObject(drawrect7,200,300);
+        DrawRectangle drawrect8 = new DrawRectangle(8);
+        addObject(drawrect8,325,350);
+        DrawRectangle drawrect9 = new DrawRectangle(9);
+        addObject(drawrect9,525,350);
+        DrawRectangle drawrect10 = new DrawRectangle(10);
+        addObject(drawrect10,600,250);
+        DrawRectangle drawrect11 = new DrawRectangle(11);
+        addObject(drawrect11,250,400);
+        DrawRectangle drawrect12 = new DrawRectangle(12);
+        addObject(drawrect12,450,400);
+        DrawRectangle drawrect13 = new DrawRectangle(13);
+        addObject(drawrect13,650,400);
+        DrawRectangle drawrect14 = new DrawRectangle(14);
+        addObject(drawrect14,150,450);
+        DrawRectangle drawrect15 = new DrawRectangle(15);
+        addObject(drawrect15,350,450);
+        DrawRectangle drawrect16 = new DrawRectangle(16);
+        addObject(drawrect16,600,450);
+        DrawRectangle drawrect17 = new DrawRectangle(17);
+        addObject(drawrect17,650,300);
+        colorSelectLabel = new Label("Color Selected: ", 20);
+        addObject(colorSelectLabel, 100, 100);
+        validLabel = new Label("Select a Color", 25);
+        addObject(validLabel, 511, 55);        
+        validLabel.setValue("");
 
+        int numCol = 4;
+        colorPicker = new ColorPicker(300, 75, numCol);
+        addObject(colorPicker, 150, 30);
     }
 }
