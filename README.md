@@ -45,10 +45,10 @@ Prerequisite Accounts:
 ### Multiple clients
 Greenfoot IDE is one client, but for other clients, you will need the jar.  
 On top right, there is a Share button.  
-![Share button](./share.png)
+![Share button](./docImgs/share.png)
 
 Click Share, then go to Application.  
-![Greenfoot export screen](./export.png)
+![Greenfoot export screen](./docImgs/export.png)
 
 Hit Export.  
 The jar file will be compiled and stored in the path.  
