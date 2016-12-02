@@ -28,22 +28,23 @@ public class NumberOfPlayers extends World implements ActionListener
      */
     public NumberOfPlayers()
     {
-        super(800, 500, 1); 
+        super(985,700, 1);  
 
         setBackground(background);
         background = getBackground();
 
-        text = new GreenfootImage("Welcome to the Graph Game!!", 40, Color.black, new Color(0, 0, 0, 0));
-        background.drawImage(text, 400-text.getWidth()/2, 50);
+        text = new GreenfootImage("Welcome to the Graph Game!!", 50, Color.black, new Color(0, 0, 0, 0));
+        background.drawImage(text, 500-text.getWidth()/2, 100);
         text = new GreenfootImage("Please Select Single or Multi Player", 32, Color.black, new Color(0, 0, 0, 0));
-        background.drawImage(text, 400-text.getWidth()/2, 200);
+        background.drawImage(text, 500-text.getWidth()/2, 250);
         singleplayer = new Button("Single Player", 2000);
         singleplayer.addActionListener(this);
-        addObject(singleplayer, 350, 300);
+        addObject(singleplayer, 370, 370);
         multiplayer = new Button("Multi Player", 1001);
         multiplayer.addActionListener(this);
-        addObject(multiplayer, 450, 300);
+        addObject(multiplayer, 600, 370);
 
+        prepare();
     }
 
     public void actionPerformed(GUIComponent c) {
@@ -58,6 +59,7 @@ public class NumberOfPlayers extends World implements ActionListener
         }
 
     }
+
     public void act()
     {
         try{
@@ -67,6 +69,14 @@ public class NumberOfPlayers extends World implements ActionListener
         }catch (Exception e){
             System.err.println(e);
         }
+    }
+
+    /**
+     * Prepare the world for the start of the program.
+     * That is: create the initial objects and add them to the world.
+     */
+    private void prepare()
+    {
     }
 }
 

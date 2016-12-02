@@ -49,7 +49,7 @@ public class BaseGraph extends World implements IServerCallbackDelegate
     public BaseGraph()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
-        super(600, 400, 1);         
+        super(1000, 1000, 1);          
     }
 
     public BaseGraph(int worldWidth, int worldHeight, int cellSize){
@@ -72,7 +72,7 @@ public class BaseGraph extends World implements IServerCallbackDelegate
             this.colorSelectLabel.setValue(colString);
         }
         if (this.turnLabel != null && isMyTurn() ) {
-            this.turnLabel.setValue("Click a country");
+            this.turnLabel.setValue("Color the region");
         }
     }
 

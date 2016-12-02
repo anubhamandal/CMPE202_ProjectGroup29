@@ -6,9 +6,9 @@ import java.awt.*;
 
 public class GraphEdge extends Actor
 {
-    private String node1, node2;
+    private int node1, node2;
     
-    public GraphEdge(String pNode1, String pNode2, int width, int height, int rot) {
+    public GraphEdge(int pNode1, int pNode2, int width, int height, int rot) {
         node1 = pNode1;
         node2 = pNode2;
         GreenfootImage img = new GreenfootImage(width, height);
@@ -21,11 +21,11 @@ public class GraphEdge extends Actor
      
    
         
-    public String getNode1() {
+    public int getNode1() {
         return node1;
     }
     
-    public String getNode2() {
+    public int getNode2() {
         return node2;
     }
 }

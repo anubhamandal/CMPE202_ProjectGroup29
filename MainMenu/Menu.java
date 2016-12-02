@@ -17,7 +17,7 @@ public class Menu extends World
 
     public Menu()
     {
-        super(800, 500, 1);   
+        super(985,700, 1); 
         init();
     }
 
@@ -52,7 +52,7 @@ public class Menu extends World
 
         if (Greenfoot.isKeyDown("1"))
         {
-            activeGraph = new Graph1();
+            activeGraph = new Graph1(1);
         }
 
         if ( Greenfoot.isKeyDown("2"))
