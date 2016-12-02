@@ -189,9 +189,17 @@ public class BaseGraph extends World implements IServerCallbackDelegate
         if (currentPlayer == null || currentPlayer.length() == 0) {
             turnLabel.setValue("Waiting for players");
         } else if (currentPlayer.equals(playerName)) {
+            setGameTimeStart();
             turnLabel.setValue("Your Turn");
         } else {
+            setGameTimeStart();
             turnLabel.setValue(currentPlayer + "'s turn");
+        }
+    }
+
+    public void setGameTimeStart() {
+        if (turnLabel.getValue().equals("Waiting for players")) {
+            startTime = System.currentTimeMillis();
         }
     }
 
@@ -237,7 +245,7 @@ public class BaseGraph extends World implements IServerCallbackDelegate
     public void setPlayerName(String playerName){
         this.playerName = playerName;
     }
-    
+
     public void setCurrentPlayer(String playerName){
         this.currentPlayer = playerName;
     }
