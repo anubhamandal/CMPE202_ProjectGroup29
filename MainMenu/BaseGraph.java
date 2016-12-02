@@ -35,7 +35,8 @@ public class BaseGraph extends World implements IServerCallbackDelegate
     public String currentPlayer;
     int desiredPlayers;
     private Integer gameId;
-
+    boolean whetherValid = false;
+    String colorToFill; // added 
     // The following is to keep track of the colors of the nodes
     public Map<Integer, String> colorMap = new HashMap<Integer, String>();
 
@@ -112,24 +113,26 @@ public class BaseGraph extends World implements IServerCallbackDelegate
             return;
         }
         // Local
-        colorMap.put(id, Utils.getInstance().colorToString(selectedColor()));
-
-        if (desiredPlayers <= 1) {
-            refreshNodeColors();
-            return;
+        // colorMap.put(id, Utils.getInstance().colorToString(selectedColor()));
+        colorToFill = Utils.getInstance().colorToString(selectedColor());
+        if(desiredPlayers <=1){
+            refreshNodeColors(id);
         }
-        // Server
-        GraphAction graphAct = new GraphAction();
-        graphAct.setColor(Utils.getInstance().colorToString(selectedColor()));
-        graphAct.setNodeId(id);
-        graphAct.setAction("insertMove");
-        graphAct.setPlayerId(playerName);
-        graphAct.setGameId(gameId);
-
-        //Representation rep = new JacksonRepresentation<GraphAction>(graphAct) ;
-        //client.post(rep, MediaType.APPLICATION_JSON);
-
-        sendAction(graphAct);
+        else{
+        CheckNodeColors(id);
+        if(whetherValid) {
+            colorMap.put(id, Utils.getInstance().colorToString(selectedColor()));
+            GraphAction graphAct = new GraphAction();
+            // for multiplayer call the sever to update the colormap
+            graphAct.setColor(Utils.getInstance().colorToString(selectedColor()));
+            graphAct.setNodeId(id);
+            graphAct.setAction("insertMove");
+            graphAct.setPlayerId(playerName);
+            graphAct.setGameId(gameId);
+            sendAction(graphAct);
+        }
+       } 
+       
     }
 
     /**
@@ -169,9 +172,8 @@ public class BaseGraph extends World implements IServerCallbackDelegate
             if (colMap != null){
                 colorMap = Utils.getInstance().getMapFromJSON(colMap);
             }
-
+            System.out.println(colorMap);
             currentPlayer = json.optString("currentPlayer");
-
             updatePlayerTurnLabel();
             refreshNodeColors();
         }catch (JSONException e){
@@ -204,6 +206,33 @@ public class BaseGraph extends World implements IServerCallbackDelegate
     }
 
     /**
+     * Refresh country node colors based on color map
+     */
+    public void CheckNodeColors(int id){
+        List nodes = getObjects(Country.class);
+        Iterator it = nodes.iterator();
+        while(it.hasNext()){
+            Country c = (Country)it.next();
+            if(c.getId() == id && colorToFill != null) {
+                Color color = Utils.getInstance().stringToColor(colorToFill);
+                whetherValid = c.checkColor(color);
+                return;
+            }
+        }
+    }
+        public void refreshNodeColors(int id){
+        List nodes = getObjects(Country.class);
+        Iterator it = nodes.iterator();
+        while(it.hasNext()){
+            Country c = (Country)it.next();
+            if(c.getId() == id && colorToFill != null) {
+                Color color = Utils.getInstance().stringToColor(colorToFill);
+                whetherValid = c.updateColor(color);
+                return;
+            }
+        }
+    }
+     /**
      * Refresh country colors based on color map
      */
     public void refreshNodeColors(){
@@ -212,12 +241,13 @@ public class BaseGraph extends World implements IServerCallbackDelegate
         while(it.hasNext()){
             Country c = (Country)it.next();
             String colorString = colorMap.get(c.getId());
-            if (colorString != null){
+            if(colorString != null) {
                 Color color = Utils.getInstance().stringToColor(colorString);
-                c.updateColor(color);
+                c.updateWholeCountry(color);
+ 
             }
         }
-
+        checkEndGame();
     }
 
     /**
@@ -225,9 +255,8 @@ public class BaseGraph extends World implements IServerCallbackDelegate
      */
     public void checkEndGame(){
         List items = getObjects(Country.class);
-        boolean isGameOver = checkValid() && items.size() == colorMap.size() ;
 
-        if (isGameOver) {
+        if (items.size() == colorMap.size()) {
 
             stopTime=System.currentTimeMillis();
             int timeTaken = (int)(stopTime-startTime)/1000;

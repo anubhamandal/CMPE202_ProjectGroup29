@@ -76,23 +76,4 @@ public class Graph2 extends BaseGraph
 
     }
 
-    /**
-     * A method to check if the adjacent colors of the graph nodes are different
-     */
-    public boolean checkValid() {
-
-        List<Country> objList = getObjects(Country.class);
-        ListIterator<Country> li = objList.listIterator();
-
-        while(li.hasNext()){
-            Country c = li.next();
-            if (! c.checkColor()){
-                this.validLabel.setValue("invalid");
-                return false;
-            }
-        }
-        this.validLabel.setValue("valid");
-        return true;
-    }
-
 }

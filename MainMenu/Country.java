@@ -1,4 +1,3 @@
- 
 
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.awt.Color;
@@ -87,20 +86,24 @@ public class Country extends Actor
      * false if adjacent countries have color that match this country color
      * Ignores GRAY, which is uninitialized color
      */
-    public boolean checkColor(){
+    public boolean checkColor(Color needToColor){
         // If uninitialized, quick exit
-        if (this.fillColor == Color.GRAY) {
+        String needtoColorString =  Utils.getInstance().colorToString(needToColor);
+        if (needToColor == Color.GRAY) {
             return true;
         }
-
+        BaseGraph world = (BaseGraph)getWorld();
         List<Country> countries = getIntersectingObjects(Country.class);
         ListIterator<Country> it = countries.listIterator();
         while (it.hasNext()){
             Country c = it.next();
-            if (c.fillColor == this.fillColor){
+            String adjColor =world.colorMap.get(c.getId());
+            if (adjColor!=null && adjColor.equals(needtoColorString)){
+                world.validLabel.setValue("invalid");
                 return false;
             }
         }
+        world.validLabel.setValue("Valid");
         return true;
     }
 
@@ -121,14 +124,24 @@ public class Country extends Actor
     /**
      * Method used to update color of country
      */
-    void updateColor(Color color){
-        fillColor = color;
-        updateImage();
-        BaseGraph world = (BaseGraph)getWorld();
-        // isValid is wrapped in checkEndGame
-        world.checkEndGame();
+    boolean updateColor(Color color){
+        if(checkColor(color)){
+            fillColor = color;
+            updateImage();
+            BaseGraph world = (BaseGraph)getWorld();
+            String filledColorString = Utils.getInstance().colorToString(fillColor);
+            world.colorMap.put(id,filledColorString);
+            world.checkEndGame(); 
+            return true;
+        }
+        return false;
     }
-
+    void updateWholeCountry(Color color){
+         fillColor = color;
+         updateImage();
+    
+     }
+         
     /**
      * Update the image on screen to show the current value.
      */
@@ -153,5 +166,5 @@ public class Country extends Actor
     public Integer getId(){
         return this.id;
     }
-    
+
 }
