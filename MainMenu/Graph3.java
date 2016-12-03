@@ -1,5 +1,3 @@
- 
-
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.awt.*;
 import java.util.*;
@@ -12,8 +10,7 @@ import java.util.*;
  */
 public class Graph3 extends BaseGraph
 {
-    public HashMap<Integer, String> colorMap = new HashMap<Integer, String>();
-    public Label validLabel;
+
     public Graph3()
     {    
         // Create a new world with 600x600 cells with a cell size of 1x1 pixels.
@@ -21,9 +18,14 @@ public class Graph3 extends BaseGraph
         prepare();
     }
     
-    public void act()
+    public Graph3(int numPlayers)
     {
-        
+        super(800, 500, 1); 
+        prepare();
+        desiredPlayers = numPlayers;
+        if (numPlayers > 1){
+            GraphClient.getInstance().setDelegate(this);
+        }
     }
     
     private void prepare() 

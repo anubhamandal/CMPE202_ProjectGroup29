@@ -1,5 +1,3 @@
- 
-
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.awt.*;
 import java.util.*;
@@ -12,57 +10,61 @@ import java.util.*;
  */
 public class Graph4 extends BaseGraph
 {
-    public HashMap<Integer, String> colorMap = new HashMap<Integer, String>();
-    public Label validLabel;
+
     public Graph4()
     {    
-        // Create a new world with 600x600 cells with a cell size of 1x1 pixels.
+        // Create a new world with 800x500 cells with a cell size of 1x1 pixels.
         super(800, 500, 1); 
         prepare();
     }
     
-    public void act()
-    {
-        
+    public Graph4(int numPlayers){
+        super(600, 600, 1); 
+        prepare();
+        desiredPlayers = numPlayers;
+        if (numPlayers > 1){
+            GraphClient.getInstance().setDelegate(this);
+        }
     }
     
     private void prepare() 
     {
         
-        DrawRectangle drawrect = new DrawRectangle(1);
-        addObject(drawrect,240,150);
-        DrawRectangle drawrect2 = new DrawRectangle(2);
-        addObject(drawrect2,170,200);
-        DrawRectangle drawrect3 = new DrawRectangle(3);
-        addObject(drawrect3,370,200);
-        DrawRectangle drawrect4 = new DrawRectangle(4);
-        addObject(drawrect4,500,150);
-        DrawRectangle drawrect5 = new DrawRectangle(5);
-        addObject(drawrect5,570,200);
-        DrawRectangle drawrect6 = new DrawRectangle(6);
-        addObject(drawrect6,300,250);
-        DrawRectangle drawrect7 = new DrawRectangle(7);
-        addObject(drawrect7,200,300);
-        DrawRectangle drawrect8 = new DrawRectangle(8);
-        addObject(drawrect8,325,350);
-        DrawRectangle drawrect9 = new DrawRectangle(9);
-        addObject(drawrect9,525,350);
-        DrawRectangle drawrect10 = new DrawRectangle(10);
-        addObject(drawrect10,600,250);
-        DrawRectangle drawrect11 = new DrawRectangle(11);
-        addObject(drawrect11,250,400);
-        DrawRectangle drawrect12 = new DrawRectangle(12);
-        addObject(drawrect12,450,400);
-        DrawRectangle drawrect13 = new DrawRectangle(13);
-        addObject(drawrect13,650,400);
-        DrawRectangle drawrect14 = new DrawRectangle(14);
-        addObject(drawrect14,150,450);
-        DrawRectangle drawrect15 = new DrawRectangle(15);
-        addObject(drawrect15,350,450);
-        DrawRectangle drawrect16 = new DrawRectangle(16);
-        addObject(drawrect16,600,450);
-        DrawRectangle drawrect17 = new DrawRectangle(17);
-        addObject(drawrect17,650,300);
+        DrawRegion drawregion = new DrawRegion(1);
+        addObject(drawregion,240,150);
+        DrawRegion drawregion2 = new DrawRegion(2);
+        addObject(drawregion2,170,200);
+        DrawRegion drawregion3 = new DrawRegion(3);
+        addObject(drawregion3,370,200);
+        DrawRegion drawregion4 = new DrawRegion(4);
+        addObject(drawregion4,500,150);
+        DrawRegion drawregion5 = new DrawRegion(5);
+        addObject(drawregion5,570,200);
+        DrawRegion drawregion6 = new DrawRegion(6);
+        addObject(drawregion6,300,250);
+        DrawRegion drawregion7 = new DrawRegion(7);
+        addObject(drawregion7,200,300);
+        DrawRegion drawregion8 = new DrawRegion(8);
+        addObject(drawregion8,325,350);
+        DrawRegion drawregion9 = new DrawRegion(9);
+        addObject(drawregion9,525,350);
+        DrawRegion drawregion10 = new DrawRegion(10);
+        addObject(drawregion10,600,250);
+        DrawRegion drawregion11 = new DrawRegion(11);
+        addObject(drawregion11,250,400);
+        DrawRegion drawregion12 = new DrawRegion(12);
+        addObject(drawregion12,450,400);
+        DrawRegion drawregion13 = new DrawRegion(13);
+        addObject(drawregion13,650,400);
+        DrawRegion drawregion14 = new DrawRegion(14);
+        addObject(drawregion14,150,450);
+        DrawRegion drawregion15 = new DrawRegion(15);
+        addObject(drawregion15,350,450);
+        DrawRegion drawregion16 = new DrawRegion(16);
+        addObject(drawregion16,600,450);
+        DrawRegion drawregion17 = new DrawRegion(17);
+        addObject(drawregion17,650,300);
+        
         colorSelectLabel = new Label("Color Selected: ", 20);
         addObject(colorSelectLabel, 100, 100);
         validLabel = new Label("Select a Color", 25);

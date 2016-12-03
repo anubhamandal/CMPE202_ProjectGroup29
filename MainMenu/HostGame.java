@@ -133,16 +133,16 @@ public class HostGame extends World implements ActionListener, IServerCallbackDe
             bg = new Graph2(numPeeps);
             break;
             case "3":
-            bg = new Graph3();
+            bg = new Graph3(numPeeps);
             break;
             case "4":
-            bg = new Graph4();
+            bg = new Graph4(numPeeps);
             break;
             case "5":
-            bg = new Graph5();
+            bg = new Graph5(numPeeps);
             break;
             case "6":
-            bg = new Graph6();
+            bg = new Graph6(numPeeps);
             break;
         }
         return bg;

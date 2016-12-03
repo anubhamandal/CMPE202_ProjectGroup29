@@ -1,5 +1,3 @@
- 
-
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import greenfoot.GreenfootImage.*;
 import java.lang.Object;
@@ -12,13 +10,9 @@ import java.util.*;
  * @author (Anubha) 
  * @version (11-08-2016)
  */
-public class DrawSquare extends DrawShapes
+public class DrawSquare extends Country
 {
     private int id;
-    Color colorToFill=null;
-    boolean isFilled = false;
-    String filledColorString;
-    boolean isGameOver=false;
     
     public DrawSquare(int nodeid) 
     {
@@ -29,49 +23,35 @@ public class DrawSquare extends DrawShapes
         setImage(img);
     }    
 
-    public int getTitle() {
+    public Integer getId(){
         return id;
     }
     
     public void act()
     {
-        getColorToFill();
-        if (Greenfoot.mouseClicked(this))
+       if (Greenfoot.mouseClicked(this))
         {
-            Graph5 g = new Graph5();
-            filledColorString = Utils.getInstance().colorToString(colorToFill);
-            for(DrawSquare ds : getIntersectingObjects(DrawSquare.class))
-            {
-                if(((Graph5)getWorld()).colorMap.get(ds.getTitle()) == filledColorString)
-                {
-                    ((Graph5)getWorld()).validLabel.setValue("Cannot fill the node with this color");
-                    return;
-                }
-            }
-            ((Graph5)getWorld()).validLabel.setValue("");
-            getImage().setColor(colorToFill);
-            getImage().fillRect(0,0,50,50);
-            ((Graph5)getWorld()).colorMap.put(this.id, filledColorString);
+            BaseGraph world = (BaseGraph)getWorld();
+            fillColor = world.selectedColor();
+            world.setCountryColor(id);
         }
-        checkEndGame();
     }
- 
-    public void getColorToFill()
-    { 
-        BaseGraph world = (BaseGraph)getWorld();
-        Color selectedColor = world.selectedColor();
-        if(selectedColor !=null)
+
+    boolean updateColor(Color color)
+    {
+        String filledColorString = Utils.getInstance().colorToString(color);
+        for(DrawSquare ds : getIntersectingObjects(DrawSquare.class))
         {
-            colorToFill = selectedColor;
+            if(((BaseGraph)getWorld()).colorMap.get(ds.getId()) == filledColorString)
+            {
+                ((BaseGraph)getWorld()).validLabel.setValue("Cannot fill the node with this color");
+                return false;
+            }
         }
-    } 
-    public void checkEndGame(){
-        if((((Graph5)getWorld()).colorMap.size() == 44) && !isGameOver){
-            ((BaseGraph)getWorld()).stopTime=System.currentTimeMillis();
-            int timeTaken = (int)(((BaseGraph)getWorld()).stopTime-((BaseGraph)getWorld()).startTime)/1000;
-            isGameOver = true;
-            EndGame endgame = new EndGame(timeTaken);
-            Greenfoot.setWorld(endgame);
-        }
+        ((BaseGraph)getWorld()).validLabel.setValue("");
+        getImage().setColor(color);
+        getImage().fillRect(0,0,50,50);
+        ((BaseGraph)getWorld()).colorMap.put(this.id, filledColorString);
+        return true;
     }
 }

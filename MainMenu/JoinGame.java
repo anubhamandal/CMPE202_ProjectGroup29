@@ -200,16 +200,16 @@ public class JoinGame extends World implements ActionListener,IServerCallbackDel
             bg = new Graph2(chosenGame.numofPlayers);
             break;
             case 3:
-            bg = new Graph3();
+            bg = new Graph3(chosenGame.numofPlayers);
             break;
             case 4:
-            bg = new Graph4();
+            bg = new Graph4(chosenGame.numofPlayers);
             break;
             case 5:
-            bg = new Graph5();
+            bg = new Graph5(chosenGame.numofPlayers);
             break;
             case 6:
-            bg = new Graph6();
+            bg = new Graph6(chosenGame.numofPlayers);
             break;
         }
         return bg;
