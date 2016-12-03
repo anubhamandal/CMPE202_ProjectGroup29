@@ -12,7 +12,7 @@ import java.util.*;
  */
 public class Graph1 extends BaseGraph
 {
-    public Map<Integer,Set<Integer>> connectedMap;
+    
     
 
         
@@ -32,7 +32,7 @@ public class Graph1 extends BaseGraph
         bg.setColor(Color.white);
         bg.fill();
         //A-2 B-1 c-2 D-5 E-3 F-5 G-3 H-3 I-4J-5  k2 L3 M6 N4 O3 P3
-        connectedMap = new HashMap();
+       
         Set<Integer> h1 = new HashSet<Integer>();
         h1.add(5);
         h1.add(10);

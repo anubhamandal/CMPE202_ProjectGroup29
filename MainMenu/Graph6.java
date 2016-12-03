@@ -13,27 +13,28 @@ import java.util.*;
  */
 public class Graph6 extends BaseGraph
 {
-    public Map<Integer, Set<Integer>> connectedMap;
-    public Map<Integer, String> colorMap = new HashMap<Integer, String>();
-    public Label validLabel;
-   
-    public Graph6()
+    
+    
+    public Graph6(int numPlayers)
     {
         //Create a new world with 600x400 cells with a cell size of 1x1 pixels.
-        super(800, 800, 1); 
-        GreenfootImage bg = getBackground();
-        bg.setColor(Color.white);
-        bg.fill();
-        
+        super(800, 800, 1);         
         createGraph();
-       // joinGame();
+        
+        desiredPlayers = numPlayers;
+        if (numPlayers > 1){
+            GraphClient.getInstance().setDelegate(this);
+        }
+       
     }
     
        
     private void createGraph() {
-        
-        
-        connectedMap = new HashMap();
+        GreenfootImage bg = getBackground();
+        bg.setColor(Color.white);
+        bg.fill();
+              
+       
         Set<Integer> h1 = new HashSet<Integer>();
         h1.add(2);
         h1.add(6);
@@ -98,16 +99,16 @@ public class Graph6 extends BaseGraph
         
         
         
-        addObject(new Node6(1), 50, 300);
-        addObject(new Node6(2), 200, 300);
-        addObject(new Node6(3), 350, 300);
-        addObject(new Node6(4), 500, 300);
-        addObject(new Node6(5), 650, 300);
-        addObject(new Node6(6), 50, 600);
-        addObject(new Node6(7), 200, 600);
-        addObject(new Node6(8), 350, 600);
-        addObject(new Node6(9), 500, 600);
-        addObject(new Node6(10), 125, 450);
+        addObject(new Node(1), 50, 300);
+        addObject(new Node(2), 200, 300);
+        addObject(new Node(3), 350, 300);
+        addObject(new Node(4), 500, 300);
+        addObject(new Node(5), 650, 300);
+        addObject(new Node(6), 50, 600);
+        addObject(new Node(7), 200, 600);
+        addObject(new Node(8), 350, 600);
+        addObject(new Node(9), 500, 600);
+        addObject(new Node(10), 125, 450);
             
         addObject(new Edge(5, 100, 90), 125,300);
         addObject(new Edge(5, 100, 90), 275,300);
@@ -129,8 +130,14 @@ public class Graph6 extends BaseGraph
         
         colorPicker = new ColorPicker(300, 65, 6);
         addObject (colorPicker, 150, 50);
-        validLabel = new Label("Select a color", 40);
-        addObject(validLabel, 190, 111); 
+        
+           
+        turnLabel = new Label("Select a Color", 40);
+        addObject(turnLabel, 190, 111);      
+        
+        validLabel = new Label("", 40);
+        addObject(validLabel, 550, 50);
+
         
         colorSelectLabel = new Label("Color Selected: ", 30);
         addObject(colorSelectLabel, 190, 150);

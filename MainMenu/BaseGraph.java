@@ -39,6 +39,7 @@ public class BaseGraph extends World implements IServerCallbackDelegate
     String colorToFill; // added 
     // The following is to keep track of the colors of the nodes
     public Map<Integer, String> colorMap = new HashMap<Integer, String>();
+    public Map<Integer,Set<Integer>> connectedMap = new HashMap();
 
     private ClientResource client = new ClientResource(url);
 

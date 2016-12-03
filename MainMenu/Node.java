@@ -5,7 +5,7 @@ import java.util.*;
 
 public class Node extends Country
 {
-    private int title;
+    private Integer title;
     Color colorToFill=null;
     String filledColorString;
     boolean isValid=true,isGameOver=false;
@@ -49,7 +49,7 @@ public class Node extends Country
             world.validLabel.setValue("Please select a Color");
             return false;
         }
-        Set<Integer> connectedNodes = ((Graph1)getWorld()).connectedMap.get(title);
+        Set<Integer> connectedNodes = world.connectedMap.get(title);
         System.out.println(connectedNodes);
         Iterator iterator = connectedNodes.iterator(); 
         while (iterator.hasNext()){
