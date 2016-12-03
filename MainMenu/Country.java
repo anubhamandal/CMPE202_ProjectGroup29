@@ -60,8 +60,6 @@ public class Country extends Actor
         BaseGraph world = (BaseGraph)getWorld();
         fillColor = world.selectedColor();
         world.setCountryColor(id);
-        //updateImage();
-        //world.checkValid();
     }
 
     boolean isClickInRange() {
@@ -76,7 +74,6 @@ public class Country extends Actor
         int x = clickx - selfx;
         int y = clicky - selfy;
         int rot = getRotation();
-        //System.out.printf("rot %d, x %d, y %d\n", rot, Math.abs(x), Math.abs(y));
         return Math.abs(x) < width/2.0 && Math.abs(y) < height/2.0;
     }
 
@@ -87,7 +84,6 @@ public class Country extends Actor
      * Ignores GRAY, which is uninitialized color
      */
     public boolean checkColor(Color needToColor){
-        // If uninitialized, quick exit
         String needtoColorString =  Utils.getInstance().colorToString(needToColor);
         if (needToColor == Color.GRAY) {
             return true;
@@ -100,15 +96,16 @@ public class Country extends Actor
             String adjColor =world.colorMap.get(c.getId());
             if (adjColor!=null && adjColor.equals(needtoColorString)){
                 world.validLabel.setValue("Invalid Color");
+				Greenfoot.playSound("invalid.wav");
                 return false;
             }
         }
         world.validLabel.setValue("Valid Color");
+		Greenfoot.playSound("valid.wav");
         return true;
     }
 
     public Country() {
-        //id = Math.floor(Math.random()*99999999);
         updateImage();
     }
 

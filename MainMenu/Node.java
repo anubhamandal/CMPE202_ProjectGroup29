@@ -58,11 +58,13 @@ public class Node extends Country
             
             if(adjColor!=null && adjColor.equals(needtoColorString)){
                 world.validLabel.setValue("Invalid Color");
+				Greenfoot.playSound("invalid.wav");
                 return false;
             }
         }
 
         world.validLabel.setValue("Valid Color");
+		Greenfoot.playSound("valid.wav");
         return true;
     }
 
