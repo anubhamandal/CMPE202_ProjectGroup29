@@ -7,8 +7,8 @@ import java.awt.Font;
 /**
  * Write a description of class NumberOfPlayers here.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author (SHILPA CHANDRA) 
+ * @version (02/12/16)
  */
 public class NumberOfPlayers extends World implements ActionListener
 {

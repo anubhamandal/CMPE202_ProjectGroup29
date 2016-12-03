@@ -5,7 +5,7 @@ import java.awt.Color;
 import java.util.*;
 
 /**
- * Shape class for Graph 3
+ * Shape class for Graph 4
  * 
  * @author (Shilpa) 
  * @version (11-08-2016)
