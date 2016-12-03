@@ -20,37 +20,37 @@ The below section contains a list of user stories describing our graph game func
 
 **MULTIPLAYER:**
 
-- As a multiplayer user, I want to see the options available for multiplayer so that I can make my decision.
+- As a multiplayer participant, I want to see the options available for multiplayer so that I can make my decision.
 
-- As a multiplayer user, I want to be able to host a game so that other users can join my session.
+- As a multiplayer participant, I want to be able to host a game so that other users can join my session.
 
-- As a multiplayer user, I want to be able to join an existing game so that I can play with other people.
+- As a multiplayer participant, I want to be able to join an existing game so that I can play with other people.
 
-- As a host player, I want to be able to be able to setup the session so that I can pick my username, the number of players and the graph that I want to play.
+- As a host player, I want to be able to setup the session so that I can pick my username, the number of players and the graph that I want to play.
 
 - As a non-host player, I want to be able to see the list of available game sessions so that I can join one of my choice.
 
-- As a non-host player, I want to be able to see the information for each game so that I can know the gaming that I am joining.
+- As a non-host player, I want to be able to see the information for each game so that I can know the game that I am joining.
 
-- As a non-host player, I want to be able to prompt the game id session so that I can join that specific game 
+- As a non-host player, I want to be able to prompt the game id session so that I can join that specific game. 
 
-- As a non-host player, I want to be ask to prompt my username before joining the game so that other players can recognize me
+- As a non-host player, I want to be ask to prompt my username before joining the game so that other players can recognize me.
 
-- As a multiplayer user, I want to be notify in my screen each player’s turn so that I can know when it is mine turn.
+- As a multiplayer participant, I want to be notified in my screen each player’s turn so that I can know when it is my turn.
 
-- As a multiplayer user, I want to be able to see the moves from the other player(s) in my session so that I can see the progress of the game.
+- As a multiplayer participant, I want to be able to see the moves from the other player(s) in my session so that I can see the progress of the game.
 
 **PLAYER:**
 
 - As a player, I want to be able to see the graph that I have selected on my screen so that I can start playing.
 
-- As a player, I want to have a palette of colors so that I can pick one to color a country on the graph.
+- As a player, I want to have a palette of colors available so that I can pick one color to color a country on the graph.
 
-- As a player, I want to be able to check what color I am selecting so that I can pick between the palette.
+- As a player, I want to be able to see what color I am selecting so that I can pick between the palette.
 
 - As a player, I want to be able to switch between colors so that I can make my next move.
 
-- As a player, I want to be able to color a country when I clicked on it so that I can complete the game.
+- As a player, I want to be able to color a country when I click on it so that I can complete the game.
 
 - As a player, I want to be notified when the color of the country is valid or invalid so that I can pick other color if wrong.
 
