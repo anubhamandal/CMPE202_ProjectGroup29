@@ -60,6 +60,10 @@ The below section contains a list of user stories describing our graph game func
 
 - As a player, I want to see the timing results at the end of the game so that I can see in how much time the game has been completed.
 
+## Use Cases
+
+![UseCases](./usecases.png)
+
 
 ## Activity Diagram - Jonathan Guan
 
