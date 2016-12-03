@@ -13,46 +13,73 @@ import java.util.*;
 public class DrawRect extends Country
 {
     private int id;
-    
+    Color colorToFill=null;
+    String filledColorString;
+
     public DrawRect(int nodeid) 
     {
         this.id = nodeid;
         GreenfootImage img = new GreenfootImage(130, 90);
         img.setColor(Color.black);
-        img.drawRect(0,0,129,89);
+        img.drawRect(0,0,129, 89);
         setImage(img);
     }    
-    
+
     public Integer getId(){
         return id;
     }
-    
+
     public void act()
     {
         if (Greenfoot.mouseClicked(this))
         {
             BaseGraph world = (BaseGraph)getWorld();
-            fillColor = world.selectedColor();
             world.setCountryColor(id);
         }
     }
-    
-    boolean updateColor(Color color)
+
+    public boolean checkColor(Color needToColor)
     {
-        String filledColorString = Utils.getInstance().colorToString(color);
+        filledColorString = Utils.getInstance().colorToString(needToColor);
+        BaseGraph world = (BaseGraph)getWorld();
+        if(filledColorString==null){
+            world.validLabel.setValue("Please select a Color");
+            return false;
+        }
         for(DrawRect ds : getIntersectingObjects(DrawRect.class))
         {
-            if(((BaseGraph)getWorld()).colorMap.get(ds.getId()) == filledColorString)
+            String adjColor = world.colorMap.get(ds.getId());
+            if(adjColor!=null && adjColor.equals(filledColorString))
             {
-                ((BaseGraph)getWorld()).validLabel.setValue("Cannot fill the node with this color");
+                world.validLabel.setValue("Invalid Choice");
                 return false;
             }
         }
-        ((BaseGraph)getWorld()).validLabel.setValue("");
-        getImage().setColor(color);
-        getImage().fillRect(0,0,129,89);
-        ((BaseGraph)getWorld()).colorMap.put(this.id, filledColorString);
+        world.validLabel.setValue("Valid choice");
         return true;
     }
-    
+
+    public boolean updateColor(Color color)
+    {
+        if(checkColor(color)){
+            colorToFill = color;
+            updateImage();
+            BaseGraph world = (BaseGraph)getWorld();
+            String filledColorString = Utils.getInstance().colorToString(colorToFill);
+            world.colorMap.put(id,filledColorString);
+            world.checkEndGame(); 
+            return true;
+        }
+        return false;
+    }
+
+    void updateWholeCountry(Color color){
+        colorToFill = color;
+        updateImage();
+    }
+
+    void updateImage(){
+        getImage().setColor(colorToFill);
+        getImage().fillRect(0,0,129, 89);;
+    }
 }
