@@ -27,10 +27,12 @@ public class JoinGame extends World implements ActionListener,IServerCallbackDel
     Button createGame, back, joinGame;
     TextField joinGameTextField;
     private GameMetaData chosenGame;
+    private static Integer WIDTH = 985;
+    private static Integer HEIGHT = 700;
 
     public JoinGame()
     {    
-         super(985,700, 1); 
+        super(WIDTH,HEIGHT, 1); 
         setBackground(background);
         GraphClient.getInstance().setDelegate(this);
         init();
@@ -66,13 +68,14 @@ public class JoinGame extends World implements ActionListener,IServerCallbackDel
      * receive available games from the server
      */
     public boolean receiveMove(String move){
+        boolean retVal = true;
         System.out.println("received " + move); 
         try{
             JSONObject json = new JSONObject(move);
             String err = json.optString("error");
             System.out.println("err is " + err);
             if (err != null && err.length() > 0 ){
-                return (err.indexOf("Bye") < 0);
+                retVal = (err.indexOf("Bye") < 0);
             }
 
             JSONArray array = json.optJSONArray("games");
@@ -92,7 +95,7 @@ public class JoinGame extends World implements ActionListener,IServerCallbackDel
             e.printStackTrace();
             return false;
         }
-        return true;
+        return retVal;
     }
 
     private void populateGamesList(JSONArray array){
@@ -116,21 +119,22 @@ public class JoinGame extends World implements ActionListener,IServerCallbackDel
 
         Greenfoot.setWorld(bg);
     }
-    
+
     private GameMetaData metaDataForId(Integer id){
-       List<GameMetaData> result = gamesList.stream().filter(metaData -> metaData.gameid == id).collect(Collectors.toList()); 
-       if (result.size() > 0){
-           return result.get(0);
+        List<GameMetaData> result = gamesList.stream().filter(metaData -> metaData.gameid == id).collect(Collectors.toList()); 
+        if (result.size() > 0){
+            return result.get(0);
         }
         return null;
     }
-    
+
     //show currrent games in greenfoot
     public void showCurrentGames(){  
         int datax = 100;
-        int datak = 130;
+
         if(gamesList.size()>0){
             for(int i=0;i<gamesList.size();i++){
+                System.out.println("i =" + i);
                 GameMetaData metaData = gamesList.get(i);
                 StringBuffer sb = new StringBuffer();
                 sb.append("Game Id: ");
@@ -140,32 +144,36 @@ public class JoinGame extends World implements ActionListener,IServerCallbackDel
                 sb.append(" ;Graph# ");
                 sb.append(metaData.graphnumber);
                 GreenfootImage gd =  new GreenfootImage( sb.toString(),20,Color.black, new Color(0, 0, 0, 0));
-                background.drawImage(gd, 400-gd.getWidth()/2,datax );
+                background.drawImage(gd, (WIDTH-gd.getWidth())/2,datax );
                 datax += (30);
 
             }
 
             // Select Game label
+
             GreenfootImage select =  new GreenfootImage( "Select GameId to join", 20, Color.black, new Color(0, 0, 0, 0));
-            background.drawImage(select, (800-select.getWidth())/2, 430);
+            int halfX = WIDTH/2;
+            background.drawImage(select, halfX-select.getWidth()/2, HEIGHT-70);
             // select game text field
             joinGameTextField = new TextField("", 10);
             joinGameTextField.requestFocus();    
-            addObject(joinGameTextField, 360, 470);
+            addObject(joinGameTextField, halfX-joinGameTextField.getWidth()-50, HEIGHT-30);
 
             joinGame = new Button("Join Game", 743473);
             joinGame.addActionListener(this);
-            addObject(joinGame, 460, 470);
+            addObject(joinGame, halfX+50, HEIGHT-30);
+
         }
         else{
 
             GreenfootImage text = new GreenfootImage("No games available yet.  Create one?", 32, Color.black, new Color(0, 0, 0, 0));
-            background.drawImage(text, 400-text.getWidth()/2, datak);
+            background.drawImage(text, (WIDTH-text.getWidth())/2, 130);
             createGame = new Button("Create Game", 2000);
             createGame.addActionListener(this);
             addObject(createGame, 392, 241);
 
         }
+        setBackground(background);
     }
 
     public void actionPerformed(GUIComponent c){

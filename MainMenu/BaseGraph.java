@@ -23,7 +23,7 @@ import org.restlet.ext.jackson.*;
 public class BaseGraph extends World implements IServerCallbackDelegate
 {
 
-    private static String url = "http://localhost:8080/graphgame";
+    // private static String url = "http://localhost:8080/graphgame";
     public ColorPicker colorPicker;
     Label validLabel;
     Label colorSelectLabel;
@@ -41,7 +41,7 @@ public class BaseGraph extends World implements IServerCallbackDelegate
     public Map<Integer, String> colorMap = new HashMap<Integer, String>();
     public Map<Integer,Set<Integer>> connectedMap = new HashMap();
 
-    private ClientResource client = new ClientResource(url);
+    // private ClientResource client = new ClientResource(url);
 
     /**
      * Constructor for objects of class BaseGraph.

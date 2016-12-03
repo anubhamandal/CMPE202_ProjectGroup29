@@ -122,7 +122,7 @@ private static String ENV = "prod";
             break;
             case "prod":
             {
-                hostName = "http://graphgame-prod.9bd3c57d.svc.dockerapp.io";
+                hostName = "52.53.170.60";
                 portNumber = 80;
             }
         }
