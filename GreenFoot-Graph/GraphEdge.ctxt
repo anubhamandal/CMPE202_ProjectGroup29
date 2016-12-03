@@ -1,9 +1,0 @@
-#BlueJ class context
-comment0.target=GraphEdge
-comment1.params=pNode1\ pNode2\ width\ height\ rot
-comment1.target=GraphEdge(java.lang.String,\ java.lang.String,\ int,\ int,\ int)
-comment2.params=
-comment2.target=java.lang.String\ getNode1()
-comment3.params=
-comment3.target=java.lang.String\ getNode2()
-numComments=4
