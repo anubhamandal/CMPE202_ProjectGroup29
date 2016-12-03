@@ -2,6 +2,7 @@
 This folder contains UML documentation for project structure. 
 
 ## User Stories - Kelly Alvarez Aguirre
+The below section contains a list of user stories describing our graph game functionality.
 
 **USER:**
 
