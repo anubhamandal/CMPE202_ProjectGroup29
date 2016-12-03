@@ -18,7 +18,7 @@ public class Graph6 extends BaseGraph
     public Graph6(int numPlayers)
     {
         //Create a new world with 600x400 cells with a cell size of 1x1 pixels.
-        super(800, 800, 1);         
+        super(985,700, 1);     
         createGraph();
         
         desiredPlayers = numPlayers;
@@ -128,18 +128,18 @@ public class Graph6 extends BaseGraph
         addObject(new Edge(5, 120, 30), 158,375);
         addObject(new Edge(5, 120, -30), 158,525);
         
-        colorPicker = new ColorPicker(300, 65, 6);
+        colorPicker = new ColorPicker(300, 65, 4);
         addObject (colorPicker, 150, 50);
         
            
-        turnLabel = new Label("Select a Color", 40);
+        turnLabel = new Label("Select a Color", 25);
         addObject(turnLabel, 190, 111);      
         
-        validLabel = new Label("", 40);
+        validLabel = new Label("", 20);
         addObject(validLabel, 550, 50);
 
         
-        colorSelectLabel = new Label("Color Selected: ", 30);
+        colorSelectLabel = new Label("Color Selected: ", 20);
         addObject(colorSelectLabel, 190, 150);
         Greenfoot.start();
         

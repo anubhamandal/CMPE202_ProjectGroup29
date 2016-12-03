@@ -11,14 +11,10 @@ import java.util.*;
 public class Graph5 extends BaseGraph
 {
     
-    public Graph5()
-    {    
-        super(800, 500, 1); 
-        prepare();      // Prepare the graph
-    }
+    
 
     public Graph5(int numPlayers){
-        super(800, 500, 1); 
+        super(985,700, 1); 
         prepare();
         desiredPlayers = numPlayers;
         if (numPlayers > 1){
@@ -123,11 +119,14 @@ public class Graph5 extends BaseGraph
         
         colorSelectLabel = new Label("Color Selected: ", 20);
         addObject(colorSelectLabel, 100, 100);
-        validLabel = new Label("Select a Color", 25);
-        addObject(validLabel, 511, 55);        
-        validLabel.setValue("");
+        turnLabel = new Label("Select a Color", 25);
+        addObject(turnLabel, 511, 55);      
+        
+        validLabel = new Label("", 20);
+        addObject(validLabel, 787, 56);
 
-        int numCol = 5;
+
+        int numCol = 4;
         colorPicker = new ColorPicker(300, 75, numCol);
         addObject(colorPicker, 150, 30);
     }

@@ -30,7 +30,7 @@ public class JoinGame extends World implements ActionListener,IServerCallbackDel
 
     public JoinGame()
     {    
-        super(800, 500, 1); 
+         super(985,700, 1); 
         setBackground(background);
         GraphClient.getInstance().setDelegate(this);
         init();

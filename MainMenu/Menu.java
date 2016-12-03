@@ -62,17 +62,17 @@ public class Menu extends World
 
         if ( Greenfoot.isKeyDown("3"))
         {
-            activeGraph = new Graph3();
+            activeGraph = new Graph3(1);
         }
 
         if ( Greenfoot.isKeyDown("4"))
         {
-             activeGraph = new Graph4();
+             activeGraph = new Graph4(1);
         }
 
         if (Greenfoot.isKeyDown("5"))
         {
-            activeGraph = new Graph5();
+            activeGraph = new Graph5(1);
         }
 
         if ( Greenfoot.isKeyDown("6"))

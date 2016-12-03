@@ -73,7 +73,7 @@ public class BaseGraph extends World implements IServerCallbackDelegate
             this.colorSelectLabel.setValue(colString);
         }
         if (this.turnLabel != null && isMyTurn() ) {
-            this.turnLabel.setValue("Color the region");
+            this.turnLabel.setValue("Color the Region");
         }
     }
 

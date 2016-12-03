@@ -18,7 +18,7 @@ public class TestWorld extends BaseGraph
     public TestWorld()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
-        super(600, 400, 1); 
+         super(985,700, 1); 
         init();
     }
     

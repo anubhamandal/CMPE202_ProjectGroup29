@@ -52,11 +52,11 @@ public class DrawSquare extends Country
                 String adjColor = world.colorMap.get(ds.getId());
                 if(adjColor!=null && adjColor.equals(filledColorString))
                 {
-                    world.validLabel.setValue("Invalid Choice");
+                    world.validLabel.setValue("Invalid Color");
                     return false;
                 }
             }
-            world.validLabel.setValue("Valid choice");
+            world.validLabel.setValue("Valid Color");
             return true;
         }
     }

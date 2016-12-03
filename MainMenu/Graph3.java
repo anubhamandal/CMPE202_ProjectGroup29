@@ -11,16 +11,11 @@ import java.util.*;
 public class Graph3 extends BaseGraph
 {
 
-    public Graph3()
-    {    
-        // Create a new world with 600x600 cells with a cell size of 1x1 pixels.
-        super(800, 500, 1); 
-        prepare();
-    }
+   
     
     public Graph3(int numPlayers)
     {
-        super(800, 500, 1); 
+        super(985,700, 1);
         prepare();
         desiredPlayers = numPlayers;
         if (numPlayers > 1){
@@ -70,9 +65,12 @@ public class Graph3 extends BaseGraph
         
         colorSelectLabel = new Label("Color Selected: ", 20);
         addObject(colorSelectLabel, 100, 100);
-        validLabel = new Label("Select a Color", 25);
-        addObject(validLabel, 511, 55);        
-        validLabel.setValue("");
+        turnLabel = new Label("Select a Color", 25);
+        addObject(turnLabel, 511, 55);      
+        
+        validLabel = new Label("", 20);
+        addObject(validLabel, 787, 56);
+
 
         int numCol = 4;
         colorPicker = new ColorPicker(300, 75, numCol);

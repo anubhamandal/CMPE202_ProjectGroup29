@@ -50,19 +50,19 @@ public class Node extends Country
             return false;
         }
         Set<Integer> connectedNodes = world.connectedMap.get(title);
-        System.out.println(connectedNodes);
+       
         Iterator iterator = connectedNodes.iterator(); 
         while (iterator.hasNext()){
             Integer adjNode = (Integer)iterator.next();
             String adjColor =world.colorMap.get(adjNode);
             
             if(adjColor!=null && adjColor.equals(needtoColorString)){
-                world.validLabel.setValue("Can not fill Same Color");
+                world.validLabel.setValue("Invalid Color");
                 return false;
             }
         }
 
-        world.validLabel.setValue("Valid color Fill");
+        world.validLabel.setValue("Valid Color");
         return true;
     }
 
