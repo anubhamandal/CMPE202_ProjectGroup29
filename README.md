@@ -22,9 +22,12 @@ Check out our [design folder](./DESIGN/) for documents relating to how this proj
 ## Running the game  
 
 The multiplayer game requires that a server is running.  Try it out on localhost.
-From base path...  
-`make compile`  
-`make run`  
+From your terminal on the base path...  
+* Set the environment to localhost:  `make setenv-local`
+* Compile the server code: `make compile`  
+* Run the server: `make run` 
+
+Now open up greenfoot, compile, and run!   
 
 ### Docker -  local machine
 Docker allows this game to be packaged and thrown onto the web.
@@ -32,11 +35,12 @@ Commands to run docker locally are as follows:
 
 1. Find out the local IP address via `docker-machine ls`.  The local ip address of the docker machine will be printed.  
 2. Modify `MainMenu/GraphClient.java` to match this ip.  Docker machine will be running at port 80.
-2. `make compile`  
-3. `make app`  
-4. `make docker-build`  
-5. `make docker-run-bridge`
-6. Docker machine will be running at docker-machine ip address at port 80  
+3. Set environment to docker: `make setenv-docker`  
+4. `make compile`  
+5. `make app`  
+6. `make docker-build`  
+7. `make docker-run-bridge`
+8. Docker machine will be running at docker-machine ip address at port 80  
 
 ### Docker - cloud
 Once docker is running on your local machine, it's time to push to the cloud.
