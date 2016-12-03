@@ -5,6 +5,9 @@ This repository is for the team project for CMPE202 under Prof. Paul Nguyen.
 
 # Graph Coloring  
 
+## Rationale
+This project was created as a supplement to [CSUnplugged's Graph Colouring Activity](http://csunplugged.org/graph-colouring/).  Graph Colouring is a subset of computer science's really hard / intractable problems.  These problems may seem easy to make up, but they require an inordinate amount of time to solve. 
+ 
 ## Basic Concept  
 Color a graph (similar to a map), where no adjacent vertex/edge may have the same color.  In addition, graphs must use a minimum number of colors.  
 
