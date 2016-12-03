@@ -161,6 +161,16 @@ public class GraphServer
                     return getMovesJson("Sorry. Game full. Bye", gameId);
                 }
             }
+            case "resetGame":
+            {
+                resetGame(gameId);
+                return getGamesJson();
+            }
+            case "resetAll":
+            {
+                resetAll();
+                return getGamesJson();
+            }
             default:
             return getMovesJson("", gameId);
         }
