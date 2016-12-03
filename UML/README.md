@@ -26,9 +26,15 @@ The below section contains a list of user stories describing our graph game func
 
 > As a multiplayer user, I want to be able to join an existing game so that I can play with other people.
 
+> As a host player, I want to be able to be able to setup the session so that I can pick my username, the number of players and the graph that I want to play.
+
 > As a non-host player, I want to be able to see the list of available game sessions so that I can join one of my choice.
 
 > As a non-host player, I want to be able to see the information for each game so that I can know the gaming that I am joining.
+
+> As a non-host player, I want to be able to prompt the game id session so that I can join that specific game 
+
+> As a non-host player, I want to be ask to prompt my username before joining the game so that other players can recognize me
 
 > As a multiplayer user, I want to be notify in my screen each player’s turn so that I can know when it is mine turn.
 
