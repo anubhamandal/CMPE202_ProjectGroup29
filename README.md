@@ -7,7 +7,7 @@ This repository is for the team project for CMPE202 under Prof. Paul Nguyen.
 
 ## Rationale
 This project was created as a supplement to [CSUnplugged's Graph Colouring Activity](http://csunplugged.org/graph-colouring/).  Graph Colouring is a subset of computer science's really hard / intractable problems.  These problems may seem easy to make up, but they require an inordinate amount of time to solve. 
- 
+
 ## Basic Concept  
 Color a graph (similar to a map), where no adjacent vertex/edge may have the same color.  In addition, graphs must use a minimum number of colors.  
 
@@ -16,6 +16,8 @@ Color a graph (similar to a map), where no adjacent vertex/edge may have the sam
 We have decided the game to be designed as follows:  
 1. Pre-built Graphs: Built the graph like continuous curve and fill the intersecting regions.  
 2. Designing graphs with predefined shapes as objects and fill them with the given colors as shown  
+
+Check out our [design folder](./DESIGN/) for documents relating to how this project came about.
 
 ## Running the game  
 
