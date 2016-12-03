@@ -1,6 +1,18 @@
 
 all: clean compile 
 
+setenv-local:
+	sed '15s/.*/private static String ENV = "local";/' MainMenu/GraphClient.java > tmp.txt
+	mv tmp.txt MainMenu/GraphClient.java
+
+setenv-docker:
+	sed '15s/.*/private static String ENV = "docker";/' MainMenu/GraphClient.java > tmp.txt
+	mv tmp.txt MainMenu/GraphClient.java
+
+setenv-prod:
+	sed '15s/.*/private static String ENV = "prod";/' MainMenu/GraphClient.java > tmp.txt
+	mv tmp.txt MainMenu/GraphClient.java
+
 clean:
 	rm -rf build/*
 	rm -rf buildgf/*
@@ -82,7 +94,7 @@ docker-run-host:
 	docker ps
 
 docker-run-bridge:
-	docker run --name graphgame -td -p 80:8080 graphgame
+	docker run --name graphgame -td -p 80:8080 -p 9080:9080 graphgame
 	docker ps
 
 docker-network:

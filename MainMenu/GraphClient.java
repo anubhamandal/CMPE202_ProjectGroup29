@@ -12,11 +12,10 @@ import com.fasterxml.jackson.databind.*;
  */
 public class GraphClient implements IServerProxy
 {
+private static String ENV = "prod";
     private volatile static GraphClient uniqueInstance;
-    // private static String hostName = "192.168.99.100";
-    // private static int portNumber = 80;
-    private static String hostName = "localhost";
-    private static int portNumber = 8080;
+    private String hostName;
+    private int portNumber;
     private Socket kkSocket;
     private PrintWriter out;
     private BufferedReader in;
@@ -26,15 +25,15 @@ public class GraphClient implements IServerProxy
     private ArrayList<String> actions = new ArrayList<String>();
 
     // public class ThreadRunnable implements Runnable{
-        // public void run(){
-            // try {
-                // while (actions.size() == 0){
-                    // Thread.sleep(1000);
-                // }
-            // } catch (InterruptedException ie) {
-                // System.out.println("Child thread interrupted! " + ie);
-            // }
-        // }
+    // public void run(){
+    // try {
+    // while (actions.size() == 0){
+    // Thread.sleep(1000);
+    // }
+    // } catch (InterruptedException ie) {
+    // System.out.println("Child thread interrupted! " + ie);
+    // }
+    // }
     // }
 
     public class SocketRunnable implements Runnable {
@@ -107,7 +106,30 @@ public class GraphClient implements IServerProxy
         init();
     }
 
+    private void setEnvironment(){
+        switch (ENV){
+            case "local":
+            {
+                hostName = "localhost";
+                portNumber = 8080;
+            }
+            break;
+            case "docker":
+            {
+                hostName = "192.168.99.100";
+                portNumber = 80;
+            }
+            break;
+            case "prod":
+            {
+                hostName = "http://graphgame-prod.9bd3c57d.svc.dockerapp.io";
+                portNumber = 80;
+            }
+        }
+    }
+
     private void init(){
+        setEnvironment();
         try  {
 
             kkSocket = new Socket(hostName, portNumber);
@@ -136,7 +158,7 @@ public class GraphClient implements IServerProxy
             System.out.println(e);
         }
     }
-    
+
     public void send(String payload){
         System.out.println("queue payload" + payload);
         actions.add(payload);

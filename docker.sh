@@ -37,7 +37,7 @@ docker_auth () {
    docker login -u $user -p $pass
    TMP=`cat ~/.docker/config.json | grep  \"auth\": | wc -l | sed -e 's/^[ \t]*//'`
    #echo ".${TMP}."
-   if [ "$TMP" == "1" ] ; 
+   if [ "$TMP" -gt "0" ] ; 
    then 
    		AUTH="TRUE" ; 
    		ACCOUNT=$user ;
