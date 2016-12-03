@@ -5,12 +5,12 @@ import java.util.*;
 
 public class Node extends Country
 {
-    private String title;
+    private Integer title;
     Color colorToFill=null;
     String filledColorString;
     boolean isValid=true,isGameOver=false;
 
-    public Node(String pTitle) {
+    public Node(int pTitle) {
         title = pTitle;
         GreenfootImage img = new GreenfootImage(50, 50);
         img.setColor(Color.black);
@@ -18,27 +18,17 @@ public class Node extends Country
         setImage(img);
     }
 
-    public String getTitle() {
+    public int getTitle() {
         return title;
     }
 
     public void act() 
     {
-
-        getColorToFill();
         if (Greenfoot.mouseClicked(this)){
             isValid=true;
-            int x = this.getX();
-            int y = this.getY();
-            filledColorString = Utils.getInstance().colorToString(colorToFill);
-            isValid = validateGraph();
-            if(isValid){
-                ((Graph1)getWorld()).colorMap.put(title,filledColorString);
-                getImage().setColor(colorToFill);
-                getImage().fillOval(0,0,50,50);
-            }
-        }
-        checkEndGame();  
+            BaseGraph world = (BaseGraph)getWorld();
+            world.setCountryColor(title);
+        } 
 
     }   
 
@@ -50,37 +40,56 @@ public class Node extends Country
         }
     }
 
-    // TODO - validateGraph is similar to BaseGraph's checkValid() method
-    public boolean validateGraph(){
-        if(filledColorString==null){
-            ((Graph1)getWorld()).validLabel.setValue("Please select a Color");
+    // Overridden method 
+    
+    public boolean checkColor(Color needToColor){
+        String needtoColorString =  Utils.getInstance().colorToString(needToColor);
+        BaseGraph world = (BaseGraph)getWorld();
+        if(needtoColorString==null){
+            world.validLabel.setValue("Please select a Color");
             return false;
         }
-        Set<String> connectedNodes = ((Graph1)getWorld()).connectedMap.get(title);
+        Set<Integer> connectedNodes = world.connectedMap.get(title);
+       
         Iterator iterator = connectedNodes.iterator(); 
         while (iterator.hasNext()){
-            String adjNode = (String)iterator.next();
-            String adjColor =((Graph1)getWorld()).colorMap.get(adjNode);
-            if(adjColor!=null && adjColor.equals(filledColorString)){
-                ((Graph1)getWorld()).validLabel.setValue("Can not fill Same Color");
+            Integer adjNode = (Integer)iterator.next();
+            String adjColor =world.colorMap.get(adjNode);
+            
+            if(adjColor!=null && adjColor.equals(needtoColorString)){
+                world.validLabel.setValue("Invalid Color");
                 return false;
             }
         }
 
-        ((Graph1)getWorld()).validLabel.setValue("");
+        world.validLabel.setValue("Valid Color");
         return true;
     }
 
-    // TODO - this is already implemented in BaseGraph
-    public void checkEndGame(){
-        if((((Graph1)getWorld()).colorMap.size() == 16) && !isGameOver){
-            ((BaseGraph)getWorld()).stopTime=System.currentTimeMillis();
-            int timeTaken = (int)(((BaseGraph)getWorld()).stopTime-((BaseGraph)getWorld()).startTime)/1000;
-            // ((Graph1)getWorld()).validLabel.setValue("Finished the game in "+ timeTaken + " seconds");
-            isGameOver = true;
-            EndGame endgame = new EndGame(timeTaken);
-            Greenfoot.setWorld(endgame);
-
+    boolean updateColor(Color color){
+        if(checkColor(color)){
+            colorToFill = color;
+            updateImage();
+            BaseGraph world = (BaseGraph)getWorld();
+            String filledColorString = Utils.getInstance().colorToString(colorToFill);
+            world.colorMap.put(title,filledColorString);
+            world.checkEndGame(); 
+            return true;
         }
+        return false;
+    }
+    void updateWholeCountry(Color color){
+         colorToFill = color;
+         updateImage();
+    
+     }
+     
+   void updateImage(){
+       getImage().setColor(colorToFill);
+       getImage().fillOval(0,0,50,50);
+    }
+    
+   public Integer getId(){
+        return title;
     }
 }

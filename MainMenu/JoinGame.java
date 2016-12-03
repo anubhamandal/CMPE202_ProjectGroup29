@@ -30,7 +30,7 @@ public class JoinGame extends World implements ActionListener,IServerCallbackDel
 
     public JoinGame()
     {    
-        super(800, 500, 1); 
+         super(985,700, 1); 
         setBackground(background);
         GraphClient.getInstance().setDelegate(this);
         init();
@@ -194,22 +194,22 @@ public class JoinGame extends World implements ActionListener,IServerCallbackDel
 
         switch (num){
             case 1:
-            bg = new Graph1();
+            bg = new Graph1(chosenGame.numofPlayers);
             break;
             case 2:
             bg = new Graph2(chosenGame.numofPlayers);
             break;
             case 3:
-            bg = new Graph3();
+            bg = new Graph3(chosenGame.numofPlayers);
             break;
             case 4:
-            bg = new Graph4();
+            bg = new Graph4(chosenGame.numofPlayers);
             break;
             case 5:
-            bg = new Graph5();
+            bg = new Graph5(chosenGame.numofPlayers);
             break;
             case 6:
-            bg = new Graph6();
+            bg = new Graph6(chosenGame.numofPlayers);
             break;
         }
         return bg;

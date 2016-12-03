@@ -99,11 +99,11 @@ public class Country extends Actor
             Country c = it.next();
             String adjColor =world.colorMap.get(c.getId());
             if (adjColor!=null && adjColor.equals(needtoColorString)){
-                world.validLabel.setValue("invalid");
+                world.validLabel.setValue("Invalid Color");
                 return false;
             }
         }
-        world.validLabel.setValue("Valid");
+        world.validLabel.setValue("Valid Color");
         return true;
     }
 

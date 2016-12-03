@@ -22,16 +22,10 @@ public class Graph2 extends BaseGraph
      * Constructor for objects of class MyWorld.
      * 
      */
-    public Graph2()
-    {    
-        // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
-        super(600, 600, 1); 
-        prepare();
-        //joinGame();
-    }
+   
 
     public Graph2(int numPlayers){
-        super(600, 600, 1); 
+        super(985,700, 1);
         prepare();
         desiredPlayers = numPlayers;
         if (numPlayers > 1){
@@ -60,16 +54,15 @@ public class Graph2 extends BaseGraph
         validLabel = new Label("", 40);
         addObject(validLabel, 450, 40);
 
-        turnLabel = new Label("Select a color", 30);
+        turnLabel = new Label("Select a color", 25);
         addObject(turnLabel, 150, 40);
 
-        // Color Picker
-        // Color selected label
+      
         colorSelectLabel = new Label("Color Selected: ", 20);
         addObject(colorSelectLabel, 100, 75);
 
-        //int numCol = Integer.parseInt(Greenfoot.ask("How many colors? (up to 4)"));
-        int numCol = 3;
+       
+        int numCol = 2;
 
         colorPicker = new ColorPicker(300, 75, numCol);
         addObject(colorPicker, 150, 150);

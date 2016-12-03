@@ -1,5 +1,3 @@
- 
-
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import greenfoot.GreenfootImage.*;
 import java.lang.Object;
@@ -12,67 +10,76 @@ import java.util.*;
  * @author (Anubha) 
  * @version (11-08-2016)
  */
-public class DrawRect extends DrawShapes
+public class DrawRect extends Country
 {
     private int id;
     Color colorToFill=null;
-    boolean isFilled = false;
     String filledColorString;
-    boolean isGameOver=false;
-    
+
     public DrawRect(int nodeid) 
     {
         this.id = nodeid;
         GreenfootImage img = new GreenfootImage(130, 90);
         img.setColor(Color.black);
-        img.drawRect(0,0,129,89);
+        img.drawRect(0,0,129, 89);
         setImage(img);
     }    
 
-    public int getTitle() {
+    public Integer getId(){
         return id;
     }
-    
+
     public void act()
     {
-        getColorToFill();
         if (Greenfoot.mouseClicked(this))
         {
-            Graph3 g = new Graph3();
-            filledColorString = Utils.getInstance().colorToString(colorToFill);
-            for(DrawRect ds : getIntersectingObjects(DrawRect.class))
-            {
-                if(((Graph3)getWorld()).colorMap.get(ds.getTitle()) == filledColorString)
-                {
-                    ((Graph3)getWorld()).validLabel.setValue("Cannot fill the node with this color");
-                    return;
-                }
-            }
-            ((Graph3)getWorld()).validLabel.setValue("");
-            getImage().setColor(colorToFill);
-            getImage().fillRect(0,0,129,89);
-            ((Graph3)getWorld()).colorMap.put(this.id, filledColorString);
+            BaseGraph world = (BaseGraph)getWorld();
+            world.setCountryColor(id);
         }
-       checkEndGame();
     }
-    
-    public void getColorToFill()
-    { 
+
+    public boolean checkColor(Color needToColor)
+    {
+        filledColorString = Utils.getInstance().colorToString(needToColor);
         BaseGraph world = (BaseGraph)getWorld();
-        Color selectedColor = world.selectedColor();
-        if(selectedColor !=null)
+        if(filledColorString==null){
+            world.validLabel.setValue("Please select a Color");
+            return false;
+        }
+        for(DrawRect ds : getIntersectingObjects(DrawRect.class))
         {
-            colorToFill = selectedColor;
+            String adjColor = world.colorMap.get(ds.getId());
+            if(adjColor!=null && adjColor.equals(filledColorString))
+            {
+                world.validLabel.setValue("Invalid Color");
+                return false;
+            }
         }
+        world.validLabel.setValue("Valid Color");
+        return true;
     }
-     public void checkEndGame(){
-        if((((Graph3)getWorld()).colorMap.size() == 18) && !isGameOver){
-            ((BaseGraph)getWorld()).stopTime=System.currentTimeMillis();
-            int timeTaken = (int)(((BaseGraph)getWorld()).stopTime-((BaseGraph)getWorld()).startTime)/1000;
-            isGameOver = true;
-            EndGame endgame = new EndGame(timeTaken);
-            Greenfoot.setWorld(endgame);
+
+    public boolean updateColor(Color color)
+    {
+        if(checkColor(color)){
+            colorToFill = color;
+            updateImage();
+            BaseGraph world = (BaseGraph)getWorld();
+            String filledColorString = Utils.getInstance().colorToString(colorToFill);
+            world.colorMap.put(id,filledColorString);
+            world.checkEndGame(); 
+            return true;
         }
+        return false;
     }
-    
+
+    void updateWholeCountry(Color color){
+        colorToFill = color;
+        updateImage();
+    }
+
+    void updateImage(){
+        getImage().setColor(colorToFill);
+        getImage().fillRect(0,0,129, 89);;
+    }
 }

@@ -21,7 +21,7 @@ public class HostGame extends World implements ActionListener, IServerCallbackDe
      */
     public HostGame()
     {
-        super(800, 500, 1); 
+        super(985,700, 1);  
         GraphClient.getInstance().setDelegate(this);
         init();
     }
@@ -127,22 +127,22 @@ public class HostGame extends World implements ActionListener, IServerCallbackDe
         Integer numPeeps = new Integer(numPlayers.getText());
         switch (num){
             case "1":
-            bg = new Graph1();
+            bg = new Graph1(numPeeps);
             break;
             case "2":
             bg = new Graph2(numPeeps);
             break;
             case "3":
-            bg = new Graph3();
+            bg = new Graph3(numPeeps);
             break;
             case "4":
-            bg = new Graph4();
+            bg = new Graph4(numPeeps);
             break;
             case "5":
-            bg = new Graph5();
+            bg = new Graph5(numPeeps);
             break;
             case "6":
-            bg = new Graph6();
+            bg = new Graph6(numPeeps);
             break;
         }
         return bg;

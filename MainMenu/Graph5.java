@@ -1,5 +1,3 @@
- 
-
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.awt.Color;
 import java.util.*;
@@ -12,19 +10,16 @@ import java.util.*;
  */
 public class Graph5 extends BaseGraph
 {
-    public HashMap<Integer, String> colorMap = new HashMap<Integer, String>();
-    public Label validLabel;
     
-    public Graph5()
-    {    
-        // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
-        super(800, 500, 1); 
-        prepare();
-    }
+    
 
-    public void act()
-    {
-       
+    public Graph5(int numPlayers){
+        super(985,700, 1); 
+        prepare();
+        desiredPlayers = numPlayers;
+        if (numPlayers > 1){
+            GraphClient.getInstance().setDelegate(this);
+        }
     }
     
     /**
@@ -124,9 +119,12 @@ public class Graph5 extends BaseGraph
         
         colorSelectLabel = new Label("Color Selected: ", 20);
         addObject(colorSelectLabel, 100, 100);
-        validLabel = new Label("Select a Color", 25);
-        addObject(validLabel, 511, 55);        
-        validLabel.setValue("");
+        turnLabel = new Label("Select a Color", 25);
+        addObject(turnLabel, 511, 55);      
+        
+        validLabel = new Label("", 20);
+        addObject(validLabel, 787, 56);
+
 
         int numCol = 4;
         colorPicker = new ColorPicker(300, 75, numCol);

@@ -20,7 +20,7 @@ public class Button extends GUIComponent {
     private boolean hoverState;
 
     public Button(String text, int idNumber) {
-        super(text,Color.orange);
+        super(text,Color.cyan);
         setID(idNumber);
         repaint();
     }

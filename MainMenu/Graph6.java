@@ -1,113 +1,114 @@
  
 
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import greenfoot.*;  // (World, 1ctor, 7reenfoot9mage, 7reenfoot and Mouse9nfo)
 import java.awt.*;
 import java.util.*;
 
 
 /**
- * Write a description of class Graph6 here.
+ * Write a description of class 7raph6 here.
  * 
  * @author (your name) 
  * @version (a version number or a date)
  */
 public class Graph6 extends BaseGraph
 {
-    public Map<String, Set<String>> connectedMap;
-    public Map<String, String> colorMap = new HashMap<String, String>();
-    public Label validLabel;
-   
-    public Graph6()
+    
+    
+    public Graph6(int numPlayers)
     {
         //Create a new world with 600x400 cells with a cell size of 1x1 pixels.
-        super(800, 800, 1); 
-        GreenfootImage bg = getBackground();
-        bg.setColor(Color.white);
-        bg.fill();
-        
+        super(985,700, 1);     
         createGraph();
-        joinGame();
+        
+        desiredPlayers = numPlayers;
+        if (numPlayers > 1){
+            GraphClient.getInstance().setDelegate(this);
+        }
+       
     }
     
        
     private void createGraph() {
+        GreenfootImage bg = getBackground();
+        bg.setColor(Color.white);
+        bg.fill();
+              
+       
+        Set<Integer> h1 = new HashSet<Integer>();
+        h1.add(2);
+        h1.add(6);
+        h1.add(10);
+        connectedMap.put(1, h1);
         
+        Set<Integer> h2 = new HashSet<Integer>();
+        h2.add(1);
+        h2.add(3);
+        h2.add(7);
+        h2.add(8);
+        h2.add(10);
+        connectedMap.put(2, h2);
         
-        connectedMap = new HashMap();
-        Set<String> h1 = new HashSet<String>();
-        h1.add("B");
-        h1.add("F");
-        h1.add("J");
-        connectedMap.put("A", h1);
+        Set<Integer> h3 = new HashSet<Integer>();
+        h3.add(2);
+        h3.add(4);
+        h3.add(8);
+        connectedMap.put(3, h3);
         
-        Set<String> h2 = new HashSet<String>();
-        h2.add("A");
-        h2.add("C");
-        h2.add("G");
-        h2.add("H");
-        h2.add("J");
-        connectedMap.put("B", h2);
+        Set<Integer> h4 = new HashSet<Integer>();
+        h4.add(3);
+        h4.add(5);
+        h4.add(9);
+        connectedMap.put(4, h4);
         
-        Set<String> h3 = new HashSet<String>();
-        h3.add("B");
-        h3.add("D");
-        h3.add("H");
-        connectedMap.put("C", h3);
+        Set<Integer> h5 = new HashSet<Integer>();
+        h5.add(4);
+        connectedMap.put(5, h5);
         
-        Set<String> h4 = new HashSet<String>();
-        h4.add("C");
-        h4.add("E");
-        h4.add("I");
-        connectedMap.put("D", h4);
+        Set<Integer> h6 = new HashSet<Integer>();
+        h6.add(1);
+        h6.add(7);
+        h6.add(10);
+        connectedMap.put(6, h6);
         
-        Set<String> h5 = new HashSet<String>();
-        h5.add("D");
-        connectedMap.put("E", h5);
+        Set<Integer> h7 = new HashSet<Integer>();
+        h7.add(2);
+        h7.add(6);
+        h7.add(8);
+        h7.add(10);
+        connectedMap.put(7, h7);
         
-        Set<String> h6 = new HashSet<String>();
-        h6.add("A");
-        h6.add("G");
-        h6.add("J");
-        connectedMap.put("F", h6);
-        
-        Set<String> h7 = new HashSet<String>();
-        h7.add("B");
-        h7.add("F");
-        h7.add("H");
-        h7.add("J");
-        connectedMap.put("G", h7);
-        
-        Set<String> h8 = new HashSet<String>();
-        h8.add("B");
-        h8.add("C");
-        h8.add("G");
-        h8.add("I");
-        connectedMap.put("H", h8);
+        Set<Integer> h8 = new HashSet<Integer>();
+        h8.add(2);
+        h8.add(3);
+        h8.add(7);
+        h8.add(9);
+        connectedMap.put(8, h8);
          
-        Set<String> h9 = new HashSet<String>();
-        h9.add("D");
-        h9.add("H");
-        connectedMap.put("I", h9);
+        Set<Integer> h9 = new HashSet<Integer>();
+        h9.add(4);
+        h9.add(8);
+        connectedMap.put(9, h9);
                 
-        Set<String> h10 = new HashSet<String>();
-        h10.add("A");
-        h10.add("B");
-        h10.add("F");
-        h10.add("G");
-        connectedMap.put("J", h10);
+        Set<Integer> h10 = new HashSet<Integer>();
+        h10.add(1);
+        h10.add(2);
+        h10.add(6);
+        h10.add(7);
+        connectedMap.put(10, h10);
         
         
         
-        addObject(new Node6("A"), 50, 300);
-        addObject(new Node6("B"), 200, 300);
-        addObject(new Node6("C"), 350, 300);
-        addObject(new Node6("D"), 500, 300);
-        addObject(new Node6("E"), 650, 300);
-        addObject(new Node6("F"), 50, 600);
-        addObject(new Node6("G"), 200, 600);
-        addObject(new Node6("H"), 350, 600);
-        addObject(new Node6("I"), 500, 600);
-        addObject(new Node6("J"), 125, 450);
+        addObject(new Node(1), 50, 300);
+        addObject(new Node(2), 200, 300);
+        addObject(new Node(3), 350, 300);
+        addObject(new Node(4), 500, 300);
+        addObject(new Node(5), 650, 300);
+        addObject(new Node(6), 50, 600);
+        addObject(new Node(7), 200, 600);
+        addObject(new Node(8), 350, 600);
+        addObject(new Node(9), 500, 600);
+        addObject(new Node(10), 125, 450);
             
         addObject(new Edge(5, 100, 90), 125,300);
         addObject(new Edge(5, 100, 90), 275,300);
@@ -127,12 +128,18 @@ public class Graph6 extends BaseGraph
         addObject(new Edge(5, 120, 30), 158,375);
         addObject(new Edge(5, 120, -30), 158,525);
         
-        colorPicker = new ColorPicker(300, 65, 6);
+        colorPicker = new ColorPicker(300, 65, 4);
         addObject (colorPicker, 150, 50);
-        validLabel = new Label("Select a color", 40);
-        addObject(validLabel, 190, 111); 
         
-        colorSelectLabel = new Label("Color Selected: ", 30);
+           
+        turnLabel = new Label("Select a Color", 25);
+        addObject(turnLabel, 190, 111);      
+        
+        validLabel = new Label("", 20);
+        addObject(validLabel, 550, 50);
+
+        
+        colorSelectLabel = new Label("Color Selected: ", 20);
         addObject(colorSelectLabel, 190, 150);
         Greenfoot.start();
         

@@ -5,23 +5,23 @@ import java.awt.Color;
 import java.util.*;
 
 /**
- * Shape class for Graph 5
+ * Shape class for Graph 3
  * 
- * @author (Anubha) 
+ * @author (Shilpa) 
  * @version (11-08-2016)
  */
-public class DrawSquare extends Country
+public class DrawRegion extends Country
 {
     private int id;
     Color colorToFill=null;
     String filledColorString;
 
-    public DrawSquare(int nodeid) 
+    public DrawRegion(int nodeid) 
     {
         this.id = nodeid;
-        GreenfootImage img = new GreenfootImage(51, 51);
+        GreenfootImage img = new GreenfootImage(201, 51);
         img.setColor(Color.black);
-        img.drawRect(0,0,50,50);
+        img.drawRect(0,0,200,50);
         setImage(img);
     }    
 
@@ -40,27 +40,25 @@ public class DrawSquare extends Country
 
     public boolean checkColor(Color needToColor)
     {
+        filledColorString = Utils.getInstance().colorToString(needToColor);
+        BaseGraph world = (BaseGraph)getWorld();
+        if(filledColorString==null){
+            world.validLabel.setValue("Please select a Color");
+            return false;
+        }
+        for(DrawRegion ds : getIntersectingObjects(DrawRegion.class))
         {
-            filledColorString = Utils.getInstance().colorToString(needToColor);
-            BaseGraph world = (BaseGraph)getWorld();
-            if(filledColorString==null){
-                world.validLabel.setValue("Please select a Color");
+            String adjColor = world.colorMap.get(ds.getId());
+            if(adjColor!=null && adjColor.equals(filledColorString))
+            {
+                world.validLabel.setValue("Invalid Color");
                 return false;
             }
-            for(DrawSquare ds : getIntersectingObjects(DrawSquare.class))
-            {
-                String adjColor = world.colorMap.get(ds.getId());
-                if(adjColor!=null && adjColor.equals(filledColorString))
-                {
-                    world.validLabel.setValue("Invalid Color");
-                    return false;
-                }
-            }
-            world.validLabel.setValue("Valid Color");
-            return true;
         }
+        world.validLabel.setValue("Valid Color");
+        return true;
     }
-
+    
     public boolean updateColor(Color color)
     {
         if(checkColor(color)){
@@ -82,6 +80,6 @@ public class DrawSquare extends Country
 
     void updateImage(){
         getImage().setColor(colorToFill);
-        getImage().fillRect(0,0,50,50);;
+        getImage().fillRect(0,0,200,50);;
     }
 }
