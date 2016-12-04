@@ -1,5 +1,3 @@
- 
- 
 
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
@@ -11,7 +9,6 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class TriangleCountry extends Country
 {
-    //int rotateDeg;
     /**
      * Triangle will always be drawn with flat part on bottom and one point facing up. 
      * rotateDeg is measured in degrees rotation around the center clockwise.
@@ -31,7 +28,7 @@ public class TriangleCountry extends Country
 
         // Check if click in box
         if (! super.isClickInRange()) return false;
-        
+
         //Normalize x,y
         int selfx = getX();
         int selfy = getY();
@@ -46,8 +43,6 @@ public class TriangleCountry extends Country
 
         // Get rotation
         int rot = getRotation();
-
-        //System.out.printf("%d, %d, %d, %d\n", clickx, clicky, selfx, selfy);
         // Break into half triangle regions
         switch (rot) {
             case 0:{
@@ -88,6 +83,7 @@ public class TriangleCountry extends Country
         return true;
 
     }
+
     void drawInImage(GreenfootImage image) {
         int halfWidth = this.width / 2;
         int halfHeight = this.height / 2;
@@ -98,6 +94,5 @@ public class TriangleCountry extends Country
         image.drawPolygon(xPoints, yPoints, 3);
         image.setColor(fillColor);
         image.fillPolygon(xPoints, yPoints, 3);
-        //image.rotate(this.rotateDeg);
     }
 }

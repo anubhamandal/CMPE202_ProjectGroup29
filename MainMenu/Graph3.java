@@ -5,13 +5,12 @@ import java.util.*;
 /**
  * Write a description of class MyWorld here.
  * 
- * @author (your name) 
+ * @author (Anubha) 
  * @version (a version number or a date)
  */
 public class Graph3 extends BaseGraph
 {
 
-   
     
     public Graph3(int numPlayers)
     {
@@ -22,10 +21,10 @@ public class Graph3 extends BaseGraph
             GraphClient.getInstance().setDelegate(this);
         }
     }
-    
+
     private void prepare() 
     {
-        
+
         DrawRect drawrect = new DrawRect(1);
         addObject(drawrect,308,149);
         DrawRect drawrect2 = new DrawRect(2);
@@ -62,15 +61,14 @@ public class Graph3 extends BaseGraph
         addObject(drawrect17,127,413);
         DrawRect drawrect18 = new DrawRect(18);
         addObject(drawrect18,692,155);
-        
+
         colorSelectLabel = new Label("Color Selected: ", 20);
         addObject(colorSelectLabel, 100, 100);
         turnLabel = new Label("Select a Color", 25);
         addObject(turnLabel, 511, 55);      
-        
+
         validLabel = new Label("", 20);
         addObject(validLabel, 787, 56);
-
 
         int numCol = 4;
         colorPicker = new ColorPicker(300, 75, numCol);

@@ -30,6 +30,7 @@ public class EndGame extends World
         background = getBackground();
         GreenfootImage text1,text2;
         text1 = new GreenfootImage("Game Over!!!:)" , 60, Color.black, new Color(0, 0, 0, 0));
+        Greenfoot.playSound("Game_Over.mp3");
         background.drawImage(text1, 400-text1.getWidth()/2, 50);
         text2 = new GreenfootImage("Finished in "+ timeTaken + " seconds!" , 60, Color.black, new Color(0, 0, 0, 0));
         background.drawImage(text2, 400-text2.getWidth()/2, 200);

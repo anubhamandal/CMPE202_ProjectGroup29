@@ -41,7 +41,7 @@ public class Node extends Country
     }
 
     // Overridden method 
-    
+    // Validation for the color selected for the object
     public boolean checkColor(Color needToColor){
         String needtoColorString =  Utils.getInstance().colorToString(needToColor);
         BaseGraph world = (BaseGraph)getWorld();

@@ -11,20 +11,19 @@ import java.util.*;
 public class Graph4 extends BaseGraph
 {
 
-   
     
     public Graph4(int numPlayers){
-       super(985,700, 1);
+        super(985,700, 1);
         prepare();
         desiredPlayers = numPlayers;
         if (numPlayers > 1){
             GraphClient.getInstance().setDelegate(this);
         }
     }
-    
+
     private void prepare() 
     {
-        
+
         DrawRegion drawregion = new DrawRegion(1);
         addObject(drawregion,240,150);
         DrawRegion drawregion2 = new DrawRegion(2);
@@ -59,15 +58,14 @@ public class Graph4 extends BaseGraph
         addObject(drawregion16,600,450);
         DrawRegion drawregion17 = new DrawRegion(17);
         addObject(drawregion17,650,300);
-        
+
         colorSelectLabel = new Label("Color Selected: ", 20);
         addObject(colorSelectLabel, 100, 100);
         turnLabel = new Label("Select a Color", 25);
         addObject(turnLabel, 511, 55);      
-        
+
         validLabel = new Label("", 20);
         addObject(validLabel, 787, 56);
-
 
         int numCol = 4;
         colorPicker = new ColorPicker(300, 75, numCol);

@@ -83,6 +83,7 @@ public class Country extends Actor
      * false if adjacent countries have color that match this country color
      * Ignores GRAY, which is uninitialized color
      */
+    // Validation for the color selected for the object
     public boolean checkColor(Color needToColor){
         String needtoColorString =  Utils.getInstance().colorToString(needToColor);
         if (needToColor == Color.GRAY) {
@@ -96,12 +97,12 @@ public class Country extends Actor
             String adjColor =world.colorMap.get(c.getId());
             if (adjColor!=null && adjColor.equals(needtoColorString)){
                 world.validLabel.setValue("Invalid Color");
-				Greenfoot.playSound("invalid.wav");
+                Greenfoot.playSound("invalid.wav");
                 return false;
             }
         }
         world.validLabel.setValue("Valid Color");
-		Greenfoot.playSound("valid.wav");
+        Greenfoot.playSound("valid.wav");
         return true;
     }
 
@@ -133,12 +134,13 @@ public class Country extends Actor
         }
         return false;
     }
+
     void updateWholeCountry(Color color){
-         fillColor = color;
-         updateImage();
-    
-     }
-         
+        fillColor = color;
+        updateImage();
+
+    }
+
     /**
      * Update the image on screen to show the current value.
      */
