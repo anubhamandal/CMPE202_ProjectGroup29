@@ -10,7 +10,7 @@ import java.util.ListIterator;
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Country extends Actor
+public class Country extends Actor implements iRegion
 {
     Color lineColor = Color.YELLOW;
     Color fillColor = Color.GRAY;
@@ -119,10 +119,18 @@ public class Country extends Actor
         updateImage();
     }
 
+    public void draw(int id)
+    {
+        this.id = id;
+        GreenfootImage img = new GreenfootImage(51, 51);
+        img.setColor(Color.black);
+        img.drawRect(0,0,50,50);
+        setImage(img);
+    }
     /**
      * Method used to update color of country
      */
-    boolean updateColor(Color color){
+    public boolean updateColor(Color color){
         if(checkColor(color)){
             fillColor = color;
             updateImage();

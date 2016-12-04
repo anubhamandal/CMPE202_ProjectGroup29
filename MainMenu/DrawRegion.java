@@ -10,7 +10,7 @@ import java.util.*;
  * @author (Shilpa) 
  * @version (11-08-2016)
  */
-public class DrawRegion extends Country
+public class DrawRegion extends Country implements iRegion
 {
     private int id;
     Color colorToFill=null;

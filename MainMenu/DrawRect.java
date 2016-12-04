@@ -10,7 +10,7 @@ import java.util.*;
  * @author (Anubha) 
  * @version (11-08-2016)
  */
-public class DrawRect extends Country
+public class DrawRect extends Country implements iRegion
 {
     private int id;
     Color colorToFill=null;
@@ -37,6 +37,16 @@ public class DrawRect extends Country
             world.setCountryColor(id);
         }
     }
+
+    public void draw(int id)
+    {
+        this.id = id;
+        GreenfootImage img = new GreenfootImage(51, 51);
+        img.setColor(Color.black);
+        img.drawRect(0,0,50,50);
+        setImage(img);
+    }
+
     // Validation for the color selected for the object, overriden from the parent class
     public boolean checkColor(Color needToColor)
     {

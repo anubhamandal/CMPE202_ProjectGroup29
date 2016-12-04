@@ -3,7 +3,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.awt.Color;
 import java.util.*;
 
-public class Node extends Country
+public class Node extends Country implements iRegion
 {
     private Integer title;
     Color colorToFill=null;
@@ -68,7 +68,7 @@ public class Node extends Country
         return true;
     }
 
-    boolean updateColor(Color color){
+    public boolean updateColor(Color color){
         if(checkColor(color)){
             colorToFill = color;
             updateImage();
