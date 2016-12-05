@@ -62,7 +62,7 @@ The below section contains a list of user stories describing our graph game func
 
 ## Use Cases
 
-![UseCases](./usecases.png)
+![UseCases](./usecases-1.png)
 
 
 ## Activity Diagram - Jonathan Guan
