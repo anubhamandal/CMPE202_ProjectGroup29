@@ -40,7 +40,7 @@ The below section contains a list of user stories describing our graph game func
 
 - As a multiplayer participant, I want to be able to see the moves from the other player(s) in my session so that I can see the progress of the game.
 
-**PLAYER:**
+**PLAYER:** 
 
 - As a player, I want to be able to see the graph that I have selected on my screen so that I can start playing.
 
