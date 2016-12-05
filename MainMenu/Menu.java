@@ -6,7 +6,8 @@ import java.awt.Color;
 public class Menu extends World
 {
     private BaseGraph activeGraph;
-
+    private static Integer WIDTH = 985;
+    private static Integer HEIGHT = 700;
     Label label;
     // '1' key (Graph1) //Madhuri
     // '2' key (Graph2) //Jon
@@ -26,22 +27,15 @@ public class Menu extends World
         setBackground(background);
         background = getBackground();
         GreenfootImage text;
-        text = new GreenfootImage("Welcome to the Graph Coloring Game!", 40, Color.black, new Color(0, 0, 0, 0));
-        background.drawImage(text, 400-text.getWidth()/2, 50);
-        text = new GreenfootImage("Graph Selection Menu", 32, Color.black, new Color(0, 0, 0, 0));
-        background.drawImage(text, 400-text.getWidth()/2, 200);
-        text = new GreenfootImage("Use '1' key to go to Graph1", 32, Color.black, new Color(0, 0, 0, 0));
-        background.drawImage(text, 400-text.getWidth()/2, 300);
-        text = new GreenfootImage("Use '2' key to go to Graph2", 32, Color.black, new Color(0, 0, 0, 0));
-        background.drawImage(text, 400-text.getWidth()/2, 330);
-        text = new GreenfootImage("Use '3' key to go to Graph3", 32, Color.black, new Color(0, 0, 0, 0));
-        background.drawImage(text, 400-text.getWidth()/2, 360);
-        text = new GreenfootImage("Use '4' key to go to Graph4", 32, Color.black, new Color(0, 0, 0, 0));
-        background.drawImage(text, 400-text.getWidth()/2, 390);
-        text = new GreenfootImage("Use '5' key to go to Graph5", 32, Color.black, new Color(0, 0, 0, 0));
-        background.drawImage(text, 400-text.getWidth()/2, 420);
-        text = new GreenfootImage("Use '6' key to go to Graph6", 32, Color.black, new Color(0, 0, 0, 0));
-        background.drawImage(text, 400-text.getWidth()/2, 450);
+        Label welcomelabel = new Label("Welcome to the Graph Coloring Game!", 40);
+        addObject(welcomelabel, WIDTH/2, 50);
+        
+        Label whatlabel = new Label("Graph Selection Menu", 32);
+        addObject(whatlabel, WIDTH/2, 100);
+        
+        Label selectlabel = new Label("Type a number to begin game", 40);
+        addObject(selectlabel, WIDTH/2, HEIGHT/2+70);
+   
     }
 
     public void act()
@@ -78,16 +72,6 @@ public class Menu extends World
         if ( Greenfoot.isKeyDown("6"))
         {
             activeGraph = new Graph6(1);
-        }
-
-        if (Greenfoot.mouseClicked(this)){
-            GreenfootImage background = getBackground();
-            label = new Label("test", 40);
-            addObject(label, 300, 270);
-
-           // activeGraph = new TestWorld();
-           Greenfoot.setWorld(new TestWorld());
-           return;
         }
 
         try{
