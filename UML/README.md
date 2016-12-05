@@ -80,11 +80,15 @@ Below is the class diagrams with the implemented design patterns:
 
 ![ClassDiagram](./ClassDiagram.png)
 
-##Sequence Diagram - Veeresh Kamble
+##Sequence Diagrams - Veeresh Kamble
 
 The below diagram shows the sequence diagram of the interaction of objects during a single player gameplay
 
 ![SequenceDiagram](./SequenceDiagram.jpg)
+
+The below diagram shows the sequence diagram of the interaction of objects during a multi player gameplay
+
+![SequenceDiagram_Multiplayer](./SequenceDiagram_Multiplayer.jpg)
 
 ## Design Patterns
 
