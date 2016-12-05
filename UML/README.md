@@ -88,7 +88,7 @@ The below diagram shows the sequence diagram of the interaction of objects durin
 
 The below diagram shows the sequence diagram of the interaction of objects during a multi player gameplay
 
-![SequenceDiagram_Multiplayer](./SequenceDiagram_Multiplayer.jpg)
+![SequenceDiagram_Multiplayer](./Sequence Diagram_Multiplayer.jpg)
 
 ## Design Patterns
 
