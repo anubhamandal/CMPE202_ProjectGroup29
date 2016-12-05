@@ -82,7 +82,7 @@ Below is the class diagrams with the implemented design patterns:
 
 The below diagram shows the sequence diagram of the interaction of objects during a single player gameplay
 
-![SequenceDiagram](./SequenceDiagram.png)
+![SequenceDiagram](./SequenceDiagram.jpg)
 
 ## Design Patterns
 
