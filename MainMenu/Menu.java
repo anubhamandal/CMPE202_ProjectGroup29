@@ -22,7 +22,7 @@ public class Menu extends World
     }
 
     private void init(){
-        GreenfootImage background = new GreenfootImage("Background.jpg");
+        GreenfootImage background = new GreenfootImage("BackgroundSingle.png");
         setBackground(background);
         background = getBackground();
         GreenfootImage text;
