@@ -72,6 +72,11 @@ The diagram displays flows for both single player and multiplayer.
 
 ![ActivityDiagram](./ActivityDiagram.png)
 
+## Class Diagram - Anubha Mandal
+
+Below is the class diagrams with the implemented design patterns:
+
+![ClassDiagram](./ClassDiagram.png)
 
 ## Design Patterns
 
