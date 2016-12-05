@@ -78,6 +78,12 @@ Below is the class diagrams with the implemented design patterns:
 
 ![ClassDiagram](./ClassDiagram.png)
 
+##Sequence Diagram - Veeresh Kamble
+
+The below diagram shows the sequence diagram of the interaction of objects during a single player gameplay
+
+![SequenceDiagram](./SequenceDiagram.png)
+
 ## Design Patterns
 
 ### Proxy
