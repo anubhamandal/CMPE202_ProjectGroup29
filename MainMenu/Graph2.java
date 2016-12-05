@@ -15,14 +15,11 @@ import java.awt.event.*;
  */
 public class Graph2 extends BaseGraph
 {
-    // int height = 600;
-    //int width = 600;
 
     /**
      * Constructor for objects of class MyWorld.
      * 
      */
-   
 
     public Graph2(int numPlayers){
         super(985,700, 1);
@@ -32,12 +29,9 @@ public class Graph2 extends BaseGraph
             GraphClient.getInstance().setDelegate(this);
         }
     }
-    
+
     private void prepare() {
-        //Country country1 = new Country(0, 100, 600, 200);
-        //Country country2 = new Country(0, 300, 600, 200);
-        //Country country3 = new Country(0, 100, 600, 200);
-        //Country country4 = new Country(0, 300, 600, 200);
+
         TriangleCountry country1 = new TriangleCountry(0, 0, 600, 200, 1);
         TriangleCountry country2 = new TriangleCountry(0, 0, 600, 200, 2);
         TriangleCountry country3 = new TriangleCountry(0, 0, 400, 300, 3);
@@ -57,13 +51,10 @@ public class Graph2 extends BaseGraph
         turnLabel = new Label("Select a color", 25);
         addObject(turnLabel, 150, 40);
 
-      
         colorSelectLabel = new Label("Color Selected: ", 20);
         addObject(colorSelectLabel, 100, 75);
 
-       
         int numCol = 2;
-
         colorPicker = new ColorPicker(300, 75, numCol);
         addObject(colorPicker, 150, 150);
 

@@ -1,5 +1,4 @@
 
-
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.awt.*;
 import java.util.*;
@@ -12,10 +11,8 @@ import java.util.*;
  */
 public class Graph1 extends BaseGraph
 {
-    
-    
 
-        
+
     public Graph1(int numPlayers)
     {    
 
@@ -32,7 +29,7 @@ public class Graph1 extends BaseGraph
         bg.setColor(Color.white);
         bg.fill();
         //A-2 B-1 c-2 D-5 E-3 F-5 G-3 H-3 I-4J-5  k2 L3 M6 N4 O3 P3
-       
+
         Set<Integer> h1 = new HashSet<Integer>();
         h1.add(5);
         h1.add(10);
@@ -186,14 +183,13 @@ public class Graph1 extends BaseGraph
         // add color pallet 
         colorPicker = new ColorPicker(300, 65, 4);
         addObject (colorPicker, 150, 50);
-        
+
         turnLabel = new Label("Select a Color", 25);
         addObject(turnLabel, 511, 55);      
-        
+
         validLabel = new Label("", 20);
         addObject(validLabel, 787, 56);
 
-               
         colorSelectLabel = new Label("Color Selected: ", 20);
         addObject(colorSelectLabel, 190, 111);
         Greenfoot.start();

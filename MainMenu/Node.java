@@ -3,7 +3,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.awt.Color;
 import java.util.*;
 
-public class Node extends Country
+public class Node extends Country implements iRegion
 {
     private Integer title;
     Color colorToFill=null;
@@ -41,7 +41,7 @@ public class Node extends Country
     }
 
     // Overridden method 
-    
+    // Validation for the color selected for the object
     public boolean checkColor(Color needToColor){
         String needtoColorString =  Utils.getInstance().colorToString(needToColor);
         BaseGraph world = (BaseGraph)getWorld();
@@ -58,15 +58,17 @@ public class Node extends Country
             
             if(adjColor!=null && adjColor.equals(needtoColorString)){
                 world.validLabel.setValue("Invalid Color");
+				Greenfoot.playSound("invalid.wav");
                 return false;
             }
         }
 
         world.validLabel.setValue("Valid Color");
+		Greenfoot.playSound("valid.wav");
         return true;
     }
 
-    boolean updateColor(Color color){
+    public boolean updateColor(Color color){
         if(checkColor(color)){
             colorToFill = color;
             updateImage();

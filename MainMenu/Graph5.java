@@ -10,8 +10,7 @@ import java.util.*;
  */
 public class Graph5 extends BaseGraph
 {
-    
-    
+
 
     public Graph5(int numPlayers){
         super(985,700, 1); 
@@ -21,7 +20,7 @@ public class Graph5 extends BaseGraph
             GraphClient.getInstance().setDelegate(this);
         }
     }
-    
+
     /**
      * Prepare the world for the start of the program.
      * That is: create the initial objects and add them to the world.
@@ -116,15 +115,14 @@ public class Graph5 extends BaseGraph
         addObject(drawsquare43,567,164);
         DrawSquare drawsquare44 = new DrawSquare(44);
         addObject(drawsquare44,175,307);
-        
+
         colorSelectLabel = new Label("Color Selected: ", 20);
         addObject(colorSelectLabel, 100, 100);
         turnLabel = new Label("Select a Color", 25);
         addObject(turnLabel, 511, 55);      
-        
+
         validLabel = new Label("", 20);
         addObject(validLabel, 787, 56);
-
 
         int numCol = 4;
         colorPicker = new ColorPicker(300, 75, numCol);

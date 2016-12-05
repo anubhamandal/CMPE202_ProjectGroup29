@@ -10,7 +10,7 @@ import java.util.*;
  * @author (Shilpa) 
  * @version (11-08-2016)
  */
-public class DrawRegion extends Country
+public class DrawRegion extends Country implements iRegion
 {
     private int id;
     Color colorToFill=null;
@@ -37,7 +37,7 @@ public class DrawRegion extends Country
             world.setCountryColor(id);
         }
     }
-
+    // Validation for the color selected for the object, overriden from the parent class
     public boolean checkColor(Color needToColor)
     {
         filledColorString = Utils.getInstance().colorToString(needToColor);
@@ -52,10 +52,12 @@ public class DrawRegion extends Country
             if(adjColor!=null && adjColor.equals(filledColorString))
             {
                 world.validLabel.setValue("Invalid Color");
+                Greenfoot.playSound("invalid.wav");
                 return false;
             }
         }
         world.validLabel.setValue("Valid Color");
+        Greenfoot.playSound("valid.wav");
         return true;
     }
     
