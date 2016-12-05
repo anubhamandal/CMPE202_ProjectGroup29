@@ -22,7 +22,7 @@ public class JoinGame extends World implements ActionListener,IServerCallbackDel
     List<GameMetaData> gamesList = new ArrayList<GameMetaData>();
     public int graphNumber;
     private String playerName;
-    GreenfootImage background = new GreenfootImage("Background.jpg");
+    GreenfootImage background = new GreenfootImage("BackgroundMulti.png");
 
     Button createGame, back, joinGame;
     TextField joinGameTextField;

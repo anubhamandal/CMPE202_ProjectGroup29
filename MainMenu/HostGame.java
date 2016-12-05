@@ -15,7 +15,7 @@ public class HostGame extends World implements ActionListener, IServerCallbackDe
     Button create;
     TextField graphNum, numPlayers, playerName;
 
-    GreenfootImage background = new GreenfootImage("Background.jpg");
+    GreenfootImage background = new GreenfootImage("BackgroundMulti.png");
     /**
      * Constructor for objects of class HostGame
      */
