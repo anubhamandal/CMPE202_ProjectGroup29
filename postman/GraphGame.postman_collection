@@ -10,7 +10,7 @@
 		{
 			"name": "Restlet Graph Game | Get Color Map",
 			"request": {
-				"url": "http://ec2-54-197-39-127.compute-1.amazonaws.com:9080/graphgame",
+				"url": "http://ec2-52-87-216-222.compute-1.amazonaws.com:9080/graphgame",
 				"method": "GET",
 				"header": [],
 				"body": {
@@ -24,7 +24,7 @@
 		{
 			"name": "Restlet GraphGame | Insert entry",
 			"request": {
-				"url": "http://ec2-54-197-39-127.compute-1.amazonaws.com:9080/graphgame",
+				"url": "http://ec2-52-87-216-222.compute-1.amazonaws.com:9080/graphgame",
 				"method": "POST",
 				"header": [
 					{
