@@ -122,7 +122,7 @@ private static String ENV = "prod";
             break;
             case "prod":
             {
-                hostName = "54.197.39.127";
+                hostName = "52.87.216.222";
                 portNumber = 80;
             }
         }
