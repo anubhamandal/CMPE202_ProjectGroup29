@@ -5,56 +5,88 @@ import java.awt.Color;
 
 public class Menu extends World
 {
-    boolean Key1; // tracks the down state of the '1' key (Graph1) //Madhuri
-    boolean Key2; // tracks the down state of the '2' key (Graph2) //Jon
-    boolean Key3; // tracks the down state of the '3' key (Graph3) //Anubha
-    boolean Key4; // tracks the down state of the '4' key (Graph4) //Shilpa
-        
+    private BaseGraph activeGraph;
+    private static Integer WIDTH = 985;
+    private static Integer HEIGHT = 700;
+    Label label;
+    // '1' key (Graph1) //Madhuri
+    // '2' key (Graph2) //Jon
+    // '3' key (Graph3) //Anubha
+    //  '4' key (Graph4) //Shilpa
+
+    //  '6' key (Graph6) //Veeresh
+
     public Menu()
     {
-        super(800, 500, 1);        
-        GreenfootImage background = new GreenfootImage("Background.jpg");
+        super(985,700, 1); 
+        init();
+    }
+
+    private void init(){
+        GreenfootImage background = new GreenfootImage("BackgroundSingle.png");
         setBackground(background);
         background = getBackground();
         GreenfootImage text;
-        text = new GreenfootImage("Welcome to the Graph Coloring Game!", 40, Color.black, new Color(0, 0, 0, 0));
-        background.drawImage(text, 400-text.getWidth()/2, 50);
-        text = new GreenfootImage("Graph Selection Menu", 32, Color.black, new Color(0, 0, 0, 0));
-        background.drawImage(text, 400-text.getWidth()/2, 200);
-        text = new GreenfootImage("Use '1' key to go to Graph1", 32, Color.black, new Color(0, 0, 0, 0));
-        background.drawImage(text, 400-text.getWidth()/2, 300);
-        text = new GreenfootImage("Use '2' key to go to Graph2", 32, Color.black, new Color(0, 0, 0, 0));
-        background.drawImage(text, 400-text.getWidth()/2, 340);
-        text = new GreenfootImage("Use '3' key to go to Graph3", 32, Color.black, new Color(0, 0, 0, 0));
-        background.drawImage(text, 400-text.getWidth()/2, 380);
-        text = new GreenfootImage("Use '4' key to go to Graph4", 32, Color.black, new Color(0, 0, 0, 0));
-        background.drawImage(text, 400-text.getWidth()/2, 420);
+        Label welcomelabel = new Label("Welcome to the Graph Coloring Game!", 40);
+        addObject(welcomelabel, WIDTH/2, 50);
+        
+        Label whatlabel = new Label("Graph Selection Menu", 32);
+        addObject(whatlabel, WIDTH/2, 100);
+        
+        Label selectlabel = new Label("Type a number to begin game", 40);
+        addObject(selectlabel, WIDTH/2, HEIGHT/2+70);
+   
     }
-    
+
     public void act()
     {
-        if (!Key1 && Greenfoot.isKeyDown("1"))
-        {
-            Greenfoot.setWorld(new Graph1());
-            Key1 = true;
+        if (activeGraph != null) {
+            return;
         }
 
-        if (!Key2 && Greenfoot.isKeyDown("2"))
+        if (Greenfoot.isKeyDown("1"))
         {
-            Greenfoot.setWorld(new Graph2());
-            Key2 = true;
+            activeGraph = new Graph1(1);
         }
-        
-        if (!Key3 && Greenfoot.isKeyDown("3"))
+
+        if ( Greenfoot.isKeyDown("2"))
         {
-            Greenfoot.setWorld(new Graph3());
-            Key3 = true;
+            activeGraph = new Graph2(1);
         }
-        
-        if (!Key4 && Greenfoot.isKeyDown("4"))
+
+        if ( Greenfoot.isKeyDown("3"))
         {
-            Greenfoot.setWorld(new Graph4());
-            Key4 = true;
+            activeGraph = new Graph3(1);
         }
+
+        if ( Greenfoot.isKeyDown("4"))
+        {
+             activeGraph = new Graph4(1);
+        }
+
+        if (Greenfoot.isKeyDown("5"))
+        {
+            activeGraph = new Graph5(1);
+        }
+
+        if ( Greenfoot.isKeyDown("6"))
+        {
+            activeGraph = new Graph6(1);
+        }
+
+        try{
+            if (activeGraph != null){
+                String playerName = "player";
+                activeGraph.setPlayerName(playerName);
+                activeGraph.setCurrentPlayer(playerName);
+                Greenfoot.setWorld(activeGraph);
+            }
+        }catch (Exception e){
+            System.err.println(e);
+        }
+
+    }
+    public BaseGraph getActiveGraph() {
+        return activeGraph;
     }
 }

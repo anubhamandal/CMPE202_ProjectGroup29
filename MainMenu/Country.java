@@ -1,4 +1,3 @@
- 
 
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.awt.Color;
@@ -11,7 +10,7 @@ import java.util.ListIterator;
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Country extends Actor
+public class Country extends Actor implements iRegion
 {
     Color lineColor = Color.YELLOW;
     Color fillColor = Color.GRAY;
@@ -23,6 +22,8 @@ public class Country extends Actor
     private int clickCount;
     boolean isClicked = isClickInRange();
     boolean addedToWorld = false;
+
+    int id;
 
     public void addedToWorld(World world) {
         this.addedToWorld = true;
@@ -55,26 +56,10 @@ public class Country extends Actor
         if (! isClickInRange()){
             return;
         }
-        /*
-        this.clickCount += 1;
-        this.clickCount %= 3;
 
-        switch(clickCount){
-            case 0:
-            fillColor = Color.GRAY;
-            break;
-            case 1:
-            fillColor = Color.RED;
-            break;
-            case 2:
-            fillColor = Color.BLUE;
-            break;
-        }*/
-
-        Graph2 world = (Graph2)getWorld();
-        fillColor = world.selectedColor;
-        updateImage();
-        world.checkValid();
+        BaseGraph world = (BaseGraph)getWorld();
+        fillColor = world.selectedColor();
+        world.setCountryColor(id);
     }
 
     boolean isClickInRange() {
@@ -89,7 +74,6 @@ public class Country extends Actor
         int x = clickx - selfx;
         int y = clicky - selfy;
         int rot = getRotation();
-        System.out.printf("rot %d, x %d, y %d\n", rot, Math.abs(x), Math.abs(y));
         return Math.abs(x) < width/2.0 && Math.abs(y) < height/2.0;
     }
 
@@ -99,38 +83,70 @@ public class Country extends Actor
      * false if adjacent countries have color that match this country color
      * Ignores GRAY, which is uninitialized color
      */
-    public boolean checkColor(){
-        // If uninitialized, quick exit
-        if (this.fillColor == Color.GRAY) {
+    // Validation for the color selected for the object
+    public boolean checkColor(Color needToColor){
+        String needtoColorString =  Utils.getInstance().colorToString(needToColor);
+        if (needToColor == Color.GRAY) {
             return true;
         }
-        
+        BaseGraph world = (BaseGraph)getWorld();
         List<Country> countries = getIntersectingObjects(Country.class);
         ListIterator<Country> it = countries.listIterator();
         while (it.hasNext()){
             Country c = it.next();
-            if (c.fillColor == this.fillColor){
+            String adjColor =world.colorMap.get(c.getId());
+            if (adjColor!=null && adjColor.equals(needtoColorString)){
+                world.validLabel.setValue("Invalid Color");
+                Greenfoot.playSound("invalid.wav");
                 return false;
             }
         }
+        world.validLabel.setValue("Valid Color");
+        Greenfoot.playSound("valid.wav");
         return true;
     }
-    
+
     public Country() {
         updateImage();
     }
 
-    public Country(int x, int y, int w, int h) {
+    public Country(int x, int y, int w, int h, int id) {
         xPos = x;
         yPos = y;
         width = w;
         height = h;
+        this.id = id;
         updateImage();
     }
 
-    void updateColor(Color color){
+    public void draw(int id)
+    {
+        this.id = id;
+        GreenfootImage img = new GreenfootImage(51, 51);
+        img.setColor(Color.black);
+        img.drawRect(0,0,50,50);
+        setImage(img);
+    }
+    /**
+     * Method used to update color of country
+     */
+    public boolean updateColor(Color color){
+        if(checkColor(color)){
+            fillColor = color;
+            updateImage();
+            BaseGraph world = (BaseGraph)getWorld();
+            String filledColorString = Utils.getInstance().colorToString(fillColor);
+            world.colorMap.put(id,filledColorString);
+            world.checkEndGame(); 
+            return true;
+        }
+        return false;
+    }
+
+    void updateWholeCountry(Color color){
         fillColor = color;
         updateImage();
+
     }
 
     /**
@@ -149,4 +165,13 @@ public class Country extends Actor
         image.setColor(fillColor);
         image.fillRect(1, 1, width-2, height-2);
     }
+
+    public Color getColor() {
+        return fillColor;
+    }
+
+    public Integer getId(){
+        return this.id;
+    }
+
 }

@@ -1,6 +1,0 @@
-#BlueJ class context
-comment0.target=Edge
-comment0.text=\r\n\ This\ is\ a\ class\ which\ draws\ the\ edges\r\n
-comment1.params=width\ height\ rot
-comment1.target=Edge(int,\ int,\ int)
-numComments=2

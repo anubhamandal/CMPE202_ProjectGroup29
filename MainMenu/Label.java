@@ -1,3 +1,5 @@
+ 
+
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 import java.awt.Color;
@@ -98,5 +100,9 @@ public class Label extends Actor
     private void updateImage()
     {
         setImage(new GreenfootImage(value, fontSize, fillColor, transparent, lineColor));
+    }
+    
+    public String getValue(){
+        return value;
     }
 }
